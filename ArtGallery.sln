@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtGallery.Web", "ArtGallery.Web\ArtGallery.Web.csproj", "{17C9134D-C75D-4EDE-8A50-E1519BF6432C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtGallery.Common", "ArtGallery.Common\ArtGallery.Common.csproj", "{CC353CA5-03F9-4BCA-8128-0501BAD66428}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{17C9134D-C75D-4EDE-8A50-E1519BF6432C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17C9134D-C75D-4EDE-8A50-E1519BF6432C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17C9134D-C75D-4EDE-8A50-E1519BF6432C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC353CA5-03F9-4BCA-8128-0501BAD66428}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC353CA5-03F9-4BCA-8128-0501BAD66428}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC353CA5-03F9-4BCA-8128-0501BAD66428}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC353CA5-03F9-4BCA-8128-0501BAD66428}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
