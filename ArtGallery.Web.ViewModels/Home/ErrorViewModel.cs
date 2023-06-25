@@ -1,4 +1,4 @@
-namespace ArtGallery.Web.Models
+namespace ArtGallery.Web.ViewModels.Home
 {
     public class ErrorViewModel
     {

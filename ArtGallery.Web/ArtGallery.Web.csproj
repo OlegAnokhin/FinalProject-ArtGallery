@@ -17,6 +17,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ArtGallery.Common\ArtGallery.Common.csproj" />
+    <ProjectReference Include="..\ArtGallery.Data\ArtGallery.Data.csproj" />
+    <ProjectReference Include="..\ArtGallery.Web.ViewModels\ArtGallery.Web.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
