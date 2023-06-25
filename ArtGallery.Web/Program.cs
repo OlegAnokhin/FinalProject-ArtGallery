@@ -1,9 +1,9 @@
 namespace ArtGallery.Web
 {
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
     using Data;
+    using ArtGallery.Data.Models;
 
     public class Program
     {
@@ -15,15 +15,15 @@ namespace ArtGallery.Web
             string connectionString = builder.Configuration
                 .GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            builder.Services.AddDbContext<ArtGalleryDbContext>(options =>
                 options.UseSqlServer(connectionString));
             
             builder.Services
-                .AddDefaultIdentity<IdentityUser>(options =>
+                .AddDefaultIdentity<AppUser>(options =>
                 {
                     options.SignIn.RequireConfirmedAccount = false;
                 })
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ArtGalleryDbContext>();
             
             builder.Services.AddControllersWithViews();
 

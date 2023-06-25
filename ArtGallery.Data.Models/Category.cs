@@ -4,11 +4,11 @@
     using System.ComponentModel.DataAnnotations;
 
     using static Common.EntityValidationConstants.Category;
-    
+
     /// <summary>
-    /// Изложба
+    /// Категория
     /// </summary>
-    [Comment("Изложба")]
+    [Comment("Категория")]
     public class Category
     {
         public Category()
@@ -31,6 +31,9 @@
         [MaxLength(NameMaxLength)]
         public string Name { get; set; } = null!;
 
-        public ICollection<Picture> Pictures { get; set; }
+        /// <summary>
+        /// Колекция от картини
+        /// </summary>
+        public virtual ICollection<Picture> Pictures { get; set; }
     }
 }

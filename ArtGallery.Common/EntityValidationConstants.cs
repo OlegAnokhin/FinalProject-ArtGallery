@@ -32,7 +32,7 @@
             public const int MaterialMaxLength = 50;
 
             public const int ImageAddressMinLength = 2;
-            public const int ImageAddressMaxLength = 250;
+            public const int ImageAddressMaxLength = 2048;
 
             public const int ImageBaseMinLength = 2;
             public const int ImageBaseMaxLength = 250;
@@ -45,6 +45,12 @@
 
         }
 
+        public static class Comment
+        {
+            public const int CommentMinLength = 2;
+            public const int CommentMaxLength = 250;
+        }
+        
         public static class ArtClass
         {
 

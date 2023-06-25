@@ -1,7 +1,9 @@
 ﻿namespace ArtGallery.Data.Models
 {
+
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using static Common.EntityValidationConstants.Picture;
 
@@ -11,6 +13,10 @@
     [Comment("Картинa")]
     public class Picture
     {
+        public Picture()
+        {
+            PictureComments = new HashSet<Comment>();
+        }
         /// <summary>
         /// Идентификатор
         /// </summary>
@@ -70,6 +76,7 @@
         [Comment("Категория на картината")]
         [Required]
         [MaxLength(CategoryMaxLength)]
+        [ForeignKey(nameof(CategoryId))]
         public Category Category { get; set; } = null!;
 
         /// <summary>
@@ -86,5 +93,11 @@
         [Comment("Дата на създаване на картината")]
         [Required]
         public DateTime Date { get; set; }
+
+        /// <summary>
+        /// Коментари към картината
+        /// </summary>
+        [Comment("Коментари към картината")]
+        public virtual ICollection<Comment>PictureComments { get; set; }
     }
 }
