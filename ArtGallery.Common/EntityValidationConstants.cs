@@ -42,18 +42,30 @@
 
             public const int DescriptionMinLength = 2;
             public const int DescriptionMaxLength = 250;
-
         }
 
         public static class Comment
         {
+            public const int UsernameMinLength = 2;
+            public const int UsernameMaxLength = 50;
+            
             public const int CommentMinLength = 2;
             public const int CommentMaxLength = 250;
         }
         
         public static class ArtClass
         {
+            public const int NameMinLength = 2;
+            public const int NameMaxLength = 50;
 
+            public const int ImageAddressMinLength = 2;
+            public const int ImageAddressMaxLength = 2048;
+
+            public const int PlaceMinLength = 2;
+            public const int PlaceMaxLength = 50;
+
+            public const int DescriptionMinLength = 2;
+            public const int DescriptionMaxLength = 250;
         }
     }
 }

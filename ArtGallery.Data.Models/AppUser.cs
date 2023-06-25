@@ -6,6 +6,7 @@
     {
         public AppUser()
         {
+            Id = Guid.NewGuid();
             Comments = new HashSet<Comment>();
         }
 

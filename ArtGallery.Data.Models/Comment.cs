@@ -3,7 +3,7 @@
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
 
-    using static ArtGallery.Common.EntityValidationConstants.Comment;
+    using static Common.EntityValidationConstants.Comment;
 
     /// <summary>
     /// Коментар към картината.
@@ -22,6 +22,7 @@
         /// </summary>
         [Comment("Име на коментиращият")]
         [Required]
+        [MaxLength(UsernameMaxLength)]
         public string Username { get; set; } = null!;
         
         /// <summary>
