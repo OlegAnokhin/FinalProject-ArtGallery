@@ -3,19 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtGallery.Web", "ArtGallery.Web\ArtGallery.Web.csproj", "{17C9134D-C75D-4EDE-8A50-E1519BF6432C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtGallery.Web", "ArtGallery.Web\ArtGallery.Web.csproj", "{17C9134D-C75D-4EDE-8A50-E1519BF6432C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtGallery.Common", "ArtGallery.Common\ArtGallery.Common.csproj", "{CC353CA5-03F9-4BCA-8128-0501BAD66428}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtGallery.Common", "ArtGallery.Common\ArtGallery.Common.csproj", "{CC353CA5-03F9-4BCA-8128-0501BAD66428}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{6FD2E2D4-1719-43A8-949B-0C370A4BCB89}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{3C4C7237-6B73-4FE7-B9CD-923E2274B73E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtGallery.Data", "ArtGallery.Data\ArtGallery.Data.csproj", "{01325A9A-7D1F-46A6-BF81-81411D367A30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtGallery.Data", "ArtGallery.Data\ArtGallery.Data.csproj", "{01325A9A-7D1F-46A6-BF81-81411D367A30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtGallery.Data.Models", "ArtGallery.Data.Models\ArtGallery.Data.Models.csproj", "{48FD4F22-E4AD-4E0F-AE19-30DAC22FAFE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtGallery.Data.Models", "ArtGallery.Data.Models\ArtGallery.Data.Models.csproj", "{48FD4F22-E4AD-4E0F-AE19-30DAC22FAFE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtGallery.Web.ViewModels", "ArtGallery.Web.ViewModels\ArtGallery.Web.ViewModels.csproj", "{A6BAC150-EA07-4FC2-AE69-978F0FE052EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtGallery.Web.ViewModels", "ArtGallery.Web.ViewModels\ArtGallery.Web.ViewModels.csproj", "{A6BAC150-EA07-4FC2-AE69-978F0FE052EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{F4E37E66-9B84-46F7-940E-EF3D40AD0D98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtGallery.Services.Data", "ArtGallery.Services.Data\ArtGallery.Services.Data.csproj", "{8425212E-6316-4667-B423-991C1A35713E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtGallery.Web.Infrastucture", "ArtGallery.Web.Infrastucture\ArtGallery.Web.Infrastucture.csproj", "{5767AFE5-397E-4811-A4CE-11165537D8C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +49,14 @@ Global
 		{A6BAC150-EA07-4FC2-AE69-978F0FE052EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6BAC150-EA07-4FC2-AE69-978F0FE052EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6BAC150-EA07-4FC2-AE69-978F0FE052EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8425212E-6316-4667-B423-991C1A35713E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8425212E-6316-4667-B423-991C1A35713E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8425212E-6316-4667-B423-991C1A35713E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8425212E-6316-4667-B423-991C1A35713E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5767AFE5-397E-4811-A4CE-11165537D8C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5767AFE5-397E-4811-A4CE-11165537D8C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5767AFE5-397E-4811-A4CE-11165537D8C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5767AFE5-397E-4811-A4CE-11165537D8C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +66,8 @@ Global
 		{01325A9A-7D1F-46A6-BF81-81411D367A30} = {3C4C7237-6B73-4FE7-B9CD-923E2274B73E}
 		{48FD4F22-E4AD-4E0F-AE19-30DAC22FAFE0} = {3C4C7237-6B73-4FE7-B9CD-923E2274B73E}
 		{A6BAC150-EA07-4FC2-AE69-978F0FE052EF} = {6FD2E2D4-1719-43A8-949B-0C370A4BCB89}
+		{8425212E-6316-4667-B423-991C1A35713E} = {F4E37E66-9B84-46F7-940E-EF3D40AD0D98}
+		{5767AFE5-397E-4811-A4CE-11165537D8C3} = {6FD2E2D4-1719-43A8-949B-0C370A4BCB89}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {178D3709-71BF-42A9-9562-82CC0D567B66}

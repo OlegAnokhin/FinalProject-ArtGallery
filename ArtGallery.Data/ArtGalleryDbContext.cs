@@ -1,12 +1,10 @@
-﻿using System.Reflection;
-
-namespace ArtGallery.Web.Data
+﻿namespace ArtGallery.Data
 {
-    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using System.Reflection;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
-
-    using ArtGallery.Data.Models;
+    using Models;
 
     public class ArtGalleryDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
     {

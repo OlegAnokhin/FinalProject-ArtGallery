@@ -1,8 +1,10 @@
+using ArtGallery.Data;
+using ArtGallery.Services.Data.Interfaces;
+using ArtGallery.Web.Infrastucture.Extensions;
+
 namespace ArtGallery.Web
 {
     using Microsoft.EntityFrameworkCore;
-
-    using Data;
     using ArtGallery.Data.Models;
 
     public class Program
@@ -34,6 +36,8 @@ namespace ArtGallery.Web
                 })
                 .AddEntityFrameworkStores<ArtGalleryDbContext>();
             
+            builder.Services.AddApplicationServices(typeof(IPictureService));
+
             builder.Services.AddControllersWithViews();
 
             WebApplication app = builder.Build();
