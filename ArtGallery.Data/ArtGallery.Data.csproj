@@ -20,8 +20,4 @@
     <ProjectReference Include="..\ArtGallery.Data.Models\ArtGallery.Data.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Configurations\Migrations\" />
-  </ItemGroup>
-
 </Project>

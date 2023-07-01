@@ -11,7 +11,10 @@
             public const int PlaceMaxLength = 50;
             
             public const int DescriptionMinLength = 2;
-            public const int DescriptionMaxLength = 250;
+            public const int DescriptionMaxLength = 250;            
+            
+            public const int ImageUrlMinLength = 2;
+            public const int ImageUrlMaxLength = 2048;
         }
 
         public static class Category

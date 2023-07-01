@@ -68,6 +68,5 @@
         /// </summary>
         [Comment("Списък със записали се")]
         public virtual ICollection<AppUser> Participants { get; set; }
-
     }
 }

@@ -4,13 +4,13 @@
     using Services.Data.Interfaces;
     using ViewModels.Exhibition;
 
-    public class EventController : Controller
+    public class ExhibitionController : Controller
     {
         private readonly IExhibitionService eventService;
         private readonly ILogger logger;
 
-        public EventController(IExhibitionService _eventService, 
-                               ILogger<EventController> _logger)
+        public ExhibitionController(IExhibitionService _eventService, 
+                               ILogger<ExhibitionController> _logger)
         {
             eventService = _eventService;
             logger = _logger;

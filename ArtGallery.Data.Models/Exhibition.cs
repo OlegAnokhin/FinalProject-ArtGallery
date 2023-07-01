@@ -27,6 +27,14 @@
         public string Name { get; set; } = null!;
 
         /// <summary>
+        /// Адреса на изображинието
+        /// </summary>
+        [Required]
+        [MaxLength(ImageUrlMaxLength)]
+        [Comment("Адреса на изображинието")]
+        public string ImageUrl { get; set; } = null!;
+
+        /// <summary>
         /// Начало на изложбата
         /// </summary>
         [Required]

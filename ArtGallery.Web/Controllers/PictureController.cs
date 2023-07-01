@@ -7,13 +7,13 @@
     using ViewModels.Home;
     using ViewModels.Picture;
 
-    public class GalleryController : Controller
+    public class PictureController : Controller
     {
         private readonly IPictureService pictureService;
-        private readonly ILogger<GalleryController> logger;
+        private readonly ILogger<PictureController> logger;
 
-        public GalleryController(IPictureService pictureService,
-                                 ILogger<GalleryController> logger)
+        public PictureController(IPictureService pictureService,
+                                 ILogger<PictureController> logger)
         {
             this.pictureService = pictureService;
             this.logger = logger;
