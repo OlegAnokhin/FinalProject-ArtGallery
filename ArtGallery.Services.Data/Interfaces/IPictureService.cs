@@ -1,5 +1,6 @@
 ﻿namespace ArtGallery.Services.Data.Interfaces
 {
+    using Web.ViewModels.Home;
     using Web.ViewModels.Picture;
 
     /// <summary>
@@ -8,6 +9,12 @@
 
     public interface IPictureService
     {
+        /// <summary>
+        /// Зарежда последно качените картини
+        /// </summary>
+        /// <returns></returns>
+        Task<IEnumerable<IndexViewModel>> LastThreePicturesAsync();
+
         /// <summary>
         /// Добавяне на категории към картината
         /// </summary>

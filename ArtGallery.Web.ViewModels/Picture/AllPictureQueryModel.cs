@@ -1,13 +1,35 @@
 ﻿namespace ArtGallery.Web.ViewModels.Picture
 {
-    public class AllPictureViewModel
+    using System.ComponentModel.DataAnnotations;
+    using static Common.GeneralAppConstants;
+    public class AllPictureQueryModel
     {
-        public int Id { get; set; }
+        public AllPictureQueryModel()
+        {
+            this.CurrentPage = DefaultPage;
+            this.PicturesPerPage = EntitiesPerPage;
 
-        public string ImageUrl { get; set; } = null!;
+            this.Categories = new HashSet<string>();
+            this.Pictures = new HashSet<AllPictureViewModel>();
+        }
 
-        public string Name { get; set; } = null!;
+        public string? Category { get; set; }
 
-        public string Description { get; set; } = null!;
+        [Display(Name = "Търсене по име")]
+        public string? SearchString { get; set; }
+
+        [Display(Name = "Подреди картините по")]
+        public PictureSorting PictureSorting { get; set; }
+
+        public int CurrentPage { get; set; }
+
+        [Display(Name = "Покажи по ")]
+        public int PicturesPerPage { get; set; }
+
+        public int TotalHouses { get; set; }
+
+        public IEnumerable<string> Categories { get; set; }
+
+        public IEnumerable<AllPictureViewModel> Pictures { get; set; }
     }
 }

@@ -85,7 +85,7 @@
         [Display(Name = "Дата на картината")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Полето '{0}' е задължително")]
         [StringLength(100, MinimumLength = 3, ErrorMessage = "Полето '{0}' трябва да е между {2} и {1} символа")]
-        public string Date { get; set; } = null!;
+        public DateTime Date { get; set; }
 
         /// <summary>
         /// Списък с категории

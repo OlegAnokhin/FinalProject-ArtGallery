@@ -92,7 +92,7 @@
         /// </summary>
         [Comment("Дата на създаване на картината")]
         [Required]
-        public string Date { get; set; }
+        public DateTime CreatedOn { get; set; }
 
         /// <summary>
         /// Коментари към картината

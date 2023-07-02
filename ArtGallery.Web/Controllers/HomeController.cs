@@ -1,4 +1,6 @@
-﻿namespace ArtGallery.Web.Controllers
+﻿using ArtGallery.Services.Data.Interfaces;
+
+namespace ArtGallery.Web.Controllers
 {
     using System.Diagnostics;
     using Microsoft.AspNetCore.Mvc;
@@ -7,14 +9,18 @@
 
     public class HomeController : Controller
     {
-        public HomeController()
+        private readonly IPictureService pictureService;
+        public HomeController(IPictureService pictureService)
         {
-
+            this.pictureService = pictureService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            IEnumerable<IndexViewModel> viewModel = 
+                await this.pictureService.LastThreeHousesAsync();
+
+            return View(viewModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

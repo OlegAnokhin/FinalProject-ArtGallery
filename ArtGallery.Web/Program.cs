@@ -1,11 +1,11 @@
-using ArtGallery.Data;
-using ArtGallery.Services.Data.Interfaces;
-using ArtGallery.Web.Infrastucture.Extensions;
-
 namespace ArtGallery.Web
 {
     using Microsoft.EntityFrameworkCore;
-    using ArtGallery.Data.Models;
+
+    using Services.Data.Interfaces;
+    using Infrastucture.Extensions;
+    using Data;
+    using Data.Models;
 
     public class Program
     {
@@ -16,10 +16,10 @@ namespace ArtGallery.Web
             // Add services to the container.
             string connectionString = builder.Configuration
                 .GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-            
+
             builder.Services.AddDbContext<ArtGalleryDbContext>(options =>
                 options.UseSqlServer(connectionString));
-            
+
             builder.Services
                 .AddDefaultIdentity<AppUser>(options =>
                 {
@@ -35,7 +35,7 @@ namespace ArtGallery.Web
                         builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
                 })
                 .AddEntityFrameworkStores<ArtGalleryDbContext>();
-            
+
             builder.Services.AddApplicationServices(typeof(IPictureService));
 
             builder.Services.AddControllersWithViews();

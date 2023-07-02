@@ -1,4 +1,6 @@
-﻿namespace ArtGallery.Services.Data
+﻿using ArtGallery.Web.ViewModels.Home;
+
+namespace ArtGallery.Services.Data
 {
     using Microsoft.EntityFrameworkCore;
 
@@ -40,10 +42,31 @@
         //}
 
         /// <summary>
-        /// Добавяне на категории към картината
+        /// Добавяне на последно качените картини
         /// </summary>
         /// <returns></returns>
-        public async Task<PictureModel> GetCategoriesForAddNewPictureAsync()
+        public async Task<IEnumerable<IndexViewModel>> LastThreePicturesAsync()
+        {
+            IEnumerable<IndexViewModel> lastThreePictures = await this.dbContext
+                .Pictures
+                .OrderByDescending(p => p.CreatedOn)
+                .Take(3)
+                .Select(p => new IndexViewModel()
+                {
+                    Id = p.Id,
+                    Title = p.Name,
+                    ImageUrl = p.ImageAddress
+                })
+                .ToArrayAsync();
+
+            return lastThreePictures;
+        }
+
+        /// <summary>
+            /// Добавяне на категории към картината
+            /// </summary>
+            /// <returns></returns>
+            public async Task<PictureModel> GetCategoriesForAddNewPictureAsync()
         {
             var categories = await dbContext.Categories
                 .Select(c => new CategoryModel
@@ -72,7 +95,7 @@
                 ImageAddress = model.ImageAddress,
                 ImageBase = model.ImageBase,
                 Description = model.Description,
-                Date = model.Date,
+                CreatedOn = model.Date,
                 CategoryId = model.CategoryId
             };
             await dbContext.AddAsync(entity);
@@ -114,7 +137,7 @@
             entity.ImageAddress = model.ImageAddress;
             entity.ImageBase = model.ImageBase;
             entity.Description = model.Description;
-            entity.Date = model.Date;
+            entity.CreatedOn = model.Date;
             entity.CategoryId = model.CategoryId;
 
             await dbContext.SaveChangesAsync();
@@ -138,7 +161,7 @@
                     ImageAddress = p.ImageAddress,
                     ImageBase = p.ImageBase,
                     Description = p.Description,
-                    Date = p.Date,
+                    Date = p.CreatedOn,
                     Category = p.Category.Name
                 })
                 .Where(p => p.Category == "Animals")
@@ -163,7 +186,7 @@
                     ImageAddress = p.ImageAddress,
                     ImageBase = p.ImageBase,
                     Description = p.Description,
-                    Date = p.Date,
+                    Date = p.CreatedOn,
                     CategoryId = p.CategoryId
                 }).FirstOrDefaultAsync();
         }
