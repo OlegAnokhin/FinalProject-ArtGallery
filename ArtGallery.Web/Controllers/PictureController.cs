@@ -1,56 +1,66 @@
 ﻿namespace ArtGallery.Web.Controllers
 {
     using System.Diagnostics;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     using Services.Data.Interfaces;
     using ViewModels.Home;
     using ViewModels.Picture;
 
+    [Authorize]
     public class PictureController : Controller
     {
         private readonly IPictureService pictureService;
+        private readonly ICategoryService categoryService;
         private readonly ILogger<PictureController> logger;
 
         public PictureController(IPictureService pictureService,
+                                 ICategoryService categoryService,
                                  ILogger<PictureController> logger)
         {
             this.pictureService = pictureService;
+            this.categoryService = categoryService;
             this.logger = logger;
         }
 
-        public IActionResult Gallery()
+        [AllowAnonymous]
+        public async Task<IActionResult> All()
         {
-            return View("Gallery");
+            return View();
         }
 
-        //[HttpGet]
-        //public IActionResult Add()
-        //{
-        //    var model = new PictureModel();
-        //    return View(model);
-        //}
+        [HttpGet]
+        public async Task<IActionResult> Add()
+        {
+
+            AddPictureViewModel model = new AddPictureViewModel()
+            {
+                Categories = await this.categoryService.AllCategoriesAsync()
+            };
+            return View(model);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add(PictureModel model)
+        public async Task<IActionResult> Add(AddPictureViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(model);
+            //}
 
-            try
-            {
-                await pictureService.AddAsync(model);
-            }
-            catch (Exception e)
-            {
-                logger.LogError("GalleryController/Add", e);
-                ViewBag.ErrorMessage = "Възникна непредвидена грешка";
-            }
+            //try
+            //{
+            //    await pictureService.AddAsync(model);
+            //}
+            //catch (Exception e)
+            //{
+            //    logger.LogError("GalleryController/Add", e);
+            //    ViewBag.ErrorMessage = "Възникна непредвидена грешка";
+            //}
 
-            return RedirectToAction(nameof(Gallery));
+            return RedirectToAction(nameof(All));
         }
 
         [HttpGet]
@@ -71,7 +81,7 @@
                 logger.LogError("GalleryController/Details", e);
                 ViewBag.ErrorMessage = "Възникна непредвидена грешка";
             }
-            return RedirectToAction(nameof(Gallery));
+            return RedirectToAction(nameof(All));
         }
 
 

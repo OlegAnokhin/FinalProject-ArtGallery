@@ -174,7 +174,7 @@ namespace ArtGallery.Services.Data
         /// </summary>
         /// <param name="id">Идентификатор на картина</param>
         /// <returns></returns>
-        public async Task<PictureModel?> GetPictureByIdAsync(int id)
+        public async Task<PictureModel?>? GetPictureByIdAsync(int id)
         {
             return await dbContext.Pictures
                 .Where(p => p.Id == id)
