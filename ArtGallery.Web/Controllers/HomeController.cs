@@ -18,7 +18,7 @@ namespace ArtGallery.Web.Controllers
         public async Task<IActionResult> Index()
         {
             IEnumerable<IndexViewModel> viewModel = 
-                await this.pictureService.LastThreeHousesAsync();
+                await this.pictureService.LastThreePicturesAsync();
 
             return View(viewModel);
         }
