@@ -69,7 +69,7 @@ namespace ArtGallery.Services.Data
             public async Task<PictureModel> GetCategoriesForAddNewPictureAsync()
         {
             var categories = await dbContext.Categories
-                .Select(c => new CategoryModel
+                .Select(c => new PictureSelectCategoryModel
                 {
                     Id = c.Id,
                     Name = c.Name

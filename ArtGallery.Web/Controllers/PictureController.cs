@@ -24,12 +24,12 @@
             return View("Gallery");
         }
 
-        [HttpGet]
-        public IActionResult Add()
-        {
-            var model = new PictureModel();
-            return View(model);
-        }
+        //[HttpGet]
+        //public IActionResult Add()
+        //{
+        //    var model = new PictureModel();
+        //    return View(model);
+        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]

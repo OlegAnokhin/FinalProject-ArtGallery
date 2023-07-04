@@ -4,22 +4,12 @@
 
     using static Common.EntityValidationConstants.Picture;
 
-    public class PictureModel
+    public class AddPictureViewModel
     {
-        /// <summary>
-        /// Списък с категории
-        /// </summary>
-        public PictureModel()
+        public AddPictureViewModel()
         {
-            Categories = new HashSet<PictureSelectCategoryModel>();
+            this.Categories = new HashSet<PictureSelectCategoryModel>();
         }
-
-        /// <summary>
-        /// Идентификатор
-        /// </summary>
-        [Key]
-        public int Id { get; set; }
-
         /// <summary>
         /// Име на картината
         /// </summary>
@@ -64,18 +54,14 @@
         /// Категория на картината
         /// </summary>
         [Display(Name = "Категория на картината")]
-        [Range(1, int.MaxValue)]
+        [Required]
         public int CategoryId { get; set; }
 
         /// <summary>
         /// Категория на картината
         /// </summary>
         [Display(Name = "Категория на картината")]
-        public string Category { get; set; }
-
-        /// <summary>
-        /// Списък с категории
-        /// </summary>
+        [Required]
         public IEnumerable<PictureSelectCategoryModel> Categories { get; set; }
 
         /// <summary>
@@ -84,13 +70,13 @@
         [Display(Name = "Описание на картината")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Полето '{0}' е задължително")]
         [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength, ErrorMessage = "Полето '{0}' трябва да е между {2} и {1} символа")]
-        public string Description { get; set; }
+        public string Description { get; set; } = null!;
 
         /// <summary>
-        /// Дата на картината
+        /// Дата на създаване на картината
         /// </summary>
-        [Display(Name = "Дата на картината")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Полето '{0}' е задължително")]
-        public DateTime Date { get; set; }
+        [Display(Name = "Дата на създаване на картината")]
+        [Required]
+        public DateTime CreatedOn { get; set; }
     }
 }

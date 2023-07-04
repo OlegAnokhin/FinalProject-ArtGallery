@@ -1,6 +1,6 @@
 ﻿namespace ArtGallery.Web.ViewModels.Picture
 {
-    public class CategoryModel
+    public class PictureSelectCategoryModel
     {
         /// <summary>
         /// Идентификатор
