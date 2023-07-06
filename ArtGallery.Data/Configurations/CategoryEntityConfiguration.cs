@@ -15,7 +15,7 @@
         }
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-            builder.HasData(this.seeder.GenerateCategories);
+            builder.HasData(this.seeder.GenerateCategories());
         }
     }
 }
