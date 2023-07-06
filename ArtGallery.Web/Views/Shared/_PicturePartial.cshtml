@@ -1,0 +1,21 @@
+﻿@model AllPictureViewModel
+
+<div class="col-md-4">
+    <div class="card mb-3">
+        <img class="card-img-top" src="@Model.ImageAddress" alt="Picture Image">
+        <div class="card-body text-center">
+            <h4>@Model.Name</h4>
+
+            <a asp-controller="Picture" asp-action="Details" asp-route-id="@Model.Id"
+               class="btn btn-success">Детайли</a>
+
+            @if (this.User.Identity?.IsAuthenticated ?? false)
+            {
+                <a asp-controller="Picture" asp-action="Edit" asp-route-id="@Model.Id"
+                   class="btn btn-warning">Редактирай</a>
+                <a asp-controller="Picture" asp-action="Delete" asp-routeid="@Model.Id"
+                   class="btn btn-danger">Изтрий</a>
+            }
+        </div>
+    </div>
+</div>

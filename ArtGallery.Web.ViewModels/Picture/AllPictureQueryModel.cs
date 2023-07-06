@@ -1,6 +1,8 @@
 ﻿namespace ArtGallery.Web.ViewModels.Picture
 {
     using System.ComponentModel.DataAnnotations;
+
+    using Enums;
     using static Common.GeneralAppConstants;
     public class AllPictureQueryModel
     {
@@ -26,7 +28,7 @@
         [Display(Name = "Покажи по ")]
         public int PicturesPerPage { get; set; }
 
-        public int TotalHouses { get; set; }
+        public int TotalPictures { get; set; }
 
         public IEnumerable<string> Categories { get; set; }
 

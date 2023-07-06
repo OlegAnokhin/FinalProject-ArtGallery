@@ -10,6 +10,7 @@
     <ProjectReference Include="..\ArtGallery.Common\ArtGallery.Common.csproj" />
     <ProjectReference Include="..\ArtGallery.Data.Models\ArtGallery.Data.Models.csproj" />
     <ProjectReference Include="..\ArtGallery.Data\ArtGallery.Data.csproj" />
+    <ProjectReference Include="..\ArtGallery.Services.Data.Models\ArtGallery.Services.Data.Models.csproj" />
     <ProjectReference Include="..\ArtGallery.Web.ViewModels\ArtGallery.Web.ViewModels.csproj" />
   </ItemGroup>
 

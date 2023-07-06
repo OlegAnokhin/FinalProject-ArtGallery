@@ -1,9 +1,9 @@
 ﻿namespace ArtGallery.Data.Configurations
 {
-    using Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+    using Models;
 
     public class PictureEntityConfiguration : IEntityTypeConfiguration<Picture>
     {
@@ -17,7 +17,6 @@
             builder
                 .Property(p => p.CreatedOn)
                 .HasDefaultValue(DateTime.UtcNow);
-
         }
     }
 }

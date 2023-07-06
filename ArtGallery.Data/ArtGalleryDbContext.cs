@@ -1,7 +1,6 @@
 ﻿namespace ArtGallery.Data
 {
     using System.Reflection;
-    using ArtGallery.Data.Configurations;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;

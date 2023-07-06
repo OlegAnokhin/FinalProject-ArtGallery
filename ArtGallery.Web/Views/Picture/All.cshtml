@@ -1,6 +1,6 @@
-﻿@*@model IEnumerable<AllPictureQueryModel>
+﻿@model AllPictureQueryModel
 @{
-    ViewData["Title"] = "All Pictures";
+    ViewData["Title"] = "Галерия";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
@@ -10,9 +10,9 @@
     <div class="row">
         <div class="form-group col-md-3 d-flex justify-content-between">
             <div class="form-group">
-                <label asp-for="Category"></label>
+                <label asp-for="Category">Категория</label>
                 <select asp-for="Category" class="form-control">
-                    <option value="">All</option>
+                    <option value="">Всички</option>
                     @foreach (var category in Model.Categories)
                     {
                         <option value="@category">@category</option>
@@ -21,8 +21,8 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="HousesPerPage"></label>
-                <select asp-for="HousesPerPage" class="form-control">
+                <label asp-for="PicturesPerPage"></label>
+                <select asp-for="PicturesPerPage" class="form-control">
                     <option value="3">3</option>
                     <option value="6">6</option>
                     <option value="9">9</option>
@@ -37,13 +37,10 @@
 
         <div class="form-group col-md-3">
             <div class="form-group">
-                <label asp-for="HouseSorting"></label>
-                <select asp-for="HouseSorting" class="form-control">
-                    <option value="0">Newest</option>
-                    <option value="1">Oldest</option>
-                    <option value="2">Price (Ascending)</option>
-                    <option value="3">Price (Descending)</option>
-                    <option value="4">Not rented first</option>
+                <label asp-for="PictureSorting"></label>
+                <select asp-for="PictureSorting" class="form-control">
+                    <option value="0">Най-нови</option>
+                    <option value="1">Най-стари </option>
                 </select>
             </div>
         </div>
@@ -64,8 +61,8 @@
         previousPage = 1;
     }
 
-    int maxPage = (int)Math.Ceiling((double)Model.TotalHouses /
-        Model.HousesPerPage);
+    int maxPage = (int)Math.Ceiling((double)Model.TotalPictures /
+        Model.PicturesPerPage);
 }
 
 <div class="row mb-5">
@@ -76,12 +73,12 @@
            asp-route-currentPage="@previousPage"
            asp-route-category="@Model.Category"
            asp-route-searchTerm="@Model.SearchString"
-           asp-route-sorting="@((int)Model.HouseSorting)"><<</a>
+           asp-route-sorting="@((int)Model.PictureSorting)"><<</a>
     </div>
 
     @{
         bool shouldNextPageBeDisabled = Model.CurrentPage == maxPage ||
-        !Model.Houses.Any();
+        !Model.Pictures.Any();
     }
 
     <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-end">
@@ -92,18 +89,18 @@
            asp-route-currentPage="@(Model.CurrentPage + 1)"
            asp-route-category="@Model.Category"
            asp-route-searchTerm="@Model.SearchString"
-           asp-route-sorting="@((int)Model.HouseSorting)">>></a>
+           asp-route-sorting="@((int)Model.PictureSorting)">>></a>
     </div>
 </div>
 
-@if (!Model.Houses.Any())
+@if (!Model.Pictures.Any())
 {
-    <h2 class="text-center">No houses found by the given criteria!</h2>
+    <h2 class="text-center">Няма намерени картини!</h2>
 }
 
 <div class="row">
-    @foreach (var house in Model.Houses)
+    @foreach (var picture in Model.Pictures)
     {
-        <partial name="_HousePartial" model="@house" />
+        <partial name="_PicturePartial" model="@picture" />
     }
-</div>*@
+</div>

@@ -1,5 +1,6 @@
 ﻿namespace ArtGallery.Services.Data.Interfaces
 {
+    using ArtGallery.Services.Data.Models.Picture;
     using Web.ViewModels.Home;
     using Web.ViewModels.Picture;
 
@@ -27,6 +28,13 @@
         /// <param name="model">Данни за картина</param>
         /// <returns></returns>
         Task AddAsync(AddPictureViewModel model);
+
+        /// <summary>
+        /// Услуга по търсене и подреждане
+        /// </summary>
+        /// <param name="model">Параметри за търсене и подреждане</param>
+        /// <returns></returns>
+        Task<AllPicturesFilteredAndPagedServiceModel> AllAsync(AllPictureQueryModel model);
 
         /// <summary>
         /// Изтриване на картина

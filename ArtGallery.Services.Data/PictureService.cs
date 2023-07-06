@@ -8,6 +8,8 @@ namespace ArtGallery.Services.Data
     using ArtGallery.Data;
     using ArtGallery.Data.Models;
     using Web.ViewModels.Picture;
+    using ArtGallery.Services.Data.Models.Picture;
+    using ArtGallery.Web.ViewModels.Picture.Enums;
 
     /// <summary>
     /// Услуга за управление на събития
@@ -101,6 +103,59 @@ namespace ArtGallery.Services.Data
             await dbContext.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Услуга по търсене и подреждане
+        /// </summary>
+        /// <param name="model">Параметри за търсене и подреждане</param>
+        /// <returns></returns>
+        public async Task<AllPicturesFilteredAndPagedServiceModel> AllAsync(AllPictureQueryModel model)
+        {
+            IQueryable<Picture> pictureQuery = this.dbContext
+                .Pictures
+                .AsQueryable();
+
+            if(!string.IsNullOrWhiteSpace(model.Category))
+            {
+                pictureQuery = pictureQuery
+                    .Where(p => p.Category.Name == model.Category);
+            }
+
+            if(!string.IsNullOrWhiteSpace(model.SearchString))
+            {
+                string wildCard = $"%{model.SearchString.ToLower()}%";
+                pictureQuery = pictureQuery
+                    .Where(p => EF.Functions.Like(p.Name, wildCard));
+            }
+
+            pictureQuery = model.PictureSorting switch
+            {
+                PictureSorting.Newest => pictureQuery
+                .OrderBy(p => p.CreatedOn),
+                PictureSorting.Oldest => pictureQuery
+                .OrderByDescending(p => p.CreatedOn),
+                _ => pictureQuery
+                .OrderBy(p => p.Id)
+            };
+
+            IEnumerable<AllPictureViewModel> allPictures = await pictureQuery
+                .Skip((model.CurrentPage - 1) * model.PicturesPerPage)
+                .Take(model.PicturesPerPage)
+                .Select(p => new AllPictureViewModel
+                {
+                    Id = p.Id,
+                    ImageAddress = p.ImageAddress,
+                    Name = p.Name
+                })
+                .ToArrayAsync();
+            int totalPictures = pictureQuery.Count();
+
+            return new AllPicturesFilteredAndPagedServiceModel()
+            {
+                TotalPicturesCount = totalPictures,
+                Pictures = allPictures
+            };
+        }
+
         public Task DeleteAsync(int id)
         {
             throw new NotImplementedException();
@@ -189,5 +244,6 @@ namespace ArtGallery.Services.Data
                     CategoryId = p.CategoryId
                 }).FirstOrDefaultAsync();
         }
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace ArtGallery.Web.Controllers
 {
     using System.Diagnostics;
+    using ArtGallery.Services.Data.Models.Picture;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -24,10 +25,18 @@
             this.logger = logger;
         }
 
+        [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All([FromQuery]AllPictureQueryModel queryModel)
         {
-            return View();
+            AllPicturesFilteredAndPagedServiceModel serviceModel = 
+                await this.pictureService.AllAsync(queryModel);
+
+            queryModel.Pictures = serviceModel.Pictures;
+            queryModel.TotalPictures = serviceModel.TotalPicturesCount;
+            queryModel.Categories = await this.categoryService.AllCategoryNamesAsync();
+
+            return View(queryModel);
         }
 
         [HttpGet]
