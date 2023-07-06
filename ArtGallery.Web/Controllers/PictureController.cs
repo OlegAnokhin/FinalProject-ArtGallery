@@ -85,24 +85,19 @@
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
-            PictureModel model;
-            try
+            DetailsPictureViewModel? model = await this.pictureService
+                .GetDetailsByIdAsync(id);
+            if(model == null)
             {
-                model = await pictureService.GetPictureByIdAsync(id);
+                logger.LogError("Картина с този идентификатор не съществува");
+
+                return this.RedirectToAction("All", "Picture");
+            }
+            
                 return View(model);
-            }
-            catch (ArgumentException aex)
-            {
-                ViewBag.ErrorMessage = aex.Message;
-            }
-            catch (Exception e)
-            {
-                logger.LogError("GalleryController/Details", e);
-                ViewBag.ErrorMessage = "Възникна непредвидена грешка";
-            }
-            return RedirectToAction(nameof(All));
         }
 
 

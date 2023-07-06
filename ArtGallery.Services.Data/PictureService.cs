@@ -10,6 +10,10 @@ namespace ArtGallery.Services.Data
     using Web.ViewModels.Picture;
     using ArtGallery.Services.Data.Models.Picture;
     using ArtGallery.Web.ViewModels.Picture.Enums;
+    using Microsoft.AspNetCore.Identity;
+    using System.Security.Claims;
+    using System.Net.Http;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
     /// <summary>
     /// Услуга за управление на събития
@@ -172,6 +176,40 @@ namespace ArtGallery.Services.Data
         //    await dbContext.SaveChangesAsync();
         //}
 
+
+        /// <summary>
+        /// Показване на детайли на картината
+        /// </summary>
+        /// <param name="pictureId">Идентификатор на картината</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public async Task<DetailsPictureViewModel?> GetDetailsByIdAsync(int pictureId)
+        {
+            Picture? picture = await this.dbContext
+                .Pictures
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(p => p.Id == pictureId);
+
+            if (picture == null)
+            {
+                throw new ArgumentException("Невалиден идентификатор");
+            }
+
+            return new DetailsPictureViewModel()
+            {
+                Id = picture.Id,
+                Name = picture.Name,
+                Size = picture.Size,
+                Material = picture.Material,
+                ImageAddress = picture.ImageAddress,
+                ImageBase = picture.ImageBase,
+                Category = picture.Category.Name,
+                Description = picture.Description,
+                Date = picture.CreatedOn
+            };
+        }
+
+
         /// <summary>
         /// Промяна на картина
         /// </summary>
@@ -222,28 +260,5 @@ namespace ArtGallery.Services.Data
                 .OrderBy(p => p.Name)
                 .ToListAsync();
         }
-
-        /// <summary>
-        /// Пергед на картина
-        /// </summary>
-        /// <param name="id">Идентификатор на картина</param>
-        /// <returns></returns>
-        public async Task<PictureModel?>? GetPictureByIdAsync(int id)
-        {
-            return await dbContext.Pictures
-                .Where(p => p.Id == id)
-                .Select(p => new PictureModel
-                {
-                    Name = p.Name,
-                    Size = p.Size,
-                    Material = p.Material,
-                    ImageAddress = p.ImageAddress,
-                    ImageBase = p.ImageBase,
-                    Description = p.Description,
-                    Date = p.CreatedOn,
-                    CategoryId = p.CategoryId
-                }).FirstOrDefaultAsync();
-        }
-
     }
 }

@@ -1,0 +1,58 @@
+﻿@model DetailsPictureViewModel;
+
+@{
+    ViewBag.Title = "Детайли на картината";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-4">
+            <img class="card-img-top" style="width: 20rem;"
+                 src="@Model.ImageAddress" alt="Picture Image">
+        </div>
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.Name</u></p>
+            <p>Размер: <b>@Model.Size</b></p>
+            <p>Материал: <b>Model.Material</b></p>
+            <p>Основа: <b>Model.ImageBase</b></p>
+            <p>Описание: <b>@Model.Description</b></p>
+            <div class="form-inline">
+                @if (this.User.Identity?.IsAuthenticated ?? false)
+                {
+                    <a class="btn btn-warning" asp-controller="Picture" aspaction="Edit"
+                       asp-route-id="@Model.Id">Edit</a>
+                    <a class="ml-2 btn btn-danger" asp-controller="Picture" aspaction="Delete"
+                       asp-route-id="@Model.Id">Delete</a>
+                }
+            </div>
+            <p></p>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Коментари</h5>
+                    @if (this.User.Identity?.IsAuthenticated ?? false)
+                    {
+                        <div class="row">
+@*                            <form method="post">
+                                <div class="form-group">
+                                    <div class="mb-3">
+                                        <label asp-for="Title"></label>
+                                        <input asp-for="Title" class="form-control" placeholder="Попълнете името си">
+                                        <span asp-validation-for="@Model.Title" class="small text-danger"></span>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label asp-for="Content"></label>
+                                        <input asp-for="Content" class="form-control" placeholder="Оставете коментара си тук">
+                                        <span asp-validation-for="@Model.Content" class="small text-danger"></span>
+                                    </div>
+                                </div>
+                                <input class="btn btn-primary mt-3" type="submit" value="Create" />
+                            </form>
+*@                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

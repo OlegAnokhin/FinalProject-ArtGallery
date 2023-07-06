@@ -37,6 +37,13 @@
         Task<AllPicturesFilteredAndPagedServiceModel> AllAsync(AllPictureQueryModel model);
 
         /// <summary>
+        /// Взимане на детайли за картината
+        /// </summary>
+        /// <param name="pictureId">Идентификатор на картината</param>
+        /// <returns></returns>
+        Task<DetailsPictureViewModel?> GetDetailsByIdAsync(int pictureId);
+
+        /// <summary>
         /// Изтриване на картина
         /// </summary>
         /// <param name="id">Идентификатор на картина</param>
@@ -55,12 +62,5 @@
         /// </summary>
         /// <returns></returns>
         Task<IEnumerable<PictureModel>> GetAllAnimalsAsync();
-
-        /// <summary>
-        /// Преглед на картина
-        /// </summary>
-        /// <param name="id">Идентификатор на картина</param>
-        /// <returns></returns>
-        Task<PictureModel> GetPictureByIdAsync(int id);
     }
 }
