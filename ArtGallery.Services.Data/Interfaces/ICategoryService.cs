@@ -5,5 +5,7 @@
     public interface ICategoryService
     {
         Task<IEnumerable<PictureSelectCategoryModel>> AllCategoriesAsync();
+        Task<bool> ExistsByIdAsync(int id);
+
     }
 }

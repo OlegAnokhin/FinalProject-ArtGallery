@@ -28,5 +28,13 @@
                 .ToArrayAsync();
             return allCategories;
         }
+
+        public async Task<bool> ExistsByIdAsync(int id)
+        {
+            bool result = await this.dbContext
+                .Categories
+                .AnyAsync(c => c.Id == id);
+            return result;
+        }
     }
 }

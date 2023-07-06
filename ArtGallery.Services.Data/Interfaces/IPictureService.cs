@@ -26,7 +26,7 @@
         /// </summary>
         /// <param name="model">Данни за картина</param>
         /// <returns></returns>
-        Task AddAsync(PictureModel model);
+        Task AddAsync(AddPictureViewModel model);
 
         /// <summary>
         /// Изтриване на картина

@@ -85,7 +85,7 @@ namespace ArtGallery.Services.Data
         /// </summary>
         /// <param name="model">Данни за картина</param>
         /// <returns></returns>
-        public async Task AddAsync(PictureModel model)
+        public async Task AddAsync(AddPictureViewModel model)
         {
             Picture entity = new Picture()
             {
@@ -95,7 +95,6 @@ namespace ArtGallery.Services.Data
                 ImageAddress = model.ImageAddress,
                 ImageBase = model.ImageBase,
                 Description = model.Description,
-                CreatedOn = model.Date,
                 CategoryId = model.CategoryId
             };
             await dbContext.AddAsync(entity);

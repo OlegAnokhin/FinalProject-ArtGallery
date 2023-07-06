@@ -38,6 +38,7 @@
             {
                 Categories = await this.categoryService.AllCategoriesAsync()
             };
+
             return View(model);
         }
 
@@ -45,20 +46,31 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(AddPictureViewModel model)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return View(model);
-            //}
+            if (!ModelState.IsValid)
+            {
+                model.Categories = await this.categoryService.AllCategoriesAsync();
 
-            //try
-            //{
-            //    await pictureService.AddAsync(model);
-            //}
-            //catch (Exception e)
-            //{
-            //    logger.LogError("GalleryController/Add", e);
-            //    ViewBag.ErrorMessage = "Възникна непредвидена грешка";
-            //}
+                return View(model);
+            }
+
+            bool categoryExist = 
+                await this.categoryService.ExistsByIdAsync(model.CategoryId);
+            if (!categoryExist)
+            {
+                logger.LogError("Избрана категория не съществува.");
+            }
+
+            try
+            {
+                await pictureService.AddAsync(model);
+            }
+            catch (Exception e)
+            {
+                model.Categories = await this.categoryService.AllCategoriesAsync();
+
+                logger.LogError("GalleryController/Add", e);
+                ViewBag.ErrorMessage = "Възникна непредвидена грешка";
+            }
 
             return RedirectToAction(nameof(All));
         }
