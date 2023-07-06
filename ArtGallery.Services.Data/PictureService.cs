@@ -130,9 +130,9 @@ namespace ArtGallery.Services.Data
             pictureQuery = model.PictureSorting switch
             {
                 PictureSorting.Newest => pictureQuery
-                .OrderBy(p => p.CreatedOn),
-                PictureSorting.Oldest => pictureQuery
                 .OrderByDescending(p => p.CreatedOn),
+                PictureSorting.Oldest => pictureQuery
+                .OrderBy(p => p.CreatedOn),
                 _ => pictureQuery
                 .OrderBy(p => p.Id)
             };

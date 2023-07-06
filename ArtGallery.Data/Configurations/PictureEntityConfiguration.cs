@@ -16,7 +16,7 @@
                 .OnDelete(DeleteBehavior.Restrict);
             builder
                 .Property(p => p.CreatedOn)
-                .HasDefaultValue(DateTime.UtcNow);
+                .HasDefaultValueSql("GETDATE()");
         }
     }
 }
