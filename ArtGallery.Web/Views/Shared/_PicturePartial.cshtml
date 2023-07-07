@@ -13,8 +13,11 @@
             {
                 <a asp-controller="Picture" asp-action="Edit" asp-route-id="@Model.Id"
                    class="btn btn-warning">Редактирай</a>
-                <a asp-controller="Picture" asp-action="Delete" asp-routeid="@Model.Id"
-                   class="btn btn-danger">Изтрий</a>
+                <form class="mt-2" asp-controller="Picture" asp-action="Delete" asp-route-id="@Model.Id">
+                    <div>
+                        <input type="submit" value="Изтрий" class="btn btn-danger mb-2" onclick="return confirm('Наистина ли искате да изтриете картината')" />
+                    </div>
+                </form>
             }
         </div>
     </div>

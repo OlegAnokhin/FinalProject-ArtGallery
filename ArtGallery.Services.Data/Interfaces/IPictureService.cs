@@ -1,6 +1,6 @@
 ﻿namespace ArtGallery.Services.Data.Interfaces
 {
-    using ArtGallery.Services.Data.Models.Picture;
+    using Models.Picture;
     using Web.ViewModels.Home;
     using Web.ViewModels.Picture;
 
@@ -60,6 +60,6 @@
         /// </summary>
         /// <param name="id">Идентификатор на картина</param>
         /// <returns></returns>
-        Task DeleteAsync(int id);
+        Task DeletePictureByIdAsync(int pictureId);
     }
 }

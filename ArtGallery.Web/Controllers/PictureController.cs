@@ -81,7 +81,7 @@
                 ViewBag.ErrorMessage = "Възникна непредвидена грешка";
             }
 
-            return this.RedirectToAction(nameof(All));
+            return this.RedirectToAction("All", "Picture");
         }
 
         [HttpGet]
@@ -156,6 +156,30 @@
             return this.RedirectToAction("Details", "Picture", new { id });
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            bool pictureExist = await this.pictureService
+                .ExistByIdAsync(id);
+
+            if (!pictureExist)
+            {
+                logger.LogError("Картина с този идентификатор не съществува");
+
+                return this.RedirectToAction("All", "Picture");
+            }
+
+            try
+            {
+                await this.pictureService.DeletePictureByIdAsync(id);
+            }
+            catch (Exception)
+            {
+                logger.LogError("Възникна непредвидена грешка");
+                return this.RedirectToAction("All", "Picture");
+            }
+            return this.RedirectToAction("All", "Picture");
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

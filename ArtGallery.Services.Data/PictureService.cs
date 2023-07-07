@@ -158,23 +158,6 @@
             await this.dbContext.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        ///// <summary>
-        ///// Изтриване на картина
-        ///// </summary>
-        ///// <param name="id">Идентификатор на картина</param>
-        ///// <returns></returns>
-        //public async Task DeleteAsync(int id)
-        //{
-        //    await dbContext.DeleteAsync<Picture>(id);
-        //    await dbContext.SaveChangesAsync();
-        //}
-
-
         /// <summary>
         /// Показване на детайли на картината
         /// </summary>
@@ -238,5 +221,19 @@
             };
         }
 
+        /// <summary>
+        /// Изтриване на картина
+        /// </summary>
+        /// <param name="id">Идентификатор на картина</param>
+        /// <returns></returns>
+        public async Task DeletePictureByIdAsync(int pictureId)
+        {
+            Picture picture = await this.dbContext
+                .Pictures
+                .FirstAsync(p => p.Id == pictureId);
+
+            this.dbContext.Pictures.Remove(picture);
+            await this.dbContext.SaveChangesAsync();
+        }
     }
 }
