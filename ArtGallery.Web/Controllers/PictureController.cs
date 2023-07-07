@@ -43,7 +43,7 @@
         public async Task<IActionResult> Add()
         {
 
-            AddPictureViewModel model = new AddPictureViewModel()
+            AddAndEditPictureViewModel model = new AddAndEditPictureViewModel()
             {
                 Categories = await this.categoryService.AllCategoriesAsync()
             };
@@ -53,7 +53,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add(AddPictureViewModel model)
+        public async Task<IActionResult> Add(AddAndEditPictureViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -88,17 +88,40 @@
         [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
-            DetailsPictureViewModel? model = await this.pictureService
-                .GetDetailsByIdAsync(id);
-            if(model == null)
+            bool pictureExist = await this.pictureService
+                .ExistByIdAsync(id);
+
+            if (!pictureExist)
             {
                 logger.LogError("Картина с този идентификатор не съществува");
 
                 return this.RedirectToAction("All", "Picture");
             }
+            DetailsPictureViewModel model = await this.pictureService
+                .GetDetailsByIdAsync(id);
+
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            bool pictureExist = await this.pictureService
+                .ExistByIdAsync(id);
+
+            if (!pictureExist)
+            {
+                logger.LogError("Картина с този идентификатор не съществува");
+
+                return this.RedirectToAction("All", "Picture");
+            }
+
+            AddAndEditPictureViewModel model = await this.pictureService
+                .GetPictureForEditAsync(id);
+            model.Categories = await this.categoryService.AllCategoriesAsync();
+
+            return View(model);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

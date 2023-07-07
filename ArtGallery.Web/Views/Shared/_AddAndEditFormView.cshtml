@@ -1,10 +1,4 @@
 ﻿@model AddAndEditPictureViewModel
-@{
-    ViewData["Title"] = "Добавяне на картина";
-}
-
-<h2 class="text-center">@ViewData["Title"]</h2>
-<hr />
 
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
@@ -49,19 +43,9 @@
                 <input asp-for="Description" class="form-control" aria-required="true" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-@*            <div class="mb-3">
-                <label asp-for="CreatedOn" class="form-label">Дата</label>
-                <input asp-for="CreatedOn" class="form-control" aria-required="true" />
-                <span asp-validation-for="CreatedOn" class="text-danger"></span>
-            </div>*@
             <div class="mb-3 text-center">
-                <input class="btn btn-primary" type="submit" value="Добави" />
+                <input class="btn btn-primary" type="submit" value="Запази" />
             </div>
         </form>
     </div>
 </div>
-
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}

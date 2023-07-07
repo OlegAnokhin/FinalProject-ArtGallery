@@ -4,9 +4,9 @@
 
     using static Common.EntityValidationConstants.Picture;
 
-    public class AddPictureViewModel
+    public class AddAndEditPictureViewModel
     {
-        public AddPictureViewModel()
+        public AddAndEditPictureViewModel()
         {
             this.Categories = new HashSet<PictureSelectCategoryModel>();
         }

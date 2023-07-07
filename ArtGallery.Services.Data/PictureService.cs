@@ -53,7 +53,7 @@
             /// Добавяне на категории към картината
             /// </summary>
             /// <returns></returns>
-            public async Task<AddPictureViewModel> GetCategoriesForAddNewPictureAsync()
+            public async Task<AddAndEditPictureViewModel> GetCategoriesForAddNewPictureAsync()
         {
             var categories = await dbContext.Categories
                 .Select(c => new PictureSelectCategoryModel
@@ -61,7 +61,7 @@
                     Id = c.Id,
                     Name = c.Name
                 }).ToListAsync();
-            var model = new AddPictureViewModel()
+            var model = new AddAndEditPictureViewModel()
             {
                 Categories = categories
             };
@@ -72,7 +72,7 @@
         /// </summary>
         /// <param name="model">Данни за картина</param>
         /// <returns></returns>
-        public async Task AddAsync(AddPictureViewModel model)
+        public async Task AddAsync(AddAndEditPictureViewModel model)
         {
             Picture entity = new Picture()
             {
@@ -164,17 +164,12 @@
         /// <param name="pictureId">Идентификатор на картината</param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
-        public async Task<DetailsPictureViewModel?> GetDetailsByIdAsync(int pictureId)
+        public async Task<DetailsPictureViewModel> GetDetailsByIdAsync(int pictureId)
         {
             Picture? picture = await this.dbContext
                 .Pictures
                 .Include(p => p.Category)
-                .FirstOrDefaultAsync(p => p.Id == pictureId);
-
-            if (picture == null)
-            {
-                throw new ArgumentException("Невалиден идентификатор");
-            }
+                .FirstAsync(p => p.Id == pictureId);
 
             return new DetailsPictureViewModel()
             {
@@ -190,6 +185,15 @@
             };
         }
 
+        public async Task<bool> ExistByIdAsync(int pictureId)
+        {
+            bool result = await this.dbContext
+                .Pictures
+                .AnyAsync(p => p.Id == pictureId);
+
+            return result;
+        }
+
 
         /// <summary>
         /// Промяна на картина
@@ -197,23 +201,24 @@
         /// <param name="model">Данни за картина</param>
         /// <returns></returns>
 
-        public async Task EditAsync(AddPictureViewModel model, int id)
+        public async Task<AddAndEditPictureViewModel> GetPictureForEditAsync(int pictureId)
         {
-            var entity = await dbContext.Pictures.FindAsync(id);
-            if (entity == null)
+            Picture picture = await this.dbContext
+                .Pictures
+                .Include(p => p.Category)
+                .FirstAsync(p => p.Id == pictureId);
+            
+            return new AddAndEditPictureViewModel
             {
-                throw new ArgumentException("Невалиден идентификатор");
-            }
-            entity.Name = model.Name;
-            entity.Size = model.Size;
-            entity.Material = model.Material;
-            entity.ImageAddress = model.ImageAddress;
-            entity.ImageBase = model.ImageBase;
-            entity.Description = model.Description;
-            entity.CreatedOn = model.CreatedOn;
-            entity.CategoryId = model.CategoryId;
-
-            await dbContext.SaveChangesAsync();
+                Name = picture.Name,
+                Size = picture.Size,
+                Material = picture.Material,
+                ImageAddress = picture.ImageAddress,
+                ImageBase = picture.ImageBase,
+                CategoryId = picture.CategoryId,
+                Description = picture.Description,
+                CreatedOn = picture.CreatedOn
+            };
         }
 
     }

@@ -20,14 +20,14 @@
         /// Добавяне на категории към картината
         /// </summary>
         /// <returns></returns>
-        Task<AddPictureViewModel> GetCategoriesForAddNewPictureAsync();
+        Task<AddAndEditPictureViewModel> GetCategoriesForAddNewPictureAsync();
 
         /// <summary>
         /// Добавяне на картина
         /// </summary>
         /// <param name="model">Данни за картина</param>
         /// <returns></returns>
-        Task AddAsync(AddPictureViewModel model);
+        Task AddAsync(AddAndEditPictureViewModel model);
 
         /// <summary>
         /// Услуга по търсене и подреждане
@@ -41,7 +41,16 @@
         /// </summary>
         /// <param name="pictureId">Идентификатор на картината</param>
         /// <returns></returns>
-        Task<DetailsPictureViewModel?> GetDetailsByIdAsync(int pictureId);
+        Task<DetailsPictureViewModel> GetDetailsByIdAsync(int pictureId);
+
+        Task<bool> ExistByIdAsync(int pictureId);
+
+        /// <summary>
+        /// Промяна на картина
+        /// </summary>
+        /// <param name="model">Данни за картина</param>
+        /// <returns></returns>
+        Task<AddAndEditPictureViewModel> GetPictureForEditAsync(int pictureId);
 
         /// <summary>
         /// Изтриване на картина
@@ -49,13 +58,5 @@
         /// <param name="id">Идентификатор на картина</param>
         /// <returns></returns>
         Task DeleteAsync(int id);
-
-        /// <summary>
-        /// Промяна на картина
-        /// </summary>
-        /// <param name="model">Данни за картина</param>
-        /// <returns></returns>
-        Task EditAsync(AddPictureViewModel model, int id);
-
     }
 }

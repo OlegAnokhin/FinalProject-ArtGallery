@@ -1,0 +1,13 @@
+﻿@model AddAndEditPictureViewModel
+@{
+    ViewData["Title"] = "Редактиране на картина";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<partial name="_AddAndEditFormView" model="Model"/>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
