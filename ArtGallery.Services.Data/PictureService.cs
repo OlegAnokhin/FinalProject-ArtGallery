@@ -141,6 +141,23 @@
             };
         }
 
+        public async Task EditPictureByIdAsync(int pictureId, AddAndEditPictureViewModel model)
+        {
+            Picture picture = await this.dbContext
+                .Pictures
+                .FirstAsync(p => p.Id == pictureId);
+
+            picture.Name = model.Name;
+            picture.Size = model.Size;
+            picture.Material = model.Material;
+            picture.ImageAddress = model.ImageAddress;
+            picture.ImageBase = model.ImageBase;
+            picture.CategoryId = model.CategoryId;
+            picture.Description = model.Description;
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
         public Task DeleteAsync(int id)
         {
             throw new NotImplementedException();

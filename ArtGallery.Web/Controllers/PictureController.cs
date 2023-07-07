@@ -1,10 +1,10 @@
 ﻿namespace ArtGallery.Web.Controllers
 {
-    using System.Diagnostics;
-    using ArtGallery.Services.Data.Models.Picture;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using System.Diagnostics;
 
+    using Services.Data.Models.Picture;
     using Services.Data.Interfaces;
     using ViewModels.Home;
     using ViewModels.Picture;
@@ -36,7 +36,7 @@
             queryModel.TotalPictures = serviceModel.TotalPicturesCount;
             queryModel.Categories = await this.categoryService.AllCategoryNamesAsync();
 
-            return View(queryModel);
+            return this.View(queryModel);
         }
 
         [HttpGet]
@@ -48,7 +48,7 @@
                 Categories = await this.categoryService.AllCategoriesAsync()
             };
 
-            return View(model);
+            return this.View(model);
         }
 
         [HttpPost]
@@ -59,7 +59,7 @@
             {
                 model.Categories = await this.categoryService.AllCategoriesAsync();
 
-                return View(model);
+                return this.View(model);
             }
 
             bool categoryExist = 
@@ -81,7 +81,7 @@
                 ViewBag.ErrorMessage = "Възникна непредвидена грешка";
             }
 
-            return RedirectToAction(nameof(All));
+            return this.RedirectToAction(nameof(All));
         }
 
         [HttpGet]
@@ -100,7 +100,7 @@
             DetailsPictureViewModel model = await this.pictureService
                 .GetDetailsByIdAsync(id);
 
-            return View(model);
+            return this.View(model);
         }
 
         [HttpGet]
@@ -120,13 +120,47 @@
                 .GetPictureForEditAsync(id);
             model.Categories = await this.categoryService.AllCategoriesAsync();
 
-            return View(model);
+            return this.View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, AddAndEditPictureViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                model.Categories = await this.categoryService.AllCategoriesAsync();
+                return this.View(model);
+            }
+
+            bool pictureExist = await this.pictureService
+                .ExistByIdAsync(id);
+
+            if (!pictureExist)
+            {
+                logger.LogError("Картина с този идентификатор не съществува");
+
+                return this.RedirectToAction("All", "Picture");
+            }
+
+            try
+            {
+                await this.pictureService.EditPictureByIdAsync(id, model);
+            }
+            catch (Exception)
+            {
+                logger.LogError("Възникна непредвидена грешка");
+                model.Categories = await this.categoryService.AllCategoriesAsync();
+                return this.View(model);
+            }
+
+            return this.RedirectToAction("Details", "Picture", new { id });
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
     }

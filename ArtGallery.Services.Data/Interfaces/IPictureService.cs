@@ -52,6 +52,9 @@
         /// <returns></returns>
         Task<AddAndEditPictureViewModel> GetPictureForEditAsync(int pictureId);
 
+        Task EditPictureByIdAsync(int pictureId, AddAndEditPictureViewModel model);
+
+
         /// <summary>
         /// Изтриване на картина
         /// </summary>
