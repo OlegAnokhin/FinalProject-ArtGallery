@@ -20,7 +20,7 @@
         /// Добавяне на категории към картината
         /// </summary>
         /// <returns></returns>
-        Task<PictureModel> GetCategoriesForAddNewPictureAsync();
+        Task<AddPictureViewModel> GetCategoriesForAddNewPictureAsync();
 
         /// <summary>
         /// Добавяне на картина
@@ -55,12 +55,7 @@
         /// </summary>
         /// <param name="model">Данни за картина</param>
         /// <returns></returns>
-        Task EditAsync(PictureModel model, int id);
+        Task EditAsync(AddPictureViewModel model, int id);
 
-        /// <summary>
-        /// Преглед на всички картини
-        /// </summary>
-        /// <returns></returns>
-        Task<IEnumerable<PictureModel>> GetAllAnimalsAsync();
     }
 }

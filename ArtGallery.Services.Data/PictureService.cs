@@ -1,19 +1,13 @@
-﻿using ArtGallery.Web.ViewModels.Home;
-
-namespace ArtGallery.Services.Data
+﻿namespace ArtGallery.Services.Data
 {
-    using Microsoft.EntityFrameworkCore;
-
-    using Interfaces;
     using ArtGallery.Data;
     using ArtGallery.Data.Models;
+    using Interfaces;
+    using Microsoft.EntityFrameworkCore;
+    using Models.Picture;
+    using Web.ViewModels.Home;
     using Web.ViewModels.Picture;
-    using ArtGallery.Services.Data.Models.Picture;
-    using ArtGallery.Web.ViewModels.Picture.Enums;
-    using Microsoft.AspNetCore.Identity;
-    using System.Security.Claims;
-    using System.Net.Http;
-    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Web.ViewModels.Picture.Enums;
 
     /// <summary>
     /// Услуга за управление на събития
@@ -33,19 +27,6 @@ namespace ArtGallery.Services.Data
         {
             this.dbContext = dbContext;
         }
-        ///// <summary>
-        ///// Достъп до база данни
-        ///// </summary>
-        //private readonly IRepository repo;
-
-        ///// <summary>
-        ///// Инжектиране на зависимост
-        ///// </summary>
-        ///// <param name="_repo">Достъп до база данни</param>
-        //public PictureService(IRepository _repo)
-        //{
-        //    repo = _repo;
-        //}
 
         /// <summary>
         /// Добавяне на последно качените картини
@@ -72,7 +53,7 @@ namespace ArtGallery.Services.Data
             /// Добавяне на категории към картината
             /// </summary>
             /// <returns></returns>
-            public async Task<PictureModel> GetCategoriesForAddNewPictureAsync()
+            public async Task<AddPictureViewModel> GetCategoriesForAddNewPictureAsync()
         {
             var categories = await dbContext.Categories
                 .Select(c => new PictureSelectCategoryModel
@@ -80,7 +61,7 @@ namespace ArtGallery.Services.Data
                     Id = c.Id,
                     Name = c.Name
                 }).ToListAsync();
-            var model = new PictureModel()
+            var model = new AddPictureViewModel()
             {
                 Categories = categories
             };
@@ -216,12 +197,12 @@ namespace ArtGallery.Services.Data
         /// <param name="model">Данни за картина</param>
         /// <returns></returns>
 
-        public async Task EditAsync(PictureModel model, int id)
+        public async Task EditAsync(AddPictureViewModel model, int id)
         {
             var entity = await dbContext.Pictures.FindAsync(id);
             if (entity == null)
             {
-                throw new ArgumentException("Невалиден идентификатор", nameof(model.Id));
+                throw new ArgumentException("Невалиден идентификатор");
             }
             entity.Name = model.Name;
             entity.Size = model.Size;
@@ -229,36 +210,11 @@ namespace ArtGallery.Services.Data
             entity.ImageAddress = model.ImageAddress;
             entity.ImageBase = model.ImageBase;
             entity.Description = model.Description;
-            entity.CreatedOn = model.Date;
+            entity.CreatedOn = model.CreatedOn;
             entity.CategoryId = model.CategoryId;
 
             await dbContext.SaveChangesAsync();
         }
 
-        /// <summary>
-        /// Прегед на всички картини
-        /// </summary>
-        /// <param name="id">Идентификатор на картина</param>
-        /// <returns></returns>
-        public async Task<IEnumerable<PictureModel>> GetAllAnimalsAsync()
-        {
-            return await dbContext
-                .Pictures
-                .Select(p => new PictureModel()
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Size = p.Size,
-                    Material = p.Material,
-                    ImageAddress = p.ImageAddress,
-                    ImageBase = p.ImageBase,
-                    Description = p.Description,
-                    Date = p.CreatedOn,
-                    Category = p.Category.Name
-                })
-                .Where(p => p.Category == "Animals")
-                .OrderBy(p => p.Name)
-                .ToListAsync();
-        }
     }
 }

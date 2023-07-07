@@ -96,31 +96,9 @@
 
                 return this.RedirectToAction("All", "Picture");
             }
-            
-                return View(model);
+            return View(model);
         }
 
-
-        [HttpGet]
-        public async Task<IActionResult> Animals()
-        {
-            IEnumerable<PictureModel> model = Enumerable.Empty<PictureModel>();
-            try
-            {
-                model = await pictureService.GetAllAnimalsAsync();
-            }
-            catch (Exception e)
-            {
-                logger.LogError("GalleryController/Animals", e);
-                ViewBag.ErrorMessage = "Възникна непредвидена грешка";
-            }
-            return View("Animals", model);
-        }
-
-        public IActionResult People()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

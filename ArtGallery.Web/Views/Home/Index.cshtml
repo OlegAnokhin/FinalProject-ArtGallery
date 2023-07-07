@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<IndexViewModel>
 
-    @{
+@{
     ViewData["Title"] = "Home Page";
 
     var pictures = Model.ToList();
@@ -17,7 +17,7 @@
             @if (User.Identity?.IsAuthenticated ?? false)
             {
                 <a asp-controller="Picture" asp-action="Add" class="btn btn-primary btn-lg"
-           role="button">Добави картина</a>
+                   role="button">Добави картина</a>
             }
         </p>
     </div>
@@ -36,10 +36,6 @@
                 <img class="d-block w-400" style="height:500px"
                      src="@picture.ImageUrl" alt="@picture.Title">
                 <div class="carousel-caption d-none d-md-block">
-                    @*<h5>
-                        <a class="btn btn-primary" asp-controller="Picture" asp-action="Details"
-                           asp-route-id="@picture.Id"> @picture.Title</a>
-                    </h5>*@
                 </div>
             </div>
         }

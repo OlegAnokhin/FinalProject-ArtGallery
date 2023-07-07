@@ -15,22 +15,14 @@
         <div class="card col-8 border-0">
             <p style="font-size:25px;"><u>@Model.Name</u></p>
             <p>Размер: <b>@Model.Size</b></p>
-            <p>Материал: <b>Model.Material</b></p>
-            <p>Основа: <b>Model.ImageBase</b></p>
+            <p>Материал: <b>@Model.Material</b></p>
+            <p>Основа: <b>@Model.ImageBase</b></p>
             <p>Описание: <b>@Model.Description</b></p>
-            <div class="form-inline">
-                @if (this.User.Identity?.IsAuthenticated ?? false)
-                {
-                    <a class="btn btn-warning" asp-controller="Picture" aspaction="Edit"
-                       asp-route-id="@Model.Id">Edit</a>
-                    <a class="ml-2 btn btn-danger" asp-controller="Picture" aspaction="Delete"
-                       asp-route-id="@Model.Id">Delete</a>
-                }
-            </div>
             <p></p>
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Коментари</h5>
+                    <p></p>
                     @if (this.User.Identity?.IsAuthenticated ?? false)
                     {
                         <div class="row">
