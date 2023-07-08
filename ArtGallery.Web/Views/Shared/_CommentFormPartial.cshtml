@@ -1,21 +1,18 @@
 ﻿@model CommentFormModel
 
-
-<form asp-controller="Comment" asp-action="Send" method="post" class="mb-3">
+<form asp-controller="Comment" asp-action="Add" method="post" class="mb-3">
     <div class="form-group card-header row">
         <div class="col-12">
-            <h5>Send a new message</h5>
+            <h5>Създаване на нов коментар</h5>
         </div>
         <div class="col-4">
-            <label>Sender Name: </label>
-            <input asp-for="CurrentMessage.Sender" class="form-control">
-            <input class="btn btn-primary mt-2
-                   float-lg-right" type="submit" value="Send" />
+            <label>Вашето име: </label>
+            <input asp-for="CurrentComment.Username" class="form-control">
         </div>
         <div class="col-8">
-            <label>Message: </label>
-            <textarea asp-for="CurrentMessage.MessageText"
-                                              class="form-control" rows="3"></textarea>
+            <label>Съобщение: </label>
+            <textarea asp-for="CurrentComment.Content" class="form-control" rows="3"></textarea>
+            <input class="btn btn-primary mt-2 float-lg-right" type="submit" value="Изпрати" />
         </div>
     </div>
 </form>

@@ -14,14 +14,17 @@
     {
         private readonly IPictureService pictureService;
         private readonly ICategoryService categoryService;
+        private readonly ICommentService commentService;
         private readonly ILogger<PictureController> logger;
 
         public PictureController(IPictureService pictureService,
                                  ICategoryService categoryService,
+                                 ICommentService commentService,
                                  ILogger<PictureController> logger)
         {
             this.pictureService = pictureService;
             this.categoryService = categoryService;
+            this.commentService = commentService;
             this.logger = logger;
         }
 
@@ -97,7 +100,11 @@
 
                 return this.RedirectToAction("All", "Picture");
             }
-            DetailsPictureViewModel model = await this.pictureService
+            DetailsPictureViewModel model = new DetailsPictureViewModel()
+            {
+                Comments = await this.commentService.AllCommentsAsync()
+            };
+            model = await this.pictureService
                 .GetDetailsByIdAsync(id);
 
             return this.View(model);

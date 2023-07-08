@@ -169,6 +169,7 @@
             Picture? picture = await this.dbContext
                 .Pictures
                 .Include(p => p.Category)
+                .Include(pc => pc.PictureComments)
                 .FirstAsync(p => p.Id == pictureId);
 
             return new DetailsPictureViewModel()

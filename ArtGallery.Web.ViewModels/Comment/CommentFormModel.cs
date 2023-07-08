@@ -2,8 +2,12 @@
 {
     public class CommentFormModel
     {
+        public CommentFormModel()
+        {
+            this.Comments = new HashSet<CommentViewModel>();
+        }
         public CommentViewModel CurrentComment { get; set; }
 
-        public List<CommentViewModel> Comments { get; set; }
+        public IEnumerable<CommentViewModel> Comments { get; set; }
     }
 }

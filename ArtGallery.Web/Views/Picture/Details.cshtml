@@ -9,7 +9,7 @@
 <div class="container" style="display:inline">
     <div class="row">
         <div class="col-4">
-            <img class="card-img-top" style="width: 20rem;"
+            <img class="card-img-top" style="width: 25rem;"
                  src="@Model.ImageAddress" alt="Picture Image">
         </div>
         <div class="card col-8 border-0">
@@ -23,7 +23,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Коментари</h5>
                     <p></p>
-                    @if (Model.Comments.Count > 0)
+                    @if (Model.Comments.Any())
                     {
                         @foreach (var comment in Model.Comments)
                         {
@@ -31,7 +31,7 @@
                                 <div class="card-body">
                                     <blockquote class="blockquote mb-0">
                                         <p>@comment.Username</p>
-                                        <p>@(comment.Description)<p>
+                                        <p>@(comment.Content)<p>
                                     </blockquote>
                                 </div>
                             </div>
@@ -41,12 +41,14 @@
                     {
                         <p>Няма коментари.</p>
                     }
-                        <p></p>
-                    @if (this.User.Identity?.IsAuthenticated ?? false)
+                    @if (User.Identity?.IsAuthenticated ?? false)
                     {
-                        <form asp-controller="Comment" asp-action="Send" method="post" class="mb-3">
-                        
-                            </form>
+                        <p>Брой коментари : @Model.Comments.Count()</p>
+                        <a class="btn-success" asp-area="Comment" asp-page="/Comment/Add">Остави коментар.</a>
+                    }
+                    else
+                    {
+                        <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Ако искате да оставите коментар</a>
                     }
                 </div>
             </div>

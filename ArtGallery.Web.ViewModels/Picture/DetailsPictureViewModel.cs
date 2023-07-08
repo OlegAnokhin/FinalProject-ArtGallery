@@ -66,6 +66,6 @@
         public DateTime Date { get; set; }
 
         [Display(Name = "Коментари към картината")]
-        public ICollection<CommentViewModel> Comments { get; set; }
+        public IEnumerable<CommentViewModel> Comments { get; set; }
     }
 }

@@ -15,7 +15,8 @@
                    class="btn btn-warning">Редактирай</a>
                 <form class="mt-2" asp-controller="Picture" asp-action="Delete" asp-route-id="@Model.Id">
                     <div>
-                        <input type="submit" value="Изтрий" class="btn btn-danger mb-2" onclick="return confirm('Наистина ли искате да изтриете картината')" />
+                        <input type="submit" value="Изтрий" 
+                               class="btn btn-danger mb-2" onclick="return confirm('Наистина ли искате да изтриете картината')" />
                     </div>
                 </form>
             }

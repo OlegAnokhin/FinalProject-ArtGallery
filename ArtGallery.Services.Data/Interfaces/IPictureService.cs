@@ -52,6 +52,7 @@
         /// <returns></returns>
         Task<AddAndEditPictureViewModel> GetPictureForEditAsync(int pictureId);
 
+
         Task EditPictureByIdAsync(int pictureId, AddAndEditPictureViewModel model);
 
 
