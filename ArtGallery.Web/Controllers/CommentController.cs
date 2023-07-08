@@ -47,28 +47,15 @@
         //    return View(chatModel);
         //}
 
-        //[HttpGet]
-        //public async Task<IActionResult> Add()
-        //{
-
-        //    DetailsPictureViewModel model = new DetailsPictureViewModel()
-        //    {
-        //        Comments = await this.commentService.AllCommentsAsync()
-        //    };
-
-        //    return this.View(model);
-        //}
-
-        //[HttpPost]
-        //[AutoValidateAntiforgeryToken]
-        //public async Task<IActionResult> Add(AddAndEditPictureViewModel model)
-        //{
-
-        //}
+        [HttpGet]
+        public async Task<IActionResult> Add()
+        {
+            return this.View();
+        }
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Add(CommentViewModel model)
+        public async Task<IActionResult> Add(CommentViewModel model, Guid userId, int pictureId)
         {
             if (!ModelState.IsValid)
             {
@@ -76,9 +63,29 @@
                 return this.RedirectToAction("All", "Picture");
             }
 
+            bool pictureExist = await this.pictureService
+                .ExistByIdAsync(pictureId);
+
+            if (!pictureExist)
+            {
+                logger.LogError("Картина с този идентификатор не съществува");
+
+                return this.RedirectToAction("All", "Picture");
+            }
+
+            var userExist = User.Identity.Name;
+
+            if (!userExist.Any())
+            {
+                logger.LogError("Потребител не съществува");
+
+                return this.RedirectToAction("All", "Picture");
+            }
+            userId = Guid.Parse(userExist);
+
             try
             {
-                await this.commentService.AddAsync(model);
+                await this.commentService.AddAsync(model, userId, pictureId);
             }
             catch (Exception)
             {
@@ -86,7 +93,7 @@
                 return this.RedirectToAction("All", "Picture");
             }
 
-            return this.RedirectToAction("Details", "Picture");
+            return this.RedirectToAction("Details", "Picture", new{pictureId});
 
             //var newMessage = comment.CurrentComment;
 

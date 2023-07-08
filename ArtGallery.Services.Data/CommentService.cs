@@ -32,7 +32,7 @@ namespace ArtGallery.Services.Data
             /// </summary>
             /// <param name="model">Данни за коментара</param>
             /// <returns></returns>
-            public async Task AddAsync(CommentViewModel model)
+            public async Task AddAsync(CommentViewModel model, Guid userId, int pictureId)
             {
                 Comment comment = new Comment()
                 {

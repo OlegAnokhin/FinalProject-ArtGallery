@@ -44,7 +44,9 @@
                     @if (User.Identity?.IsAuthenticated ?? false)
                     {
                         <p>Брой коментари : @Model.Comments.Count()</p>
-                        <a class="btn-success" asp-area="Comment" asp-page="/Comment/Add">Остави коментар.</a>
+
+                        <a asp-controller="Comment" asp-action="Add" asp-route-id="@Model.Id"
+                           class="btn btn-success">Остави коментар</a>
                     }
                     else
                     {

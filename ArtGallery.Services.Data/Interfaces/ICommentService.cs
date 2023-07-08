@@ -9,7 +9,7 @@
         /// </summary>
         /// <param name="model">Данни за коментара</param>
         /// <returns></returns>
-        Task AddAsync(CommentViewModel model);
+        Task AddAsync(CommentViewModel model, Guid userId, int pictureId);
 
         /// <summary>
         /// Взимане на коментарите
