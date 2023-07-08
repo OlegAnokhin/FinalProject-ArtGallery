@@ -36,6 +36,7 @@ namespace ArtGallery.Services.Data
             {
                 Comment comment = new Comment()
                 {
+                    
                     Username = model.Username,
                     Content = model.Content
                 };

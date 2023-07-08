@@ -63,6 +63,11 @@
                 return this.RedirectToAction("All", "Picture");
             }
 
+            //pictureId = 0;
+            //if (Request.Cookies.TryGetValue("Id", out string idValue))
+            //{
+            //    int.TryParse(idValue, out pictureId);
+            //}
             bool pictureExist = await this.pictureService
                 .ExistByIdAsync(pictureId);
 

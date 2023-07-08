@@ -100,12 +100,10 @@
 
                 return this.RedirectToAction("All", "Picture");
             }
-            DetailsPictureViewModel model = new DetailsPictureViewModel()
-            {
-                Comments = await this.commentService.AllCommentsAsync()
-            };
-            model = await this.pictureService
+            DetailsPictureViewModel model = await this.pictureService
                 .GetDetailsByIdAsync(id);
+
+            model.Comments = await this.commentService.AllCommentsAsync();
 
             return this.View(model);
         }
