@@ -1,6 +1,7 @@
 ﻿namespace ArtGallery.Web.ViewModels.Picture
 {
     using System.ComponentModel.DataAnnotations;
+    using Comment;
 
     public class DetailsPictureViewModel
     {
@@ -9,7 +10,7 @@
         /// </summary>
         public DetailsPictureViewModel()
         {
-            this.Comments = new HashSet<PictureCommentViewModel>();
+            this.Comments = new HashSet<CommentViewModel>();
         }
         /// <summary>
         /// Идентификатор
@@ -65,6 +66,6 @@
         public DateTime Date { get; set; }
 
         [Display(Name = "Коментари към картината")]
-        public ICollection<PictureCommentViewModel> Comments { get; set; }
+        public ICollection<CommentViewModel> Comments { get; set; }
     }
 }

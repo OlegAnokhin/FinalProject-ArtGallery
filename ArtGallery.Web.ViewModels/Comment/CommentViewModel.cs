@@ -1,6 +1,6 @@
-﻿namespace ArtGallery.Web.ViewModels.Picture
+﻿namespace ArtGallery.Web.ViewModels.Comment
 {
-    public class PictureCommentViewModel
+    public class CommentViewModel
     {
         public string Username { get; set; } = null!;
 

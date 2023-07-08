@@ -23,25 +23,30 @@
                 <div class="card-body">
                     <h5 class="card-title">Коментари</h5>
                     <p></p>
+                    @if (Model.Comments.Count > 0)
+                    {
+                        @foreach (var comment in Model.Comments)
+                        {
+                            <div class="card .bg-light col-6">
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0">
+                                        <p>@comment.Username</p>
+                                        <p>@(comment.Description)<p>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>Няма коментари.</p>
+                    }
+                        <p></p>
                     @if (this.User.Identity?.IsAuthenticated ?? false)
                     {
-                        <div class="row">
-@*                            <form method="post">
-                                <div class="form-group">
-                                    <div class="mb-3">
-                                        <label asp-for="Title"></label>
-                                        <input asp-for="Title" class="form-control" placeholder="Попълнете името си">
-                                        <span asp-validation-for="@Model.Title" class="small text-danger"></span>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label asp-for="Content"></label>
-                                        <input asp-for="Content" class="form-control" placeholder="Оставете коментара си тук">
-                                        <span asp-validation-for="@Model.Content" class="small text-danger"></span>
-                                    </div>
-                                </div>
-                                <input class="btn btn-primary mt-3" type="submit" value="Create" />
+                        <form asp-controller="Comment" asp-action="Send" method="post" class="mb-3">
+                        
                             </form>
-*@                        </div>
                     }
                 </div>
             </div>
