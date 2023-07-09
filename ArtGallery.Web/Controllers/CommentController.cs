@@ -7,6 +7,7 @@
     using Services.Data.Interfaces;
     using ViewModels.Comment;
     using ViewModels.Picture;
+    using System.Security.Claims;
 
     [Authorize]
     public class CommentController : Controller
@@ -63,30 +64,34 @@
                 return this.RedirectToAction("All", "Picture");
             }
 
-            //pictureId = 0;
-            //if (Request.Cookies.TryGetValue("Id", out string idValue))
-            //{
-            //    int.TryParse(idValue, out pictureId);
-            //}
-            bool pictureExist = await this.pictureService
-                .ExistByIdAsync(pictureId);
+            var user = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            if (!pictureExist)
-            {
-                logger.LogError("Картина с този идентификатор не съществува");
-
-                return this.RedirectToAction("All", "Picture");
-            }
-
-            var userExist = User.Identity.Name;
-
-            if (!userExist.Any())
+            if (!user.Any())
             {
                 logger.LogError("Потребител не съществува");
 
                 return this.RedirectToAction("All", "Picture");
             }
-            userId = Guid.Parse(userExist);
+            userId = Guid.Parse(user);
+
+            //var pictureId = int.Parse(picId);
+
+
+            //if (Request.Cookies.TryGetValue("Id", out string idValue))
+            //{
+            //    int.TryParse(idValue, out pictureId);
+            //}
+
+            //bool pictureExist = await this.pictureService
+            //    .ExistByIdAsync(pictureId);
+
+            //if (!pictureExist)
+            //{
+            //    logger.LogError("Картина с този идентификатор не съществува");
+
+            //    return this.RedirectToAction("All", "Picture");
+            //}
+
 
             try
             {

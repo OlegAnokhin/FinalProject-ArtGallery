@@ -1,10 +1,11 @@
 ﻿namespace ArtGallery.Services.Data
 {
+    using Microsoft.EntityFrameworkCore;
+
+    using Interfaces;
+    using Models.Picture;
     using ArtGallery.Data;
     using ArtGallery.Data.Models;
-    using Interfaces;
-    using Microsoft.EntityFrameworkCore;
-    using Models.Picture;
     using Web.ViewModels.Home;
     using Web.ViewModels.Picture;
     using Web.ViewModels.Picture.Enums;
