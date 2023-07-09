@@ -103,7 +103,7 @@
             DetailsPictureViewModel model = await this.pictureService
                 .GetDetailsByIdAsync(id);
 
-            model.Comments = await this.commentService.AllCommentsAsync();
+            model.Comments = await this.commentService.AllCommentsAsync(id);
 
             return this.View(model);
         }

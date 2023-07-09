@@ -40,6 +40,7 @@ namespace ArtGallery.Services.Data
                     Username = model.Username,
                     Content = model.Content
                 };
+
                 await dbContext.AddAsync(comment);
                 await dbContext.SaveChangesAsync();
             }
@@ -48,14 +49,16 @@ namespace ArtGallery.Services.Data
             /// Взимане на всички коментари
             /// </summary>
             /// <returns></returns>
-            public async Task<IEnumerable<CommentViewModel>> AllCommentsAsync()
+            public async Task<IEnumerable<CommentViewModel>> AllCommentsAsync(int pictureId)
             {
                 IEnumerable<CommentViewModel> allComments = await this.dbContext
-                    .Comments
+                    .PicturesComment
+                    .Include(c => c.Comment)
+                    .Where(p => p.PictureId == pictureId)
                     .Select(c => new CommentViewModel()
                     {
-                        Username = c.Username,
-                        Content = c.Content
+                        Username = c.Comment.Username,
+                        Content = c.Comment.Content
                     }).ToArrayAsync();
 
                 return allComments;

@@ -15,7 +15,7 @@
         /// Взимане на коментарите
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<CommentViewModel>> AllCommentsAsync();
+        Task<IEnumerable<CommentViewModel>> AllCommentsAsync(int id);
 
     }
 }

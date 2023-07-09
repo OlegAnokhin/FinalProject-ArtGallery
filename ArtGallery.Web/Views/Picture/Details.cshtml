@@ -13,11 +13,15 @@
                  src="@Model.ImageAddress" alt="Picture Image">
         </div>
         <div class="card col-6 border-0">
-            <p style="font-size:25px;"><u>@Model.Name</u></p>
-            <p>Размер: <b>@Model.Size</b></p>
-            <p>Материал: <b>@Model.Material</b></p>
-            <p>Основа: <b>@Model.ImageBase</b></p>
-            <p>Описание: <b>@Model.Description</b></p>
+            <p class="h2"><u>@Model.Name</u></p>
+            <p></p>
+            <p class="h5">Размер: <b>@Model.Size</b></p>
+            <p></p>
+            <p class="h5">Материал: <b>@Model.Material</b></p>
+            <p></p>
+            <p class="h5">Основа: <b>@Model.ImageBase</b></p>
+            <p></p>
+            <p class="h5">Описание: <b>@Model.Description</b></p>
             <p></p>
         </div>
         <p></p>
@@ -32,9 +36,9 @@
                         <div class="card .bg-light col-18">
                             <div class="card-body">
                                 <blockquote class="blockquote mb-0">
-                                    <p>Име: @comment.Username</p>
+                                    <p class="h6">Име: @comment.Username</p>
                                     <hr />
-                                    <p>Коментар: @(comment.Content)<p>
+                                    <p class ="h6">Коментар: @(comment.Content)<p>
                                 </blockquote>
                             </div>
                         </div>
