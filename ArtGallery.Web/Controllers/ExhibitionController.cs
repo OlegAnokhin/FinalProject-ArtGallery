@@ -1,9 +1,11 @@
 ﻿namespace ArtGallery.Web.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services.Data.Interfaces;
     using ViewModels.Exhibition;
 
+    [Authorize]
     public class ExhibitionController : Controller
     {
         private readonly IExhibitionService exhibitionService;
@@ -15,7 +17,7 @@
             this.exhibitionService = exhibitionService;
             logger = _logger;
         }
-
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> All()
         {
@@ -32,38 +34,38 @@
             }
         }
 
-        //[HttpGet]
-        //public IActionResult Add()
-        //{
-        //    var model = new AddExhibitionViewModel()
-        //    {
-        //        Start = DateTime.Today,
-        //        End = DateTime.Today
-        //    };
-        //    return View(model);
-        //}
+        [HttpGet]
+        public IActionResult Add()
+        {
+            var model = new ExhibitionFormModel()
+            {
+                Start = DateTime.Today,
+                End = DateTime.Today
+            };
+            return View(model);
+        }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Add(AddExhibitionViewModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(model);
-        //    }
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> Add(ExhibitionFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
-        //    try
-        //    {
-        //        await eventService.AddAsync(model);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        logger.LogError("EventController/Add", e);
-        //        ViewBag.ErrorMessage = "Възникна непредвидена грешка";
-        //    }
+            try
+            {
+                await exhibitionService.AddAsync(model);
+            }
+            catch (Exception e)
+            {
+                logger.LogError("EventController/Add", e);
+                ViewBag.ErrorMessage = "Възникна непредвидена грешка";
+            }
 
-        //    return RedirectToAction(nameof(Index));
-        //}
+            return RedirectToAction(nameof(All));
+        }
 
         //[HttpGet]
         //public async Task<IActionResult> Details(int id)

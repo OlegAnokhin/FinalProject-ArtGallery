@@ -13,12 +13,12 @@
         /// <returns></returns>
         Task<IEnumerable<AllExhibitionsViewModel>> GetAllAsync();
 
-        ///// <summary>
-        ///// Добавяне на изложбата
-        ///// </summary>
-        ///// <param name="model">Данни за изложбата</param>
-        ///// <returns></returns>
-        //Task AddAsync(AddExhibitionViewModel model);
+        /// <summary>
+        /// Добавяне на изложбата
+        /// </summary>
+        /// <param name="model">Данни за изложбата</param>
+        /// <returns></returns>
+        Task AddAsync(ExhibitionFormModel model);
 
         ///// <summary>
         ///// Изтриване на изложбата

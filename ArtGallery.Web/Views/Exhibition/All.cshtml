@@ -18,8 +18,8 @@ else
         {
             <div class="container" style="display:inline">
                 <div class="row">
-                    <div class="col-5">
-                        <img class="card-img-top" style="width: 25rem;"
+                    <div class="col-20">
+                        <img class="card-img-top" style="width: 100%;"
                              src="@e.ImageUrl" alt="Picture Image">
                     </div>
                     <div class="card col-6 border-0">
@@ -31,7 +31,7 @@ else
                         <p></p>
                     </div>
                     <p></p>
-                    <a asp-controller="Exhibition" asp-action="Details" asp-route-id="@e.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">View Details</a>
+                    <a asp-controller="Exhibition" asp-action="Details" asp-route-id="@e.Id" class="btn btn-warning col-2 p-3 fw-bold">Детайли</a>
                 </div>
             </div>
         }

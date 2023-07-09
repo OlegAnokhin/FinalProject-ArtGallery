@@ -1,4 +1,6 @@
-﻿namespace ArtGallery.Services.Data
+﻿using ArtGallery.Data.Models;
+
+namespace ArtGallery.Services.Data
 {
     using Microsoft.EntityFrameworkCore;
     using ArtGallery.Data;
@@ -43,25 +45,25 @@
                 .ToListAsync();
         }
 
-
-        //        /// <summary>
-        //        /// Добавяне на събитие
-        //        /// </summary>
-        //        /// <param name="model">Данни за събитие</param>
-        //        /// <returns></returns>
-        //        public async Task AddAsync(EventModel model)
-        //        {
-        //            Event entity = new Event()
-        //            {
-        //                Name = model.Name,
-        //                Start = model.Start,
-        //                End = model.End,
-        //                Place = model.Place,
-        //                Description = model.Description
-        //            };
-        //            await repo.AddAsync(entity);
-        //            await repo.SaveChangesAsync();
-        //        }
+        /// <summary>
+        /// Добавяне на събитие
+        /// </summary>
+        /// <param name="model">Данни за събитие</param>
+        /// <returns></returns>
+        public async Task AddAsync(ExhibitionFormModel model)
+        {
+            var exhibition = new Exhibition
+            {
+                Name = model.Name,
+                ImageUrl = model.ImageUrl,
+                Start = model.Start,
+                End = model.End,
+                Place = model.Place,
+                Description = model.Description
+            };
+            await context.Exhibitions.AddAsync(exhibition);
+            await context.SaveChangesAsync();
+        }
 
         //        /// <summary>
         //        /// Изтриване на събитие

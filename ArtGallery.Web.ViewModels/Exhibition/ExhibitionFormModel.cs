@@ -15,7 +15,7 @@
         /// <summary>
         /// Адреса на изображинието
         /// </summary>
-        [Display(Name = "Адреса на изображинието")]
+        [Display(Name = "Адреса на картинката")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Полето '{0}' е задължително")]
         [StringLength(150, MinimumLength = 3, ErrorMessage = "Полето '{0}' трябва да е между {2} и {1} символа")]
         public string ImageUrl { get; set; } = null!;
