@@ -27,7 +27,6 @@
 
   <ItemGroup>
     <Folder Include="Views\ArtClass\" />
-    <Folder Include="Views\Exhibition\" />
   </ItemGroup>
 
 </Project>

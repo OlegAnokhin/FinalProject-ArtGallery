@@ -1,0 +1,39 @@
+﻿@model IEnumerable<AllExhibitionsViewModel>
+@{
+    ViewData["Title"] = "Изложби";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+@if (!Model.Any())
+{
+    <h2 class="text-center">Няма предстоящи изложби!</h2>
+}
+
+else
+{
+    <div class="row">
+        @foreach (var e in Model)
+        {
+            <div class="container" style="display:inline">
+                <div class="row">
+                    <div class="col-5">
+                        <img class="card-img-top" style="width: 25rem;"
+                             src="@e.ImageUrl" alt="Picture Image">
+                    </div>
+                    <div class="card col-6 border-0">
+                        <p class="h2"><u>@e.Name</u></p>
+                        <p></p>
+                        <p class="h5">Начало на изложбата: <b>@e.Start</b></p>
+                        <p></p>
+                        <p class="h5">Място: <b>@e.Place</b></p>
+                        <p></p>
+                    </div>
+                    <p></p>
+                    <a asp-controller="Exhibition" asp-action="Details" asp-route-id="@e.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">View Details</a>
+                </div>
+            </div>
+        }
+    </div>
+}

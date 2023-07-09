@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class ExhibitionModel
+    public class AddExhibitionViewModel
     {
         /// <summary>
         /// Идентификатор
@@ -53,6 +53,6 @@
         /// </summary>
         [Display(Name = "Описание на изложбата")]
         [StringLength(250)]
-        public string? Description { get; set; }
+        public string Description { get; set; } = null!;
     }
 }
