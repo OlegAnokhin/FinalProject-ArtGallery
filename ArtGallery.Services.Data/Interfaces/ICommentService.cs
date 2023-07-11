@@ -12,7 +12,7 @@
         Task AddAsync(CommentViewModel model, Guid userId, int pictureId);
 
         /// <summary>
-        /// Взимане на коментарите
+        /// Взимане всички на коментарите
         /// </summary>
         /// <returns></returns>
         Task<IEnumerable<CommentViewModel>> AllCommentsAsync(int id);

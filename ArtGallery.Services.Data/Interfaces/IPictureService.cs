@@ -43,6 +43,11 @@
         /// <returns></returns>
         Task<DetailsPictureViewModel> GetDetailsByIdAsync(int pictureId);
 
+        /// <summary>
+        /// Проверяване дали има картина с този идентификатор
+        /// </summary>
+        /// <param name="pictureId">Идентификатор на картината</param>
+        /// <returns></returns>
         Task<bool> ExistByIdAsync(int pictureId);
 
         /// <summary>
@@ -52,9 +57,13 @@
         /// <returns></returns>
         Task<AddAndEditPictureViewModel> GetPictureForEditAsync(int pictureId);
 
-
+        /// <summary>
+        /// Вземане на картина за редактиране
+        /// </summary>
+        /// <param name="pictureId">Идентификатор на картината</param>
+        /// <param name="model">Модел на редактиране</param>
+        /// <returns></returns>
         Task EditPictureByIdAsync(int pictureId, AddAndEditPictureViewModel model);
-
 
         /// <summary>
         /// Изтриване на картина

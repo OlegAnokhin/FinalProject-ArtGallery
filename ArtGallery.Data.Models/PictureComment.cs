@@ -12,8 +12,8 @@
         /// <summary>
         /// Идентификатор на картината
         /// </summary>
-        [Key]
         [Comment("Идентификатор на картината")]
+        [Key]
         public int PictureId { get; set; }
 
         [ForeignKey(nameof(PictureId))]
@@ -22,8 +22,8 @@
         /// <summary>
         /// Идентификатор на коментар
         /// </summary>
-        [Key]
         [Comment("Идентификатор на коментар")]
+        [Key]
         public int CommentId { get; set; }
 
         [ForeignKey(nameof(CommentId))]

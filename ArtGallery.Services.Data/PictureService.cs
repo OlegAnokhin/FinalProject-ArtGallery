@@ -142,6 +142,12 @@
             };
         }
 
+        /// <summary>
+        /// Вземане на картина за редактиране
+        /// </summary>
+        /// <param name="pictureId">Идентификатор на картината</param>
+        /// <param name="model">Модел на редактиране</param>
+        /// <returns></returns>
         public async Task EditPictureByIdAsync(int pictureId, AddAndEditPictureViewModel model)
         {
             Picture picture = await this.dbContext
@@ -187,6 +193,11 @@
             };
         }
 
+        /// <summary>
+        /// Проверяване дали има картина с този идентификатор
+        /// </summary>
+        /// <param name="pictureId">Идентификатор на картината</param>
+        /// <returns></returns>
         public async Task<bool> ExistByIdAsync(int pictureId)
         {
             bool result = await this.dbContext
@@ -195,7 +206,6 @@
 
             return result;
         }
-
 
         /// <summary>
         /// Промяна на картина

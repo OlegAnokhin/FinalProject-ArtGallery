@@ -1,11 +1,10 @@
-﻿using ArtGallery.Data.Models;
-
-namespace ArtGallery.Services.Data
+﻿namespace ArtGallery.Services.Data
 {
     using Microsoft.EntityFrameworkCore;
 
     using Interfaces;
     using ArtGallery.Data;
+    using ArtGallery.Data.Models;
     using Web.ViewModels.Comment;
 
     /// <summary>

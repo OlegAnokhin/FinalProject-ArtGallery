@@ -14,54 +14,54 @@
         /// <summary>
         /// Идентификатор
         /// </summary>
-        [Key]
         [Comment("Идентификатор")]
+        [Key]
         public int Id { get; set; }
 
         /// <summary>
         /// Име на изложбата
         /// </summary>
+        [Comment("Име на изложбата")]
         [Required]
         [MaxLength(NameMaxLength)]
-        [Comment("Име на изложбата")]
         public string Name { get; set; } = null!;
 
         /// <summary>
         /// Адреса на изображинието
         /// </summary>
+        [Comment("Адреса на изображинието")]
         [Required]
         [MaxLength(ImageUrlMaxLength)]
-        [Comment("Адреса на изображинието")]
         public string ImageUrl { get; set; } = null!;
 
         /// <summary>
         /// Начало на изложбата
         /// </summary>
-        [Required]
         [Comment("Начало на изложбата")]
+        [Required]
         public DateTime Start { get; set; }
 
         /// <summary>
         /// Край на изложбата
         /// </summary>
-        [Required]
         [Comment("Край на изложбата")]
+        [Required]
         public DateTime End { get; set; }
 
         /// <summary>
         /// Мястото на изложбата
         /// </summary>
+        [Comment("Мястото на изложбата")]
         [Required]
         [MaxLength(PlaceMaxLength)]
-        [Comment("Мястото на изложбата")]
         public string Place { get; set; } = null!;
 
         /// <summary>
         /// Описание на изложбата
         /// </summary>
+        [Comment("Описание на изложбата")]
         [Required]
         [MaxLength(DescriptionMaxLength)]
-        [Comment("Описание на изложбата")]
         public string Description { get; set; } = null!;
     }
 }
