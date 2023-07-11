@@ -65,6 +65,9 @@
         [Display(Name = "Дата на картината")]
         public DateTime Date { get; set; }
 
+        /// <summary>
+        /// Колекция на всички коментари
+        /// </summary>
         [Display(Name = "Коментари към картината")]
         public IEnumerable<CommentViewModel> Comments { get; set; }
     }
