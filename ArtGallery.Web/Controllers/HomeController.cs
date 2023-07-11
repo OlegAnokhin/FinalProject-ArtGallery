@@ -1,11 +1,10 @@
-﻿using ArtGallery.Services.Data.Interfaces;
-
-namespace ArtGallery.Web.Controllers
+﻿namespace ArtGallery.Web.Controllers
 {
     using System.Diagnostics;
     using Microsoft.AspNetCore.Mvc;
 
     using ViewModels.Home;
+    using Services.Data.Interfaces;
 
     public class HomeController : Controller
     {
@@ -21,6 +20,11 @@ namespace ArtGallery.Web.Controllers
                 await this.pictureService.LastThreePicturesAsync();
 
             return View(viewModel);
+        }
+
+        public IActionResult About()
+        {
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
