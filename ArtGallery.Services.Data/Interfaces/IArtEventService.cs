@@ -6,6 +6,8 @@
     {
          Task<IEnumerable<AllArtEventViewModel>> GetAllArtEventsAsync();
 
+        Task AddArtEventAsync(ArtEventFormModel model);
+
 
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace ArtGallery.Services.Data
+﻿using ArtGallery.Data.Models;
+
+namespace ArtGallery.Services.Data
 {
     using Microsoft.EntityFrameworkCore;
     using ArtGallery.Data;
@@ -24,6 +26,20 @@
                     ImageAddress = e.ImageAddress,
                     Start = e.Start
                 }).ToListAsync();
+        }
+
+        public async Task AddArtEventAsync(ArtEventFormModel model)
+        {
+            var artEvent = new ArtEvent
+            {
+                Name = model.Name,
+                Start = model.Start,
+                ImageAddress = model.ImageAddress,
+                Place = model.Place,
+                Description = model.Description,
+            };
+            await context.ArtEvents.AddAsync(artEvent);
+            await context.SaveChangesAsync();
         }
     }
 }

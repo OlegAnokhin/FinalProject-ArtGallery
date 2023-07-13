@@ -1,4 +1,6 @@
-﻿namespace ArtGallery.Web.Controllers
+﻿using ArtGallery.Web.ViewModels.ArtEvent;
+
+namespace ArtGallery.Web.Controllers
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -30,6 +32,34 @@
             catch (Exception e)
             {
                 logger.LogError("ArtEventController/All", e);
+                ViewBag.ErrorMessage = "Възникна непредвидена грешка";
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> Add(ArtEventFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            try
+            {
+                await artEventService.AddArtEventAsync(model);
+                return RedirectToAction(nameof(All));
+            }
+            catch (Exception e)
+            {
+                logger.LogError("ArtEventController/Add", e);
                 ViewBag.ErrorMessage = "Възникна непредвидена грешка";
                 return RedirectToAction(nameof(All));
             }
