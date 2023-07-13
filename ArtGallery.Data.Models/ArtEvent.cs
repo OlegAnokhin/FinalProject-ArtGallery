@@ -11,6 +11,11 @@
     [Comment("Обучение")]
     public class ArtEvent
     {
+        public ArtEvent()
+        {
+            ArtEventParticipants = new HashSet<ArtEventParticipant>();
+        }
+
         /// <summary>
         /// Идентификатор
         /// </summary>
@@ -67,6 +72,6 @@
         /// Списък със записали се
         /// </summary>
         [Comment("Списък със записали се")]
-        public virtual ICollection<AppUser> Participants { get; set; }
+        public virtual ICollection<ArtEventParticipant> ArtEventParticipants { get; set; }
     }
 }

@@ -23,6 +23,8 @@
 
         public DbSet<ArtEvent> ArtEvents { get; set; } = null!;
 
+        public DbSet<ArtEventParticipant> ArtEventParticipants { get; set; } = null!;
+
         public DbSet<PictureComment> PicturesComment { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
