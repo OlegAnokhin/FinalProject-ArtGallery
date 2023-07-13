@@ -5,6 +5,7 @@
 
     using ArtGallery.Services.Data.Interfaces;
 
+    [Authorize]
     public class ArtEventController : Controller
     {
         private readonly IArtEventService artEventService;
@@ -16,6 +17,7 @@
             this.artEventService = artEventService;
             logger = _logger;
         }
+
         [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> All()
