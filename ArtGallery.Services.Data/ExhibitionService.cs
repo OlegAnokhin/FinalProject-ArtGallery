@@ -65,6 +65,36 @@ namespace ArtGallery.Services.Data
             await context.SaveChangesAsync();
         }
 
+        public async Task<bool> ExistsByIdAsync(int exhibitionId)
+        {
+            bool result = await context.Exhibitions
+                .AnyAsync(e => e.Id == exhibitionId);
+            return result;
+        }
+
+        /// <summary>
+        /// Преглед на изложбата
+        /// </summary>
+        /// <param name="id">Идентификатор на изложбата</param>
+        /// <returns></returns>
+        public async Task<DetailsExhibitionsViewModel> GetExhibitionDetailsAsync(int id)
+        {
+            Exhibition exhibition = await this.context
+                .Exhibitions
+                .FirstAsync(e => e.Id == id);
+
+            return new DetailsExhibitionsViewModel
+            {
+                Id = exhibition.Id,
+                Name = exhibition.Name,
+                ImageUrl = exhibition.ImageUrl,
+                Start = exhibition.Start,
+                Place = exhibition.Place,
+                End = exhibition.End,
+                Description = exhibition.Description
+            };
+        }
+
         //        /// <summary>
         //        /// Изтриване на събитие
         //        /// </summary>
@@ -97,28 +127,5 @@ namespace ArtGallery.Services.Data
         //            await repo.SaveChangesAsync();
         //        }
 
-
-        //        /// <summary>
-        //        /// Пергед на събитие
-        //        /// </summary>
-        //        /// <param name="id">Идентификатор на събитие</param>
-        //        /// <returns></returns>
-        //        public async Task<EventModel> GetEventAsync(int id)
-        //        {
-        //            var entity = await repo.GetByIdAsync<Event>(id);
-        //            if (entity == null)
-        //            {
-        //                throw new ArgumentException("Невалиден идентификатор", nameof(id));
-        //            }
-
-        //            return new EventModel()
-        //            {
-        //                Name = entity.Name,
-        //                Start = entity.Start,
-        //                End = entity.End,
-        //                Place = entity.Place,
-        //                Description = entity.Description
-        //            };
-        //        }
     }
 }

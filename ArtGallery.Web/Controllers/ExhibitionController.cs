@@ -17,8 +17,8 @@
             this.exhibitionService = exhibitionService;
             logger = _logger;
         }
-        [AllowAnonymous]
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> All()
         {
             try
@@ -60,33 +60,37 @@
             }
             catch (Exception e)
             {
-                logger.LogError("EventController/Add", e);
+                logger.LogError("ExhibitionController/Add", e);
                 ViewBag.ErrorMessage = "Възникна непредвидена грешка";
             }
 
             return RedirectToAction(nameof(All));
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> Details(int id)
-        //{
-        //    AddExhibitionViewModel model;
-        //    try
-        //    {
-        //        model = await eventService.GetEventAsync(id);
-        //        return View(model);
-        //    }
-        //    catch (ArgumentException aex)
-        //    {
-        //        ViewBag.ErrorMessage = aex.Message;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        logger.LogError("EventController/Details", e);
-        //        ViewBag.ErrorMessage = "Възникна непредвидена грешка";
-        //    }
-        //    return RedirectToAction(nameof(Index));
-        //}
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
+        {
+            bool exibitionExist = await exhibitionService.ExistsByIdAsync(id);
+            
+            if (!exibitionExist)
+            {
+                ViewBag.ErrorMessage = "Изложба с такъв идентификатор не съществува.";
+                return RedirectToAction(nameof(All));
+            }
+
+            try
+            {
+               var model = await exhibitionService.GetExhibitionDetailsAsync(id);
+               return View(model);
+            }
+            catch (Exception e)
+            {
+                logger.LogError("EventController/Details", e);
+                ViewBag.ErrorMessage = "Възникна непредвидена грешка";
+            }
+            return RedirectToAction(nameof(All));
+        }
 
         //[HttpPost]
         //public async Task<IActionResult> Delete(int id)

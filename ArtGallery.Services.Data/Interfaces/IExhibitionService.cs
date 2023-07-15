@@ -20,6 +20,20 @@
         /// <returns></returns>
         Task AddAsync(ExhibitionFormModel model);
 
+        /// <summary>
+        /// Проверка за съществуване
+        /// </summary>
+        /// <param name="exhibitionId">Идентификатор на излижбата</param>
+        /// <returns></returns>
+        Task<bool> ExistsByIdAsync(int exhibitionId);
+
+        /// <summary>
+        /// Преглед на изложбата
+        /// </summary>
+        /// <param name="id">Идентификатор на изложбата</param>
+        /// <returns></returns>
+        Task<DetailsExhibitionsViewModel> GetExhibitionDetailsAsync(int id);
+
         ///// <summary>
         ///// Изтриване на изложбата
         ///// </summary>
@@ -34,11 +48,5 @@
         ///// <returns></returns>
         //Task UpdateAsync(AddExhibitionViewModel model);
 
-        ///// <summary>
-        ///// Преглед на изложбата
-        ///// </summary>
-        ///// <param name="id">Идентификатор на изложбата</param>
-        ///// <returns></returns>
-        //Task<AddExhibitionViewModel> GetEventAsync(int id);
     }
 }
