@@ -1,9 +1,8 @@
-﻿using ArtGallery.Data.Models;
-
-namespace ArtGallery.Services.Data
+﻿namespace ArtGallery.Services.Data
 {
     using Microsoft.EntityFrameworkCore;
     using ArtGallery.Data;
+    using ArtGallery.Data.Models;
     using Web.ViewModels.Exhibition;
     using Interfaces;
 
@@ -32,7 +31,7 @@ namespace ArtGallery.Services.Data
         /// <returns></returns>
         public async Task<IEnumerable<AllExhibitionsViewModel>> GetAllAsync()
         {
-            return await context.Exhibitions
+            return await this.context.Exhibitions
                 .Select(e => new AllExhibitionsViewModel()
                 {
                     Id = e.Id,
@@ -61,13 +60,13 @@ namespace ArtGallery.Services.Data
                 Place = model.Place,
                 Description = model.Description
             };
-            await context.Exhibitions.AddAsync(exhibition);
-            await context.SaveChangesAsync();
+            await this.context.Exhibitions.AddAsync(exhibition);
+            await this.context.SaveChangesAsync();
         }
 
         public async Task<bool> ExistsByIdAsync(int exhibitionId)
         {
-            bool result = await context.Exhibitions
+            bool result = await this.context.Exhibitions
                 .AnyAsync(e => e.Id == exhibitionId);
             return result;
         }
@@ -95,37 +94,41 @@ namespace ArtGallery.Services.Data
             };
         }
 
-        //        /// <summary>
-        //        /// Изтриване на събитие
-        //        /// </summary>
-        //        /// <param name="id">Идентификатор на събитие</param>
-        //        /// <returns></returns>
-        //        public async Task DeleteAsync(int id)
-        //        {
-        //            await repo.DeleteAsync<Event>(id);
-        //            await repo.SaveChangesAsync();
-        //        }
+        /// <summary>
+        /// Изтриване на събитие
+        /// </summary>
+        /// <param name="id">Идентификатор на събитие</param>
+        /// <returns></returns>
+        public async Task DeleteExhibitionAsync(int id)
+        {
+            var exhibition = await this.context
+                .Exhibitions
+                .FirstAsync(e => e.Id == id);
 
-        //        /// <summary>
-        //        /// Промяна на събитие
-        //        /// </summary>
-        //        /// <param name="model">Данни за събитие</param>
-        //        /// <returns></returns>
-        //        public async Task UpdateAsync(EventModel model)
-        //        {
-        //            var entity = await repo.GetByIdAsync<Event>(model.Id);
-        //            if (entity == null)
-        //            {
-        //                throw new ArgumentException("Невалиден идентификатор", nameof(model.Id));
-        //            }
-        //            entity.Name = model.Name;
-        //            entity.Start = model.Start;
-        //            entity.End = model.End;
-        //            entity.Place = model.Place;
-        //            entity.Description = model.Description;
+            this.context.Exhibitions.Remove(exhibition);
+            await this.context.SaveChangesAsync();
+        }
 
-        //            await repo.SaveChangesAsync();
-        //        }
+            //        /// <summary>
+            //        /// Промяна на събитие
+            //        /// </summary>
+            //        /// <param name="model">Данни за събитие</param>
+            //        /// <returns></returns>
+            //        public async Task UpdateAsync(EventModel model)
+            //        {
+            //            var entity = await repo.GetByIdAsync<Event>(model.Id);
+            //            if (entity == null)
+            //            {
+            //                throw new ArgumentException("Невалиден идентификатор", nameof(model.Id));
+            //            }
+            //            entity.Name = model.Name;
+            //            entity.Start = model.Start;
+            //            entity.End = model.End;
+            //            entity.Place = model.Place;
+            //            entity.Description = model.Description;
 
-    }
+            //            await repo.SaveChangesAsync();
+            //        }
+
+        }
 }

@@ -62,6 +62,7 @@
             {
                 logger.LogError("ExhibitionController/Add", e);
                 ViewBag.ErrorMessage = "Възникна непредвидена грешка";
+                return RedirectToAction(nameof(All));
             }
 
             return RedirectToAction(nameof(All));
@@ -71,9 +72,9 @@
         [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
-            bool exibitionExist = await exhibitionService.ExistsByIdAsync(id);
+            bool exhibitionExist = await exhibitionService.ExistsByIdAsync(id);
             
-            if (!exibitionExist)
+            if (!exhibitionExist)
             {
                 ViewBag.ErrorMessage = "Изложба с такъв идентификатор не съществува.";
                 return RedirectToAction(nameof(All));
@@ -88,24 +89,34 @@
             {
                 logger.LogError("EventController/Details", e);
                 ViewBag.ErrorMessage = "Възникна непредвидена грешка";
+                return RedirectToAction(nameof(All));
             }
             return RedirectToAction(nameof(All));
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    try
-        //    {
-        //        await eventService.DeleteAsync(id);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        logger.LogError("EventController/Delete", e);
-        //        ViewBag.ErrorMessage = "Възникна непредвидена грешка";
-        //    }
-        //    return RedirectToAction(nameof(Index));
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            bool exhibitionExist = await exhibitionService.ExistsByIdAsync(id);
+
+            if (!exhibitionExist)
+            {
+                ViewBag.ErrorMessage = "Изложба с такъв идентификатор не съществува.";
+                return RedirectToAction(nameof(All));
+            }
+
+            try
+            {
+                await this.exhibitionService.DeleteExhibitionAsync(id);
+            }
+            catch (Exception)
+            {
+                logger.LogError("Възникна непредвидена грешка");
+                return RedirectToAction(nameof(All));
+            }
+            return RedirectToAction(nameof(All));
+        }
+
 
         //[HttpGet]
         //public async Task<IActionResult> Edit(int id)

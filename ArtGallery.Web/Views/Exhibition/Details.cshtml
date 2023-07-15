@@ -27,6 +27,13 @@
                 <p></p>
                 <p class="h5">Описание на изложбата: <b>@Model.Description</b></p>
                 <p></p>
+                <form class="mt-2" asp-controller="Exhibition" asp-action="Delete" asp-route-id="@Model.Id">
+                    <div>
+                        <input type="submit" value="Изтрий" 
+                               class="btn btn-danger mb-2" onclick="return confirm('Наистина ли искате да изтриете тази изложба ?')" />
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>

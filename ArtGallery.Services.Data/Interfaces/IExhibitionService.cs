@@ -34,12 +34,12 @@
         /// <returns></returns>
         Task<DetailsExhibitionsViewModel> GetExhibitionDetailsAsync(int id);
 
-        ///// <summary>
-        ///// Изтриване на изложбата
-        ///// </summary>
-        ///// <param name="id">Идентификатор на изложбата</param>
-        ///// <returns></returns>
-        //Task DeleteAsync(int id);
+        /// <summary>
+        /// Изтриване на изложбата
+        /// </summary>
+        /// <param name="id">Идентификатор на изложбата</param>
+        /// <returns></returns>
+        Task DeleteExhibitionAsync(int id);
 
         ///// <summary>
         ///// Промяна на изложбата
