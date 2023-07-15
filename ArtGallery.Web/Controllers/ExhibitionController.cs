@@ -57,6 +57,7 @@
             try
             {
                 await exhibitionService.AddAsync(model);
+                return View(model);
             }
             catch (Exception e)
             {
@@ -64,8 +65,6 @@
                 ViewBag.ErrorMessage = "Възникна непредвидена грешка";
                 return RedirectToAction(nameof(All));
             }
-
-            return RedirectToAction(nameof(All));
         }
 
         [HttpGet]
@@ -87,11 +86,10 @@
             }
             catch (Exception e)
             {
-                logger.LogError("EventController/Details", e);
+                logger.LogError("ExhibitionController/Details", e);
                 ViewBag.ErrorMessage = "Възникна непредвидена грешка";
                 return RedirectToAction(nameof(All));
             }
-            return RedirectToAction(nameof(All));
         }
 
         [HttpPost]
@@ -108,60 +106,13 @@
             try
             {
                 await this.exhibitionService.DeleteExhibitionAsync(id);
+                return RedirectToAction(nameof(All));
             }
             catch (Exception)
             {
                 logger.LogError("Възникна непредвидена грешка");
                 return RedirectToAction(nameof(All));
             }
-            return RedirectToAction(nameof(All));
         }
-
-
-        //[HttpGet]
-        //public async Task<IActionResult> Edit(int id)
-        //{
-        //    AddExhibitionViewModel model;
-        //    try
-        //    {
-        //        model = await eventService.GetEventAsync(id);
-        //        return View(model);
-        //    }
-        //    catch (ArgumentException aex)
-        //    {
-        //        ViewBag.ErrorMessage = aex.Message;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        logger.LogError("EventController/Edit", e);
-        //        ViewBag.ErrorMessage = "Възникна непредвидена грешка";
-        //    }
-        //    return RedirectToAction(nameof(Index));
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(AddExhibitionViewModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(model);
-        //    }
-        //    try
-        //    {
-        //        await eventService.UpdateAsync(model);
-        //        return RedirectToAction(nameof(Details), new { id = model.Id });
-        //    }
-        //    catch (ArgumentException aex)
-        //    {
-        //        ViewBag.ErrorMessage = aex.Message;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        logger.LogError("EventController/Edit", e);
-        //        ViewBag.ErrorMessage = "Възникна непредвидена грешка";
-        //    }
-        //    return RedirectToAction(nameof(Index));
-        //}
     }
 }

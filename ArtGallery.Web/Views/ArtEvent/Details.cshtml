@@ -1,0 +1,36 @@
+﻿@model DetaisArtEventViewModel
+@{
+    ViewData["Title"] = "Детайли за обучението";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="row">
+    <div class="container" style="display:inline">
+        <div class="row">
+            <div class="col-20">
+                <img class="card-img-top" style="width: 100%;"
+                     src="@Model.ImageAddress" alt="Picture Image">
+            </div>
+            <div class="card col-6 border-0">
+                <p class="h2"><u>@Model.Name</u></p>
+                <p></p>
+                <p class="h5">Начало на обучението: <b>@Model.Start</b></p>
+                <p></p>
+                <p></p>
+                <p class="h5">Място на обучението: <b>@Model.Place</b></p>
+                <p></p>
+                <p></p>
+                <p class="h5">Описание на обучението: <b>@Model.Description</b></p>
+                <p></p>
+                <form class="mt-2" asp-controller="ArtEvent" asp-action="Delete" asp-route-id="@Model.Id">
+                    <div>
+                        <input type="submit" value="Изтрий"
+                               class="btn btn-danger mb-2" onclick="return confirm('Наистина ли искате да изтриете това обучение ?')" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -40,13 +40,5 @@
         /// <param name="id">Идентификатор на изложбата</param>
         /// <returns></returns>
         Task DeleteExhibitionAsync(int id);
-
-        ///// <summary>
-        ///// Промяна на изложбата
-        ///// </summary>
-        ///// <param name="model">Данни за изложбата</param>
-        ///// <returns></returns>
-        //Task UpdateAsync(AddExhibitionViewModel model);
-
     }
 }

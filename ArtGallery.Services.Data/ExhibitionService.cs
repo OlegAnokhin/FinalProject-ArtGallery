@@ -51,7 +51,7 @@
         /// <returns></returns>
         public async Task AddAsync(ExhibitionFormModel model)
         {
-            var exhibition = new Exhibition
+            Exhibition exhibition = new Exhibition
             {
                 Name = model.Name,
                 ImageUrl = model.ImageUrl,
@@ -64,6 +64,11 @@
             await this.context.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Проверка за съществуване
+        /// </summary>
+        /// <param name="exhibitionId">Идентификатор на изложбата</param>
+        /// <returns></returns>
         public async Task<bool> ExistsByIdAsync(int exhibitionId)
         {
             bool result = await this.context.Exhibitions
@@ -101,34 +106,12 @@
         /// <returns></returns>
         public async Task DeleteExhibitionAsync(int id)
         {
-            var exhibition = await this.context
+            Exhibition exhibition = await this.context
                 .Exhibitions
                 .FirstAsync(e => e.Id == id);
 
             this.context.Exhibitions.Remove(exhibition);
             await this.context.SaveChangesAsync();
         }
-
-            //        /// <summary>
-            //        /// Промяна на събитие
-            //        /// </summary>
-            //        /// <param name="model">Данни за събитие</param>
-            //        /// <returns></returns>
-            //        public async Task UpdateAsync(EventModel model)
-            //        {
-            //            var entity = await repo.GetByIdAsync<Event>(model.Id);
-            //            if (entity == null)
-            //            {
-            //                throw new ArgumentException("Невалиден идентификатор", nameof(model.Id));
-            //            }
-            //            entity.Name = model.Name;
-            //            entity.Start = model.Start;
-            //            entity.End = model.End;
-            //            entity.Place = model.Place;
-            //            entity.Description = model.Description;
-
-            //            await repo.SaveChangesAsync();
-            //        }
-
-        }
+    }
 }

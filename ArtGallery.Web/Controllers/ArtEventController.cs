@@ -1,11 +1,9 @@
-﻿using ArtGallery.Web.ViewModels.ArtEvent;
-
-namespace ArtGallery.Web.Controllers
+﻿namespace ArtGallery.Web.Controllers
 {
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-
-    using ArtGallery.Services.Data.Interfaces;
+    using Microsoft.AspNetCore.Authorization;
+    using ViewModels.ArtEvent;
+    using Services.Data.Interfaces;
 
     [Authorize]
     public class ArtEventController : Controller
@@ -40,6 +38,10 @@ namespace ArtGallery.Web.Controllers
         [HttpGet]
         public IActionResult Add()
         {
+            var model = new ArtEventFormModel()
+            {
+                Start = DateTime.Today
+            };
             return View();
         }
 
@@ -61,6 +63,54 @@ namespace ArtGallery.Web.Controllers
             {
                 logger.LogError("ArtEventController/Add", e);
                 ViewBag.ErrorMessage = "Възникна непредвидена грешка";
+                return RedirectToAction(nameof(All));
+            }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
+        {
+            bool artEventExist = await artEventService.ExistsByIdAsync(id);
+
+            if (!artEventExist)
+            {
+                ViewBag.ErrorMessage = "Oбучение с такъв идентификатор не съществува.";
+                return RedirectToAction(nameof(All));
+            }
+
+            try
+            {
+                var model = await artEventService.GetArtEventDetailsAsync(id);
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                logger.LogError("ArtEventController/Details", e);
+                ViewBag.ErrorMessage = "Възникна непредвидена грешка";
+                return RedirectToAction(nameof(All));
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            bool artEventExist = await artEventService.ExistsByIdAsync(id);
+
+            if (!artEventExist)
+            {
+                ViewBag.ErrorMessage = "Oбучение с такъв идентификатор не съществува.";
+                return RedirectToAction(nameof(All));
+            }
+
+            try
+            {
+                await this.artEventService.DeleteArtEventAsync(id);
+                return RedirectToAction(nameof(All));
+            }
+            catch (Exception e)
+            {
+                logger.LogError("Възникна непредвидена грешка");
                 return RedirectToAction(nameof(All));
             }
         }
