@@ -1,5 +1,6 @@
 namespace ArtGallery.Web
 {
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
     using Services.Data.Interfaces;
@@ -21,7 +22,7 @@ namespace ArtGallery.Web
                 options.UseSqlServer(connectionString));
 
             builder.Services
-                .AddDefaultIdentity<AppUser>(options =>
+                .AddDefaultIdentity<IdentityUser>(options =>
                 {
                     options.SignIn.RequireConfirmedAccount =
                         builder.Configuration.GetValue<bool>("Identity:SignIn:RequireConfirmedAccount");

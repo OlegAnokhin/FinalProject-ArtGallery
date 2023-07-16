@@ -112,7 +112,7 @@
             }
             catch (Exception e)
             {
-                logger.LogError("Възникна непредвидена грешка");
+                logger.LogError("Възникна непредвидена грешка", e);
                 return RedirectToAction(nameof(All));
             }
         }

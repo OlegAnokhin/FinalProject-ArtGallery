@@ -155,15 +155,15 @@
         /// <returns></returns>
         public async Task JoinToEventAsync(string userId, AllArtEventViewModel model)
         {
-            if (!await this.context.ArtEventParticipants.AnyAsync(e =>
+            if (!await context.ArtEventParticipants.AnyAsync(e =>
                     e.ParticipantId == userId && e.ArtEventId == model.Id))
             {
-                await this.context.ArtEventParticipants.AddAsync(new ArtEventParticipant
+                await context.ArtEventParticipants.AddAsync(new ArtEventParticipant
                 {
                     ParticipantId = userId,
                     ArtEventId = model.Id
                 });
-                await this.context.SaveChangesAsync();
+                await context.SaveChangesAsync();
             }
         }
 

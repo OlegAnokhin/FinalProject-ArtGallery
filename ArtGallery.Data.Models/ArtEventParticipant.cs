@@ -7,7 +7,7 @@
     {
         public string ParticipantId { get; set; } = null!;
 
-        [ForeignKey(nameof(ParticipantId))]
+        //[ForeignKey(nameof(ParticipantId))]
         public IdentityUser Participant { get; set; } = null!;
 
         public int ArtEventId { get; set; }

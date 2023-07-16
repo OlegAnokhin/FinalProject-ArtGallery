@@ -6,9 +6,9 @@
     using Microsoft.EntityFrameworkCore;
     using Models;
 
-    public class ArtGalleryDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
+    public class ArtGalleryDbContext : IdentityDbContext
     {
-        public ArtGalleryDbContext(DbContextOptions<ArtGalleryDbContext> options)
+    public ArtGalleryDbContext(DbContextOptions<ArtGalleryDbContext> options)
             : base(options)
         {
         }
