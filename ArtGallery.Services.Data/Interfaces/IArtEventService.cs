@@ -40,5 +40,7 @@
         /// <param name="artEventId">Идентификатор на обучението</param>
         /// <returns></returns>
         Task DeleteArtEventAsync(int artEventId);
+
+        
     }
 }
