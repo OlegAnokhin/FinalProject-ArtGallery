@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ArtGallery.Data.Migrations
 {
     [DbContext(typeof(ArtGalleryDbContext))]
-    [Migration("20230716160410_SeedingPictures")]
-    partial class SeedingPictures
+    [Migration("20230716182516_SeedingExhibition")]
+    partial class SeedingExhibition
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -60,7 +60,7 @@ namespace ArtGallery.Data.Migrations
                     b.Property<DateTime>("Start")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 7, 16, 16, 4, 10, 61, DateTimeKind.Utc).AddTicks(4063))
+                        .HasDefaultValue(new DateTime(2023, 7, 16, 18, 25, 16, 370, DateTimeKind.Utc).AddTicks(4734))
                         .HasComment("Начало на обучението");
 
                     b.HasKey("Id");
@@ -68,6 +68,35 @@ namespace ArtGallery.Data.Migrations
                     b.ToTable("ArtEvents");
 
                     b.HasComment("Обучение");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Обучение тип Арт-клас, в него заедно ще нарисуваме невероятна картина, а аз ще пи покажа нужни техники и ще ви напътствам през цялото време.",
+                            ImageAddress = "\\lib\\images\\ArtEventPinkTree.jpg",
+                            Name = "Розовото дърво",
+                            Place = "Варна, Галерията на Петя",
+                            Start = new DateTime(2023, 7, 26, 17, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Обучение тип Арт-клас, в него заедно ще нарисуваме невероятна картина, а аз ще пи покажа нужни техники и ще ви напътствам през цялото време.",
+                            ImageAddress = "\\lib\\images\\ArtEventCatWithCoffee.jpg",
+                            Name = "Коте с кафе",
+                            Place = "Варна, Галерията на Петя",
+                            Start = new DateTime(2023, 7, 27, 17, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Обучение тип Арт-клас, в него заедно ще нарисуваме невероятна картина, а аз ще пи покажа нужни техники и ще ви напътствам през цялото време.",
+                            ImageAddress = "\\lib\\images\\ArtEventDogWithBrush.jpg",
+                            Name = "Куче художник",
+                            Place = "Варна, Галерията на Петя",
+                            Start = new DateTime(2023, 7, 28, 17, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("ArtGallery.Data.Models.ArtEventParticipant", b =>
@@ -183,7 +212,7 @@ namespace ArtGallery.Data.Migrations
                     b.Property<DateTime>("End")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 7, 16, 16, 4, 10, 62, DateTimeKind.Utc).AddTicks(1726))
+                        .HasDefaultValue(new DateTime(2023, 7, 16, 18, 25, 16, 371, DateTimeKind.Utc).AddTicks(674))
                         .HasComment("Край на изложбата");
 
                     b.Property<string>("ImageUrl")
@@ -207,7 +236,7 @@ namespace ArtGallery.Data.Migrations
                     b.Property<DateTime>("Start")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 7, 16, 16, 4, 10, 62, DateTimeKind.Utc).AddTicks(1301))
+                        .HasDefaultValue(new DateTime(2023, 7, 16, 18, 25, 16, 371, DateTimeKind.Utc).AddTicks(367))
                         .HasComment("Начало на изложбата");
 
                     b.HasKey("Id");
@@ -215,6 +244,18 @@ namespace ArtGallery.Data.Migrations
                     b.ToTable("Exhibitions");
 
                     b.HasComment("Изложба");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "В тази изложба на тема Африка ще бъдат представени тематични картина на хора и животни.",
+                            End = new DateTime(2023, 7, 30, 17, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "\\lib\\images\\ExhibitionAfrica.jpg",
+                            Name = "Изложба Африка",
+                            Place = "Варна, Галерията на Петя",
+                            Start = new DateTime(2023, 7, 20, 10, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("ArtGallery.Data.Models.Picture", b =>

@@ -4,6 +4,7 @@ using ArtGallery.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ArtGallery.Data.Migrations
 {
     [DbContext(typeof(ArtGalleryDbContext))]
-    partial class ArtGalleryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230716180734_SeedingArtEvents")]
+    partial class SeedingArtEvents
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,7 +60,7 @@ namespace ArtGallery.Data.Migrations
                     b.Property<DateTime>("Start")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 7, 16, 18, 50, 16, 628, DateTimeKind.Utc).AddTicks(3659))
+                        .HasDefaultValue(new DateTime(2023, 7, 16, 18, 7, 33, 847, DateTimeKind.Utc).AddTicks(892))
                         .HasComment("Начало на обучението");
 
                     b.HasKey("Id");
@@ -210,7 +212,7 @@ namespace ArtGallery.Data.Migrations
                     b.Property<DateTime>("End")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 7, 16, 18, 50, 16, 628, DateTimeKind.Utc).AddTicks(8097))
+                        .HasDefaultValue(new DateTime(2023, 7, 16, 18, 7, 33, 847, DateTimeKind.Utc).AddTicks(5109))
                         .HasComment("Край на изложбата");
 
                     b.Property<string>("ImageUrl")
@@ -234,7 +236,7 @@ namespace ArtGallery.Data.Migrations
                     b.Property<DateTime>("Start")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 7, 16, 18, 50, 16, 628, DateTimeKind.Utc).AddTicks(7870))
+                        .HasDefaultValue(new DateTime(2023, 7, 16, 18, 7, 33, 847, DateTimeKind.Utc).AddTicks(4885))
                         .HasComment("Начало на изложбата");
 
                     b.HasKey("Id");
@@ -242,18 +244,6 @@ namespace ArtGallery.Data.Migrations
                     b.ToTable("Exhibitions");
 
                     b.HasComment("Изложба");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "В тази изложба на тема Африка ще бъдат представени тематични картина на хора и животни.",
-                            End = new DateTime(2023, 7, 30, 17, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "\\lib\\images\\ExhibitionAfrica.jpg",
-                            Name = "Изложба Африка",
-                            Place = "Варна, Галерията на Петя",
-                            Start = new DateTime(2023, 7, 20, 10, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("ArtGallery.Data.Models.Picture", b =>
@@ -328,7 +318,7 @@ namespace ArtGallery.Data.Migrations
                             Description = "Африканско момиче с цвете в косата",
                             ImageAddress = "\\lib\\images\\Girl1.jpg",
                             ImageBase = "Платно",
-                            Material = "Акрил",
+                            Material = "Акварел",
                             Name = "Момиче с цвете",
                             Size = "40 х 60"
                         },
@@ -340,7 +330,7 @@ namespace ArtGallery.Data.Migrations
                             Description = "Африканско момиче със синя шапка",
                             ImageAddress = "\\lib\\images\\Girl2.jpg",
                             ImageBase = "Платно",
-                            Material = "Акрил",
+                            Material = "Акварел",
                             Name = "Момиче със синя шапка",
                             Size = "40 х 60"
                         },
@@ -349,119 +339,11 @@ namespace ArtGallery.Data.Migrations
                             Id = 3,
                             CategoryId = 2,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Африканско момиче със оранжева шапка",
+                            Description = "Африканско момиче със зелена шапка",
                             ImageAddress = "\\lib\\images\\Girl3.jpg",
                             ImageBase = "Платно",
-                            Material = "Акрил",
-                            Name = "Момиче със оранжева шапка",
-                            Size = "40 х 60"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CategoryId = 1,
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Портрет на кон",
-                            ImageAddress = "\\lib\\images\\Animal1.jpg",
-                            ImageBase = "Платно",
-                            Material = "Акрил",
-                            Name = "Конче",
-                            Size = "40 х 60"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CategoryId = 1,
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Портрет на царя на животните",
-                            ImageAddress = "\\lib\\images\\Animal2.jpg",
-                            ImageBase = "Платно",
-                            Material = "Акрил",
-                            Name = "Лъв",
-                            Size = "40 х 60"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CategoryId = 1,
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Портрет на тигър",
-                            ImageAddress = "\\lib\\images\\Animal3.jpg",
-                            ImageBase = "Платно",
-                            Material = "Акрил",
-                            Name = "Тигър",
-                            Size = "40 х 60"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CategoryId = 3,
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Три шарени къщички",
-                            ImageAddress = "\\lib\\images\\House1.jpg",
-                            ImageBase = "Платно",
-                            Material = "Акрил",
-                            Name = "Три шарени къщички",
-                            Size = "40 х 60"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CategoryId = 3,
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Шарени къщички на дърво",
-                            ImageAddress = "\\lib\\images\\House2.jpg",
-                            ImageBase = "Платно",
-                            Material = "Акрил",
-                            Name = "Шарени къщички на дърво",
-                            Size = "40 х 60"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CategoryId = 3,
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Шарени къщички на колела",
-                            ImageAddress = "\\lib\\images\\House3.jpg",
-                            ImageBase = "Платно",
-                            Material = "Акрил",
-                            Name = "Шарени къщички на колела",
-                            Size = "40 х 60"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CategoryId = 4,
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Розово дърво",
-                            ImageAddress = "\\lib\\images\\Nature1.jpg",
-                            ImageBase = "Платно",
-                            Material = "Акрил",
-                            Name = "Розово дърво",
-                            Size = "40 х 60"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CategoryId = 4,
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Розово дърво на скала",
-                            ImageAddress = "\\lib\\images\\Nature2.jpg",
-                            ImageBase = "Платно",
-                            Material = "Акрил",
-                            Name = "Розово дърво на скала",
-                            Size = "40 х 60"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            CategoryId = 4,
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Бурно море",
-                            ImageAddress = "\\lib\\images\\Nature3.jpg",
-                            ImageBase = "Платно",
-                            Material = "Акрил",
-                            Name = "Бурно море",
+                            Material = "Акварел",
+                            Name = "Момиче със зелена шапка",
                             Size = "40 х 60"
                         });
                 });
