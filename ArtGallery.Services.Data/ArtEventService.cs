@@ -108,5 +108,64 @@
             this.context.ArtEvents.Remove(artEvent);
             await this.context.SaveChangesAsync();
         }
+
+        /// <summary>
+        /// Взимане на обучение
+        /// </summary>
+        /// <param name="artEventId">Идентификатор на обучението</param>
+        /// <returns></returns>
+        public async Task<AllArtEventViewModel> GetArtEventByIdAsync(int artEventId)
+        {
+            return await this.context.ArtEvents
+                .Where(e => e.Id == artEventId)
+                .Select(e => new AllArtEventViewModel
+                {
+                    Id = e.Id,
+                    Name = e.Name,
+                    ImageAddress = e.ImageAddress,
+                    Start = e.Start
+                }).FirstAsync();
+        }
+
+        /// <summary>
+        /// Взимане на списък с обучения на потребителя
+        /// </summary>
+        /// <param name="userId">Идентификатор на потребителя</param>
+        /// <returns></returns>
+        public async Task<List<JoinedArtEventsViewModel>> GetJoinedArtEventsAsync(string userId)
+        {
+            return await this.context.ArtEventParticipants
+                .Where(e => e.ParticipantId == userId)
+                .Select(e => new JoinedArtEventsViewModel
+                {
+                    Id = e.ArtEventId,
+                    Name = e.ArtEvent.Name,
+                    ImageAddress = e.ArtEvent.ImageAddress,
+                    Start = e.ArtEvent.Start,
+                    Place = e.ArtEvent.Place,
+                    Description = e.ArtEvent.Description
+                }).ToListAsync();
+        }
+
+        /// <summary>
+        /// Добавяне на потребител към обучението
+        /// </summary>
+        /// <param name="userId">Идентификатор на потребителя</param>
+        /// <param name="model">Модел на обучението</param>
+        /// <returns></returns>
+        public async Task JoinToEventAsync(string userId, AllArtEventViewModel model)
+        {
+            if (!await this.context.ArtEventParticipants.AnyAsync(e =>
+                    e.ParticipantId == userId && e.ArtEventId == model.Id))
+            {
+                await this.context.ArtEventParticipants.AddAsync(new ArtEventParticipant
+                {
+                    ParticipantId = userId,
+                    ArtEventId = model.Id
+                });
+                await this.context.SaveChangesAsync();
+            }
+        }
+
     }
 }

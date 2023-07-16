@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
+    using System.Security.Claims;
     using ViewModels.ArtEvent;
     using Services.Data.Interfaces;
 
@@ -10,6 +11,7 @@
     {
         private readonly IArtEventService artEventService;
         private readonly ILogger logger;
+        private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier);
 
         public ArtEventController(IArtEventService artEventService,
                                   ILogger<ArtEventController> _logger)
@@ -113,6 +115,23 @@
                 logger.LogError("Възникна непредвидена грешка");
                 return RedirectToAction(nameof(All));
             }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Join(int id)
+        {
+            var artEventToJoin = await artEventService.GetArtEventByIdAsync(id);
+            var model = await artEventService.GetJoinedArtEventsAsync(GetUserId());
+
+            if (model.Any(m => m.Id == id))
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            await artEventService.JoinToEventAsync(GetUserId(), artEventToJoin);
+            ViewBag.ErrorMessage = "Успешно се записахте за обучението.";
+
+            return RedirectToAction(nameof(All));
         }
     }
 }

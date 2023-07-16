@@ -10,10 +10,17 @@
         {
             builder
                 .HasKey(pc => new { pc.ParticipantId, pc.ArtEventId });
+            
             builder
                 .HasOne(e => e.ArtEvent)
                 .WithMany(p => p.ArtEventParticipants)
                 .HasForeignKey(e => e.ArtEventId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasOne(ep => ep.Participant)
+                .WithMany()
+                .HasForeignKey(ep => ep.ParticipantId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

@@ -41,6 +41,27 @@
         /// <returns></returns>
         Task DeleteArtEventAsync(int artEventId);
 
-        
+        /// <summary>
+        /// Взимане на обучение
+        /// </summary>
+        /// <param name="artEventId">Идентификатор на обучението</param>
+        /// <returns></returns>
+        Task<AllArtEventViewModel> GetArtEventByIdAsync(int artEventId);
+
+        /// <summary>
+        /// Взимане на списък с обучения на потребителя
+        /// </summary>
+        /// <param name="userId">Идентификатор на потребителя</param>
+        /// <returns></returns>
+        Task<List<JoinedArtEventsViewModel>> GetJoinedArtEventsAsync(string userId);
+
+        /// <summary>
+        /// Добавяне на потребител към обучението
+        /// </summary>
+        /// <param name="userId">Идентификатор на потребителя</param>
+        /// <param name="model">Модел на обучението</param>
+        /// <returns></returns>
+        Task JoinToEventAsync(string userId, AllArtEventViewModel model);
+
     }
 }
