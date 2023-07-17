@@ -184,6 +184,22 @@
             }
         }
 
+        public async Task<int> GetCountOfParticipantAsync(int eventId)
+        {
+            //var artEvent = await context.ArtEventParticipants
+            //    .FirstAsync(e => e.ArtEventId == eventId);
 
+            //if (artEvent != null)
+            //{
+            //    //var count = this.context.ArtEventParticipants.Count();
+            //    var count = artEvent.ParticipantId.Count();
+            //    return count;
+            //}
+            var count = context.ArtEventParticipants
+                .Where(e => e.ArtEventId == eventId)
+                .Count();
+
+            return count;
+        }
     }
 }

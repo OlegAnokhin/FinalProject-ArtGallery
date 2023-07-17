@@ -1,5 +1,10 @@
-﻿@model DetaisArtEventViewModel
+﻿@using ArtGallery.Services.Data.Interfaces;
+@model DetaisArtEventViewModel
+
+@inject IArtEventService ArtEventService
 @{
+    int participantCount = await ArtEventService.GetCountOfParticipantAsync(Model.Id);
+
     ViewData["Title"] = "Детайли за обучението";
 }
 
@@ -24,6 +29,19 @@
                 <p></p>
                 <p class="h5">Описание на обучението: <b>@Model.Description</b></p>
                 <p></p>
+                <div>
+                        @if (participantCount > 1)
+                        {
+                        <p class="h5"> За обучението се записаха : @participantCount човека</p>
+                        }                        
+                        else if(participantCount < 1)
+                        {
+                        <p class="h5">Няма записани хора за това събитие</p>
+                        }
+                        else{
+                        <p class="h5"> За обучението се записа : @participantCount човек</p>
+                        }
+                </div>
                 <form class="mt-2" asp-controller="ArtEvent" asp-action="Delete" asp-route-id="@Model.Id">
                     <div>
                         <input type="submit" value="Изтрий"

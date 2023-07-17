@@ -71,5 +71,6 @@
         /// <returns></returns>
         Task LeaveFromArtEventAsync(string userId, AllArtEventViewModel model);
 
+        Task<int> GetCountOfParticipantAsync(int eventId);
     }
 }
