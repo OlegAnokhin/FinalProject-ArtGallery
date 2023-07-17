@@ -31,7 +31,7 @@
             /// </summary>
             /// <param name="model">Данни за коментара</param>
             /// <returns></returns>
-            public async Task AddAsync(CommentViewModel model, Guid userId, int pictureId)
+            public async Task AddAsync(CommentViewModel model, string userId, int pictureId)
             {
                 Comment comment = new Comment()
                 {

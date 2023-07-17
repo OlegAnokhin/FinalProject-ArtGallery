@@ -56,13 +56,13 @@
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Add(CommentViewModel model, Guid userId, int pictureId)
+        public async Task<IActionResult> Add(CommentViewModel model, string userId, int pictureId)
         {
-            if (!ModelState.IsValid)
-            {
-                logger.LogError("Възникна непредвидена грешка");
-                return this.RedirectToAction("All", "Picture");
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    logger.LogError("Възникна непредвидена грешка");
+            //    return this.RedirectToAction("All", "Picture");
+            //}
 
             var user = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
@@ -72,15 +72,15 @@
 
                 return this.RedirectToAction("All", "Picture");
             }
-            userId = Guid.Parse(user);
+            userId = user;
 
-            //var pictureId = int.Parse(picId);
+            int picId = 0;
 
 
-            //if (Request.Cookies.TryGetValue("Id", out string idValue))
-            //{
-            //    int.TryParse(idValue, out pictureId);
-            //}
+            if (Request.Cookies.TryGetValue("Id", out string idValue))
+            {
+                int.TryParse(idValue, out picId);
+            }
 
             //bool pictureExist = await this.pictureService
             //    .ExistByIdAsync(pictureId);
