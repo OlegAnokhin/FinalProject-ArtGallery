@@ -61,7 +61,15 @@
         /// <param name="userId">Идентификатор на потребителя</param>
         /// <param name="model">Модел на обучението</param>
         /// <returns></returns>
-        Task JoinToEventAsync(string userId, AllArtEventViewModel model);
+        Task JoinToArtEventAsync(string userId, AllArtEventViewModel model);
+
+        /// <summary>
+        /// Изтриване на потребител от обучението
+        /// </summary>
+        /// <param name="userId">Идентификатор на потребителя</param>
+        /// <param name="model">Модел на обучението</param>
+        /// <returns></returns>
+        Task LeaveFromArtEventAsync(string userId, AllArtEventViewModel model);
 
     }
 }

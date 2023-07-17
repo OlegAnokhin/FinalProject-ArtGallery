@@ -153,7 +153,7 @@
         /// <param name="userId">Идентификатор на потребителя</param>
         /// <param name="model">Модел на обучението</param>
         /// <returns></returns>
-        public async Task JoinToEventAsync(string userId, AllArtEventViewModel model)
+        public async Task JoinToArtEventAsync(string userId, AllArtEventViewModel model)
         {
             if (!await context.ArtEventParticipants.AnyAsync(e =>
                     e.ParticipantId == userId && e.ArtEventId == model.Id))
@@ -166,6 +166,24 @@
                 await context.SaveChangesAsync();
             }
         }
+
+        /// <summary>
+        /// Изтриване на потребител от обучението
+        /// </summary>
+        /// <param name="userId">Идентификатор на потребителя</param>
+        /// <param name="model">Модел на обучението</param>
+        /// <returns></returns>
+        public async Task LeaveFromArtEventAsync(string userId, AllArtEventViewModel model)
+        {
+            var participant = await context.ArtEventParticipants
+                .FirstOrDefaultAsync(e => e.ParticipantId == userId && e.ArtEventId == model.Id);
+            if (participant != null)
+            {
+                context.ArtEventParticipants.Remove(participant);
+                await context.SaveChangesAsync();
+            }
+        }
+
 
     }
 }

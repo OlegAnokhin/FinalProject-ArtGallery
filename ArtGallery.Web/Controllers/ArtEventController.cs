@@ -113,7 +113,7 @@
             catch (Exception e)
             {
                 logger.LogError("Възникна непредвидена грешка", e);
-                return RedirectToAction(nameof(All));
+                return RedirectToAction(nameof(Details));
             }
         }
 
@@ -128,8 +128,23 @@
                 return RedirectToAction(nameof(All));
             }
 
-            await artEventService.JoinToEventAsync(GetUserId(), artEventToJoin);
-            ViewBag.ErrorMessage = "Успешно се записахте за обучението.";
+            try
+            {
+                await artEventService.JoinToArtEventAsync(GetUserId(), artEventToJoin);
+                return RedirectToAction(nameof(All));
+            }
+            catch (Exception e)
+            {
+                logger.LogError("Възникна непредвидена грешка", e);
+                return RedirectToAction(nameof(Details));
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Leave(int id)
+        {
+            var eventToLeave = await artEventService.GetArtEventByIdAsync(id);
+            await artEventService.LeaveFromArtEventAsync(GetUserId(), eventToLeave);
 
             return RedirectToAction(nameof(All));
         }
