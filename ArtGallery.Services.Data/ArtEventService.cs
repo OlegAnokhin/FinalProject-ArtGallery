@@ -14,15 +14,15 @@
         /// <summary>
         /// Достъп до база данни
         /// </summary>
-        private readonly ArtGalleryDbContext context;
+        private readonly ArtGalleryDbContext dbContext;
 
         /// <summary>
         /// Инжектиране на зависимост
         /// </summary>
-        /// <param name="context">Достъп до база данни</param>
-        public ArtEventService(ArtGalleryDbContext context)
+        /// <param name="dbContext">Достъп до база данни</param>
+        public ArtEventService(ArtGalleryDbContext dbContext)
         {
-            this.context = context;
+            this.dbContext = dbContext;
         }
 
         /// <summary>
@@ -31,7 +31,7 @@
         /// <returns></returns>
         public async Task<IEnumerable<AllArtEventViewModel>> GetAllArtEventsAsync()
         {
-            return await context.ArtEvents
+            return await dbContext.ArtEvents
                 .Select(e => new AllArtEventViewModel
                 {
                     Id = e.Id,
@@ -56,8 +56,8 @@
                 Place = model.Place,
                 Description = model.Description,
             };
-            await context.ArtEvents.AddAsync(artEvent);
-            await context.SaveChangesAsync();
+            await dbContext.ArtEvents.AddAsync(artEvent);
+            await dbContext.SaveChangesAsync();
         }
 
         /// <summary>
@@ -67,7 +67,7 @@
         /// <returns></returns>
         public async Task<bool> ExistsByIdAsync(int artEventId)
         {
-            bool result = await this.context.ArtEvents
+            bool result = await this.dbContext.ArtEvents
                 .AnyAsync(a => a.Id == artEventId);
             return result;
         }
@@ -79,7 +79,7 @@
         /// <returns></returns>
         public async Task<DetaisArtEventViewModel> GetArtEventDetailsAsync(int artEventId)
         {
-            ArtEvent artEvent = await this.context
+            ArtEvent artEvent = await this.dbContext
                 .ArtEvents
                 .FirstAsync(a => a.Id == artEventId);
 
@@ -101,12 +101,12 @@
         /// <returns></returns>
         public async Task DeleteArtEventAsync(int artEventId)
         {
-            ArtEvent artEvent = await this.context
+            ArtEvent artEvent = await this.dbContext
                 .ArtEvents
                 .FirstAsync(a => a.Id == artEventId);
 
-            this.context.ArtEvents.Remove(artEvent);
-            await this.context.SaveChangesAsync();
+            this.dbContext.ArtEvents.Remove(artEvent);
+            await this.dbContext.SaveChangesAsync();
         }
 
         /// <summary>
@@ -116,7 +116,7 @@
         /// <returns></returns>
         public async Task<AllArtEventViewModel> GetArtEventByIdAsync(int artEventId)
         {
-            return await this.context.ArtEvents
+            return await this.dbContext.ArtEvents
                 .Where(e => e.Id == artEventId)
                 .Select(e => new AllArtEventViewModel
                 {
@@ -134,7 +134,7 @@
         /// <returns></returns>
         public async Task<List<JoinedArtEventsViewModel>> GetJoinedArtEventsAsync(string userId)
         {
-            return await this.context.ArtEventParticipants
+            return await this.dbContext.ArtEventParticipants
                 .Where(e => e.ParticipantId == userId)
                 .Select(e => new JoinedArtEventsViewModel
                 {
@@ -155,15 +155,15 @@
         /// <returns></returns>
         public async Task JoinToArtEventAsync(string userId, AllArtEventViewModel model)
         {
-            if (!await context.ArtEventParticipants.AnyAsync(e =>
+            if (!await dbContext.ArtEventParticipants.AnyAsync(e =>
                     e.ParticipantId == userId && e.ArtEventId == model.Id))
             {
-                await context.ArtEventParticipants.AddAsync(new ArtEventParticipant
+                await dbContext.ArtEventParticipants.AddAsync(new ArtEventParticipant
                 {
                     ParticipantId = userId,
                     ArtEventId = model.Id
                 });
-                await context.SaveChangesAsync();
+                await dbContext.SaveChangesAsync();
             }
         }
 
@@ -175,27 +175,18 @@
         /// <returns></returns>
         public async Task LeaveFromArtEventAsync(string userId, AllArtEventViewModel model)
         {
-            var participant = await context.ArtEventParticipants
+            var participant = await dbContext.ArtEventParticipants
                 .FirstOrDefaultAsync(e => e.ParticipantId == userId && e.ArtEventId == model.Id);
             if (participant != null)
             {
-                context.ArtEventParticipants.Remove(participant);
-                await context.SaveChangesAsync();
+                dbContext.ArtEventParticipants.Remove(participant);
+                await dbContext.SaveChangesAsync();
             }
         }
 
         public async Task<int> GetCountOfParticipantAsync(int eventId)
         {
-            //var artEvent = await context.ArtEventParticipants
-            //    .FirstAsync(e => e.ArtEventId == eventId);
-
-            //if (artEvent != null)
-            //{
-            //    //var count = this.context.ArtEventParticipants.Count();
-            //    var count = artEvent.ParticipantId.Count();
-            //    return count;
-            //}
-            var count = context.ArtEventParticipants
+            var count = dbContext.ArtEventParticipants
                 .Where(e => e.ArtEventId == eventId)
                 .Count();
 

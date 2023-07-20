@@ -14,15 +14,15 @@
         /// <summary>
         /// Достъп до база данни
         /// </summary>
-        private readonly ArtGalleryDbContext context;
+        private readonly ArtGalleryDbContext dbContext;
 
         /// <summary>
         /// Инжектиране на зависимост
         /// </summary>
-        /// <param name="context">Достъп до база данни</param>
-        public ExhibitionService(ArtGalleryDbContext context)
+        /// <param name="dbContext">Достъп до база данни</param>
+        public ExhibitionService(ArtGalleryDbContext dbContext)
         {
-            this.context = context;
+            this.dbContext = dbContext;
         }
 
         /// <summary>
@@ -31,7 +31,7 @@
         /// <returns></returns>
         public async Task<IEnumerable<AllExhibitionsViewModel>> GetAllAsync()
         {
-            return await this.context.Exhibitions
+            return await this.dbContext.Exhibitions
                 .Select(e => new AllExhibitionsViewModel()
                 {
                     Id = e.Id,
@@ -60,8 +60,8 @@
                 Place = model.Place,
                 Description = model.Description
             };
-            await this.context.Exhibitions.AddAsync(exhibition);
-            await this.context.SaveChangesAsync();
+            await this.dbContext.Exhibitions.AddAsync(exhibition);
+            await this.dbContext.SaveChangesAsync();
         }
 
         /// <summary>
@@ -71,7 +71,7 @@
         /// <returns></returns>
         public async Task<bool> ExistsByIdAsync(int exhibitionId)
         {
-            bool result = await this.context.Exhibitions
+            bool result = await this.dbContext.Exhibitions
                 .AnyAsync(e => e.Id == exhibitionId);
             return result;
         }
@@ -83,7 +83,7 @@
         /// <returns></returns>
         public async Task<DetailsExhibitionsViewModel> GetExhibitionDetailsAsync(int id)
         {
-            Exhibition exhibition = await this.context
+            Exhibition exhibition = await this.dbContext
                 .Exhibitions
                 .FirstAsync(e => e.Id == id);
 
@@ -106,12 +106,12 @@
         /// <returns></returns>
         public async Task DeleteExhibitionAsync(int id)
         {
-            Exhibition exhibition = await this.context
+            Exhibition exhibition = await this.dbContext
                 .Exhibitions
                 .FirstAsync(e => e.Id == id);
 
-            this.context.Exhibitions.Remove(exhibition);
-            await this.context.SaveChangesAsync();
+            this.dbContext.Exhibitions.Remove(exhibition);
+            await this.dbContext.SaveChangesAsync();
         }
     }
 }

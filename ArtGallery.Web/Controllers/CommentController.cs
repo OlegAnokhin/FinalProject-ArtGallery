@@ -1,4 +1,6 @@
-﻿namespace ArtGallery.Web.Controllers
+﻿using ArtGallery.Data.Models;
+
+namespace ArtGallery.Web.Controllers
 {
 
     using Microsoft.AspNetCore.Mvc;
@@ -24,6 +26,16 @@
             this.pictureService = pictureService;
             this.logger = logger;
         }
+
+
+        //// Action за добавяне на Comment към Picture
+        //[HttpPost]
+        //public IActionResult AddCommentToPicture(int pictureId, Comment comment)
+        //{
+        //    commentService.AddCommentToPicture(pictureId, comment);
+        //    return RedirectToAction("Details", "Picture", new { pictureId });
+        //}
+
 
         //private static List<KeyValuePair<string, string>> Comments = new List<KeyValuePair<string, string>>();
 
@@ -51,7 +63,7 @@
         [HttpGet]
         public IActionResult Add()
         {
-           // var model = new CommentViewModel { PictureId = pictureId };
+            // var model = new CommentViewModel { PictureId = pictureId };
             return this.View();
         }
 
@@ -100,7 +112,7 @@
                 return this.RedirectToAction("All", "Picture");
             }
 
-            return this.RedirectToAction("Details", "Picture", new{pictureId});
+            return this.RedirectToAction("Details", "Picture", new { pictureId });
 
             //var newMessage = comment.CurrentComment;
 

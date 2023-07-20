@@ -51,7 +51,10 @@
                 }
                 @if (User.Identity?.IsAuthenticated ?? false)
                 {
-                    <p>Брой коментари : @Model.Comments.Count()</p>
+                    @if (Model.Comments.Any())
+                    {
+                        <p>Брой коментари : @Model.Comments.Count()</p>
+                    }
                     <a asp-controller="Picture" asp-action="AddComment" asp-route-id="@Model.Id"
                        class="btn btn-success">Остави коментар</a>
                 }

@@ -1,4 +1,6 @@
-﻿namespace ArtGallery.Services.Data.Interfaces
+﻿using ArtGallery.Data.Models;
+
+namespace ArtGallery.Services.Data.Interfaces
 {
     using Web.ViewModels.Comment;
 
@@ -19,6 +21,6 @@
         /// <returns></returns>
         Task AddCommentAsync(int pictureId, CommentViewModel model);
 
-
+        // void AddCommentToPicture(int pictureId, Comment comment);
     }
 }
