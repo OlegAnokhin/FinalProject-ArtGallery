@@ -25,25 +25,6 @@
             {
                 this.dbContext = dbContext;
             }
-
-            /// <summary>
-            /// Добавяне на коментар
-            /// </summary>
-            /// <param name="model">Данни за коментара</param>
-            /// <returns></returns>
-            public async Task AddAsync(CommentViewModel model, string userId, int pictureId)
-            {
-                Comment comment = new Comment()
-                {
-                    
-                    Username = model.Username,
-                    Content = model.Content
-                };
-
-                await dbContext.AddAsync(comment);
-                await dbContext.SaveChangesAsync();
-            }
-
             /// <summary>
             /// Взимане на всички коментари
             /// </summary>
@@ -61,6 +42,35 @@
                     }).ToArrayAsync();
 
                 return allComments;
+            }
+
+            /// <summary>
+            /// Добавяне на коментар
+            /// </summary>
+            /// <param name="model">Данни за коментара</param>
+            /// <returns></returns>
+            public async Task AddCommentAsync(int pictureId, CommentViewModel model)
+            {
+                var picture = await this.dbContext
+                    .Pictures
+                    .FirstAsync(p => p.Id == pictureId);
+
+                Comment comment = new Comment()
+                {
+                    
+                    Username = model.Username,
+                    Content = model.Content
+                };
+                picture.PictureComments.Add(comment);
+
+                var pictureComment = new PictureComment()
+                {
+                    PictureId = pictureId,
+                    CommentId = comment.CommentId
+                };
+
+                await dbContext.AddAsync(pictureComment);
+                await dbContext.SaveChangesAsync();
             }
     }
 }

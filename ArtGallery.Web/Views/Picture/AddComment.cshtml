@@ -1,4 +1,4 @@
-﻿@*@model CommentViewModel
+﻿@model CommentViewModel
 
 @{
     ViewData["Title"] = "Добавяне на коментар";
@@ -7,7 +7,7 @@
 <h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
 
-<form asp-controller="Comment" asp-action="Add" method="post" class="mb-3">
+<form asp-controller="Picture" asp-action="AddComment" method="post" class="mb-3">
     @Html.HiddenFor(m => m.PictureId)
     <div class="form-group card-header row">
         <div class="col-12">
@@ -26,4 +26,4 @@
             <input class="btn btn-primary mt-2 float-lg-right" type="submit" value="Изпрати"/>
         </div>
     </div>
-</form>*@
+</form>

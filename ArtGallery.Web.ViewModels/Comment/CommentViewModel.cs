@@ -6,8 +6,8 @@
 
     public class CommentViewModel
     {
-        //[Key]
-        //public int PictureId { get; set; }
+        [Key]
+        public int PictureId { get; set; }
 
         [Required]
         [StringLength(UsernameMaxLength, MinimumLength = UsernameMinLength)]

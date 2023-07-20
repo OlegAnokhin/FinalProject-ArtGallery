@@ -51,12 +51,13 @@
         [HttpGet]
         public IActionResult Add()
         {
+           // var model = new CommentViewModel { PictureId = pictureId };
             return this.View();
         }
 
         [HttpPost]
-        [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Add(CommentViewModel model, string userId, int pictureId)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Add(int pictureId, CommentViewModel model)
         {
             //if (!ModelState.IsValid)
             //{
@@ -72,30 +73,26 @@
 
                 return this.RedirectToAction("All", "Picture");
             }
-            userId = user;
+            var userId = user;
 
-            int picId = 0;
-
-
-            if (Request.Cookies.TryGetValue("Id", out string idValue))
-            {
-                int.TryParse(idValue, out picId);
-            }
-
-            //bool pictureExist = await this.pictureService
-            //    .ExistByIdAsync(pictureId);
-
-            //if (!pictureExist)
+            //if (Request.Cookies.TryGetValue("Id", out string idValue))
             //{
-            //    logger.LogError("Картина с този идентификатор не съществува");
-
-            //    return this.RedirectToAction("All", "Picture");
+            //    int.TryParse(idValue, out picId);
             //}
 
+            bool pictureExist = await this.pictureService
+                .ExistByIdAsync(pictureId);
+
+            if (!pictureExist)
+            {
+                logger.LogError("Картина с този идентификатор не съществува");
+
+                return this.RedirectToAction("All", "Picture");
+            }
 
             try
             {
-                await this.commentService.AddAsync(model, userId, pictureId);
+                await this.commentService.AddCommentAsync(pictureId, model);
             }
             catch (Exception)
             {
