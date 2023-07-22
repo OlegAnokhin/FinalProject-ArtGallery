@@ -1,25 +1,27 @@
 namespace ArtGallery.Web
 {
+    using ArtGallery.Data;
+    using Infrastucture.Extensions;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
-
     using Services.Data.Interfaces;
-    using Infrastucture.Extensions;
-    using Data;
-    using Data.Models;
 
     public class Program
     {
         public static void Main(string[] args)
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+            //var connectionString = builder.Configuration.GetConnectionString("ArtGalleryDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ArtGalleryDbContextConnection' not found.");
 
             // Add services to the container.
-            string connectionString = builder.Configuration
+            var connectionString = builder.Configuration
                 .GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
             builder.Services.AddDbContext<ArtGalleryDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
+            //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<ArtGalleryDbContext>();
 
             builder.Services
                 .AddDefaultIdentity<IdentityUser>(options =>
