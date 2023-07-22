@@ -1,17 +1,19 @@
 namespace ArtGallery.Web
 {
-    using ArtGallery.Data;
-    using Infrastucture.Extensions;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
+
+    using Data;
+    using Infrastucture.Extensions;
     using Services.Data.Interfaces;
+
+    using static Common.GeneralAppConstants;
 
     public class Program
     {
         public static void Main(string[] args)
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-            //var connectionString = builder.Configuration.GetConnectionString("ArtGalleryDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ArtGalleryDbContextConnection' not found.");
 
             // Add services to the container.
             var connectionString = builder.Configuration
@@ -19,9 +21,6 @@ namespace ArtGallery.Web
 
             builder.Services.AddDbContext<ArtGalleryDbContext>(options =>
                 options.UseSqlServer(connectionString));
-
-            //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //    .AddEntityFrameworkStores<ArtGalleryDbContext>();
 
             builder.Services
                 .AddDefaultIdentity<IdentityUser>(options =>
@@ -37,6 +36,7 @@ namespace ArtGallery.Web
                     options.Password.RequiredLength =
                         builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
                 })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ArtGalleryDbContext>();
 
             builder.Services.AddApplicationServices(typeof(IPictureService));
@@ -65,6 +65,11 @@ namespace ArtGallery.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            if (app.Environment.IsDevelopment())
+            {
+                app.SeedAdministrator(DevelopmentAdminEmail);
+            }
 
             app.MapDefaultControllerRoute();
             app.MapRazorPages();

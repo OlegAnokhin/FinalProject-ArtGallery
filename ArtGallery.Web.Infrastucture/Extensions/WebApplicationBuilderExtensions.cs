@@ -1,8 +1,10 @@
 ﻿namespace ArtGallery.Web.Infrastucture.Extensions
 {
     using System.Reflection;
-
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
+
+    using static Common.GeneralAppConstants;
 
     public static class WebApplicationBuilderExtensions
     {
@@ -36,6 +38,35 @@
 
                 services.AddScoped(interfaceType, implementationType);
             }
+        }
+
+        public static IApplicationBuilder SeedAdministrator(this IApplicationBuilder app, string email)
+        {
+            using IServiceScope scopedServices = app.ApplicationServices.CreateScope();
+
+            IServiceProvider serviceProvider = scopedServices.ServiceProvider;
+
+            UserManager<IdentityUser> userManager =
+                serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            RoleManager<IdentityRole> roleManager =
+                serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+            Task.Run(async () =>
+                {
+                    if (await roleManager.RoleExistsAsync(AdminRoleName))
+                    {
+                        return;
+                    }
+
+                    IdentityRole role = new IdentityRole(AdminRoleName);
+                    await roleManager.CreateAsync(role);
+
+                    IdentityUser adminUser = await userManager.FindByEmailAsync(email);
+                    await userManager.AddToRoleAsync(adminUser, AdminRoleName);
+                })
+                .GetAwaiter()
+                .GetResult();
+            return app;
         }
     }
 }
