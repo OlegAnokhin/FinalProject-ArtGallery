@@ -1,10 +1,12 @@
 ﻿namespace ArtGallery.Web.Controllers
 {
+
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
     using System.Security.Claims;
     using ViewModels.ArtEvent;
     using Services.Data.Interfaces;
+    using Infrastucture.Extensions;
 
     [Authorize]
     public class ArtEventController : Controller
@@ -40,6 +42,10 @@
         [HttpGet]
         public IActionResult Add()
         {
+            if (!User.IsAdmin())
+            {
+                return RedirectToAction("Error", "Home", StatusCode(401));
+            }
             var model = new ArtEventFormModel()
             {
                 Start = DateTime.Today
@@ -48,9 +54,13 @@
         }
 
         [HttpPost]
-        [AutoValidateAntiforgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(ArtEventFormModel model)
         {
+            if (!User.IsAdmin())
+            {
+                return RedirectToAction("Error", "Home", StatusCode(401));
+            }
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -97,6 +107,10 @@
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
+            if (!User.IsAdmin())
+            {
+                return RedirectToAction("Error", "Home", StatusCode(401));
+            }
             bool artEventExist = await artEventService.ExistsByIdAsync(id);
 
             if (!artEventExist)

@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services.Data.Interfaces;
+    using Infrastucture.Extensions;
     using ViewModels.Exhibition;
 
     [Authorize]
@@ -37,6 +38,11 @@
         [HttpGet]
         public IActionResult Add()
         {
+            if (!User.IsAdmin())
+            {
+                return RedirectToAction("Error", "Home", StatusCode(401));
+            }
+
             var model = new ExhibitionFormModel()
             {
                 Start = DateTime.Today,
@@ -49,6 +55,10 @@
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Add(ExhibitionFormModel model)
         {
+            if (!User.IsAdmin())
+            {
+                return RedirectToAction("Error", "Home", StatusCode(401));
+            }
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -95,6 +105,10 @@
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
+            if (!User.IsAdmin())
+            {
+                return RedirectToAction("Error", "Home", StatusCode(401));
+            }
             bool exhibitionExist = await exhibitionService.ExistsByIdAsync(id);
 
             if (!exhibitionExist)

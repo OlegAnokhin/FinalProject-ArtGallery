@@ -1,12 +1,18 @@
 ﻿namespace ArtGallery.Web.Infrastucture.Extensions
 {
-using System.Security.Claims;
+    using System.Security.Claims;
+    using static Common.GeneralAppConstants;
 
     public static class ClaimsPrincipalExtensions
     {
         public static string? GetId(this ClaimsPrincipal user)
         {
             return user.FindFirstValue(ClaimTypes.NameIdentifier);
+        }
+
+        public static bool IsAdmin(this ClaimsPrincipal user)
+        {
+            return user.IsInRole(AdminRoleName);
         }
     }
 }

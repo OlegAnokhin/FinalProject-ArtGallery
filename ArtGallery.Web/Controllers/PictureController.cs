@@ -2,13 +2,11 @@
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using System.Diagnostics;
-
-    using Services.Data.Models.Picture;
     using Services.Data.Interfaces;
-    using ViewModels.Home;
+    using Services.Data.Models.Picture;
+    using Infrastucture.Extensions;
+    using ViewModels.Comment;
     using ViewModels.Picture;
-    using ArtGallery.Web.ViewModels.Comment;
 
     [Authorize]
     public class PictureController : Controller
@@ -46,6 +44,10 @@
         [HttpGet]
         public async Task<IActionResult> Add()
         {
+            if (!User.IsAdmin())
+            {
+                return RedirectToAction("Error", "Home", StatusCode(401));
+            }
 
             AddAndEditPictureViewModel model = new AddAndEditPictureViewModel()
             {
@@ -59,6 +61,11 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(AddAndEditPictureViewModel model)
         {
+            if (!User.IsAdmin())
+            {
+                return RedirectToAction("Error", "Home", StatusCode(401));
+            }
+
             if (!ModelState.IsValid)
             {
                 model.Categories = await this.categoryService.AllCategoriesAsync();
@@ -112,6 +119,11 @@
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+            if (!User.IsAdmin())
+            {
+                return RedirectToAction("Error", "Home", StatusCode(401));
+            }
+
             bool pictureExist = await this.pictureService
                 .ExistByIdAsync(id);
 
@@ -132,6 +144,11 @@
         [HttpPost]
         public async Task<IActionResult> Edit(int id, AddAndEditPictureViewModel model)
         {
+            if (!User.IsAdmin())
+            {
+                return RedirectToAction("Error", "Home", StatusCode(401));
+            }
+
             if (!this.ModelState.IsValid)
             {
                 model.Categories = await this.categoryService.AllCategoriesAsync();
@@ -165,6 +182,11 @@
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
+            if (!User.IsAdmin())
+            {
+                return RedirectToAction("Error", "Home", StatusCode(401));
+            }
+
             bool pictureExist = await this.pictureService
                 .ExistByIdAsync(id);
 
@@ -222,9 +244,9 @@
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public async Task<IActionResult> Error(int statusCode)
         {
-            return this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return RedirectToAction("Error", "Home", statusCode);
         }
 
     }
