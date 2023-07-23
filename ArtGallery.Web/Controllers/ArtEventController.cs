@@ -1,4 +1,6 @@
-﻿namespace ArtGallery.Web.Controllers
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+
+namespace ArtGallery.Web.Controllers
 {
 
     using Microsoft.AspNetCore.Mvc;
@@ -134,6 +136,11 @@
         [HttpPost]
         public async Task<IActionResult> Join(int id)
         {
+            if (!User.Identity?.IsAuthenticated ?? false)
+            {
+                return RedirectToPage("Login");
+            }
+
             var artEventToJoin = await artEventService.GetArtEventByIdAsync(id);
             var model = await artEventService.GetJoinedArtEventsAsync(GetUserId());
 

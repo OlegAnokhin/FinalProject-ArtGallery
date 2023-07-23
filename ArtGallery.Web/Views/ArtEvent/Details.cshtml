@@ -55,10 +55,14 @@
                 }
                 <div class="d-inline-flex">
                     <form class="mt-2" asp-controller="ArtEvent" asp-action="Join" asp-route-id="@Model.Id">
-                        <input type="submit" value="Запиши се" class="btn btn-success m-2 border-2" />
+                        <div>
+                            <input type="submit" value="Запиши се" class="btn btn-success m-2 border-2" onclick=" return confirm('Успешно се записахте за това обучение !')" />
+                        </div>
                     </form>
                     <form class="mt-2" asp-controller="ArtEvent" asp-action="Leave" asp-route-id="@Model.Id">
-                        <input type="submit" value="Отпиши се" class="btn btn-success m-2 border-2" />
+                        <div>
+                            <input type="submit" value="Отпиши се" class="btn btn-success m-2 border-2" onclick=" return confirm('Желаете да се отпишете от това обучение ?')" />
+                        </div>
                     </form>
                 </div>
             </div>
