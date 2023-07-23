@@ -1,4 +1,5 @@
 ﻿@using static ArtGallery.Common.GeneralAppConstants;
+@using ArtGallery.Web.Infrastucture.Extensions
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,15 +34,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="ArtEvent" asp-action="All">Арт-класове</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Picture" asp-action="Add">Добавяне на картина</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Exhibition" asp-action="Add">Добавяне на изложба</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ArtEvent" asp-action="Add">Добавяне на обучение</a>
-                        </li>
+                        @if (User.IsAdmin())
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Picture" asp-action="Add">Добавяне на картина</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Exhibition" asp-action="Add">Добавяне на изложба</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="ArtEvent" asp-action="Add">Добавяне на обучение</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">За мен</a>
                         </li>
@@ -59,11 +63,11 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; ArtGallery - @ReleaseYear 
+            &copy; ArtGallery - @ReleaseYear
             @if (DateTime.UtcNow.Year != ReleaseYear)
             {
                 @Html.Raw($" - {DateTime.UtcNow.Year}")
-            }   
+            }
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
