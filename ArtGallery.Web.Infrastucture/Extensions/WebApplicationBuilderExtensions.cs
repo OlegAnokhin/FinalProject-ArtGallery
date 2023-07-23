@@ -1,6 +1,7 @@
 ﻿namespace ArtGallery.Web.Infrastucture.Extensions
 {
     using System.Reflection;
+    using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
 
