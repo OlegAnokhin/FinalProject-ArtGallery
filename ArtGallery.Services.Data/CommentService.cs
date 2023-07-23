@@ -12,16 +12,6 @@
     /// </summary>
     public class CommentService : ICommentService
     {
-        //private List<Picture> pictures;
-        //private List<Comment> comments;
-        //private List<PictureComment> pictureComments;
-
-        //public CommentService()
-        //{
-        //    pictures = new List<Picture>();
-        //    comments = new List<Comment>();
-        //    pictureComments = new List<PictureComment>();
-        //}
         /// <summary>
         /// Достъп до база данни
         /// </summary>
@@ -41,22 +31,34 @@
         /// <returns></returns>
         public async Task<IEnumerable<CommentViewModel>> AllCommentsAsync(int pictureId)
         {
-            IEnumerable<CommentViewModel> allComments = await this.dbContext
-                .PicturesComment
-                .Include(c => c.Comment)
-                .Where(p => p.PictureId == pictureId)
+            var picture = await this.dbContext
+                .Pictures
+                .FirstAsync(p => p.Id == pictureId);
+
+            return picture.PictureComments
                 .Select(c => new CommentViewModel()
                 {
-                    Username = c.Comment.Username,
-                    Content = c.Comment.Content
-                }).ToArrayAsync();
+                    Username = c.Username,
+                    Content = c.Content
+                }).ToArray();
 
-            return allComments;
+            //IEnumerable<CommentViewModel> allComments = await this.dbContext
+            //    .PicturesComment
+            //    .Include(c => c.Comment)
+            //    .Where(p => p.PictureId == pictureId)
+            //    .Select(c => new CommentViewModel()
+            //    {
+            //        Username = c.Comment.Username,
+            //        Content = c.Comment.Content
+            //    }).ToArrayAsync();
+
+            //return allComments;
         }
 
         /// <summary>
         /// Добавяне на коментар
         /// </summary>
+        /// <param name="pictureId">Идентификатор на картината</param>
         /// <param name="model">Данни за коментара</param>
         /// <returns></returns>
         public async Task AddCommentAsync(int pictureId, CommentViewModel model)
@@ -70,27 +72,18 @@
                 Username = model.Username,
                 Content = model.Content
             };
+
             picture.PictureComments.Add(comment);
 
-            var pictureComment = new PictureComment()
-            {
-                PictureId = pictureId,
-                CommentId = comment.CommentId
-            };
+            //var pictureComment = new PictureComment()
+            //{
+            //    PictureId = pictureId,
+            //    CommentId = comment.CommentId
+            //};
 
-            await dbContext.AddAsync(pictureComment);
+            //await dbContext.AddAsync(pictureComment);
+            await dbContext.Comments.AddAsync(comment);
             await dbContext.SaveChangesAsync();
         }
-
-        //public void AddCommentToPicture(int pictureId, Comment comment)
-        //{
-        //    comments.Add(comment);
-        //    var pictureComment = new PictureComment
-        //    {
-        //        PictureId = pictureId,
-        //        CommentId = comment.CommentId
-        //    };
-        //    pictureComments.Add(pictureComment);
-        //}
     }
 }

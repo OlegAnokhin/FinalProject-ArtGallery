@@ -1,7 +1,8 @@
 ﻿namespace ArtGallery.Data.Models
 {
-    using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using Microsoft.EntityFrameworkCore;
 
     using static Common.EntityValidationConstants.Comment;
 
@@ -32,5 +33,14 @@
         [Required]
         [MaxLength(CommentMaxLength)]
         public string Content { get; set; } = null!;
+
+        /// <summary>
+        /// Идентификатор на картината
+        /// </summary>
+        [Comment("Идентификатор на картината")]
+        public int PictureId { get; set; }
+
+        [ForeignKey(nameof(PictureId))]
+        public virtual Picture Picture { get; set; }
     }
 }

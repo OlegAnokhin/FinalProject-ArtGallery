@@ -1,4 +1,4 @@
-﻿@*@model CommentViewModel
+﻿@model CommentViewModel
 
 @{
     ViewData["Title"] = "Добавяне на коментар";
@@ -23,7 +23,7 @@
             <label>Съобщение: </label>
             <textarea asp-for="Content" class="form-control" rows="5"></textarea>
             <p></p>
-            <input class="btn btn-primary mt-2 float-lg-right" type="submit" value="Изпрати"/>
+            <input class="btn btn-primary mt-2 float-lg-right" type="submit" value="Изпрати" asp-route-id="@Model.PictureId" />
         </div>
     </div>
-</form>*@
+</form>

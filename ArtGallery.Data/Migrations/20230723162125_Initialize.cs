@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ArtGallery.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Initialize : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,7 +16,7 @@ namespace ArtGallery.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false, comment: "Идентификатор")
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, comment: "Име на обучението"),
-                    Start = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 7, 16, 15, 36, 45, 216, DateTimeKind.Utc).AddTicks(7437), comment: "Начало на обучението"),
+                    Start = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 7, 23, 16, 21, 25, 468, DateTimeKind.Utc).AddTicks(1403), comment: "Начало на обучението"),
                     ImageAddress = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: false, comment: "Адреса на изображението"),
                     Place = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, comment: "Мястото на обучението"),
                     Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false, comment: "Описание на обучението")
@@ -88,8 +88,8 @@ namespace ArtGallery.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, comment: "Име на изложбата"),
                     ImageUrl = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: false, comment: "Адреса на изображинието"),
-                    Start = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 7, 16, 15, 36, 45, 217, DateTimeKind.Utc).AddTicks(5459), comment: "Начало на изложбата"),
-                    End = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 7, 16, 15, 36, 45, 217, DateTimeKind.Utc).AddTicks(5861), comment: "Край на изложбата"),
+                    Start = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 7, 23, 16, 21, 25, 468, DateTimeKind.Utc).AddTicks(5890), comment: "Начало на изложбата"),
+                    End = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 7, 23, 16, 21, 25, 468, DateTimeKind.Utc).AddTicks(6127), comment: "Край на изложбата"),
                     Place = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, comment: "Мястото на изложбата"),
                     Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false, comment: "Описание на изложбата")
                 },
@@ -264,46 +264,36 @@ namespace ArtGallery.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Username = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, comment: "Име на коментиращият"),
                     Content = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false, comment: "Съдържание на коментара"),
-                    ArtEventId = table.Column<int>(type: "int", nullable: true),
-                    PictureId = table.Column<int>(type: "int", nullable: true)
+                    PictureId = table.Column<int>(type: "int", nullable: false, comment: "Идентификатор на картината")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Comments", x => x.CommentId);
                     table.ForeignKey(
-                        name: "FK_Comments_ArtEvents_ArtEventId",
-                        column: x => x.ArtEventId,
-                        principalTable: "ArtEvents",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_Comments_Pictures_PictureId",
                         column: x => x.PictureId,
                         principalTable: "Pictures",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "PicturesComment",
-                columns: table => new
+            migrationBuilder.InsertData(
+                table: "ArtEvents",
+                columns: new[] { "Id", "Description", "ImageAddress", "Name", "Place", "Start" },
+                values: new object[,]
                 {
-                    PictureId = table.Column<int>(type: "int", nullable: false, comment: "Идентификатор на картината"),
-                    CommentId = table.Column<int>(type: "int", nullable: false, comment: "Идентификатор на коментар")
-                },
-                constraints: table =>
+                    { 1, "Обучение тип Арт-клас, в него заедно ще нарисуваме невероятна картина, а аз ще пи покажа нужни техники и ще ви напътствам през цялото време.", "\\lib\\images\\ArtEventPinkTree.jpg", "Розовото дърво", "Варна, Галерията на Петя", new DateTime(2023, 7, 26, 17, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, "Обучение тип Арт-клас, в него заедно ще нарисуваме невероятна картина, а аз ще пи покажа нужни техники и ще ви напътствам през цялото време.", "\\lib\\images\\ArtEventCatWithCoffee.jpg", "Коте с кафе", "Варна, Галерията на Петя", new DateTime(2023, 7, 27, 17, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, "Обучение тип Арт-клас, в него заедно ще нарисуваме невероятна картина, а аз ще пи покажа нужни техники и ще ви напътствам през цялото време.", "\\lib\\images\\ArtEventDogWithBrush.jpg", "Куче художник", "Варна, Галерията на Петя", new DateTime(2023, 7, 28, 17, 0, 0, 0, DateTimeKind.Unspecified) }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
                 {
-                    table.PrimaryKey("PK_PicturesComment", x => new { x.PictureId, x.CommentId });
-                    table.ForeignKey(
-                        name: "FK_PicturesComment_Comments_CommentId",
-                        column: x => x.CommentId,
-                        principalTable: "Comments",
-                        principalColumn: "CommentId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PicturesComment_Pictures_PictureId",
-                        column: x => x.PictureId,
-                        principalTable: "Pictures",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                    { "c1f40236-ee63-452f-8c56-18f952098074", 0, "110c6c3c-515a-498c-8231-8dc798409865", "guest@ArtGallery.bg", false, false, null, "GUEST@ARTGALLERY.BG", "GUEST@ARTGALLERY.BG", "AQAAAAEAACcQAAAAEJwoi89tRWO+Q3ALeluwYT03XKneb1G3e4qYjnSctig8rdTnGZL18ASItx5RC3fKpg==", null, false, "f2565985-755b-4347-b8fe-459954ec12ad", false, "guest@ArtGallery.bg" },
+                    { "d53a80c3-5fd9-4451-a381-f40d2f50ec08", 0, "5c1ea97c-cd8d-43a0-b9e8-610a470e8e58", "admin@ArtGallery.bg", false, false, null, "ADMIN@ARTGALLERY.BG", "ADMIN@ARTGALLERY.BG", "AQAAAAEAACcQAAAAEMYo/eyOO2D9eA94jUYkH8cUNS8/OS3A/8zPHmdZP/DHaC8g+y9EU7zUfHIPeEspag==", null, false, "bc26f25f-9a87-4e3e-8ad1-1cc50e4775a8", false, "admin@ArtGallery.bg" }
                 });
 
             migrationBuilder.InsertData(
@@ -315,6 +305,30 @@ namespace ArtGallery.Data.Migrations
                     { 2, "Хора" },
                     { 3, "Къщи" },
                     { 4, "Пейзаж" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Exhibitions",
+                columns: new[] { "Id", "Description", "End", "ImageUrl", "Name", "Place", "Start" },
+                values: new object[] { 1, "В тази изложба на тема Африка ще бъдат представени тематични картина на хора и животни.", new DateTime(2023, 7, 30, 17, 0, 0, 0, DateTimeKind.Unspecified), "\\lib\\images\\ExhibitionAfrica.jpg", "Изложба Африка", "Варна, Галерията на Петя", new DateTime(2023, 7, 20, 10, 0, 0, 0, DateTimeKind.Unspecified) });
+
+            migrationBuilder.InsertData(
+                table: "Pictures",
+                columns: new[] { "Id", "CategoryId", "Description", "ImageAddress", "ImageBase", "Material", "Name", "Size" },
+                values: new object[,]
+                {
+                    { 1, 2, "Африканско момиче с цвете в косата", "\\lib\\images\\Girl1.jpg", "Платно", "Акрил", "Момиче с цвете", "40 х 60" },
+                    { 2, 2, "Африканско момиче със синя шапка", "\\lib\\images\\Girl2.jpg", "Платно", "Акрил", "Момиче със синя шапка", "40 х 60" },
+                    { 3, 2, "Африканско момиче със оранжева шапка", "\\lib\\images\\Girl3.jpg", "Платно", "Акрил", "Момиче със оранжева шапка", "40 х 60" },
+                    { 4, 1, "Портрет на кон", "\\lib\\images\\Animal1.jpg", "Платно", "Акрил", "Конче", "40 х 60" },
+                    { 5, 1, "Портрет на царя на животните", "\\lib\\images\\Animal2.jpg", "Платно", "Акрил", "Лъв", "40 х 60" },
+                    { 6, 1, "Портрет на тигър", "\\lib\\images\\Animal3.jpg", "Платно", "Акрил", "Тигър", "40 х 60" },
+                    { 7, 3, "Три шарени къщички", "\\lib\\images\\House1.jpg", "Платно", "Акрил", "Три шарени къщички", "40 х 60" },
+                    { 8, 3, "Шарени къщички на дърво", "\\lib\\images\\House2.jpg", "Платно", "Акрил", "Шарени къщички на дърво", "40 х 60" },
+                    { 9, 3, "Шарени къщички на колела", "\\lib\\images\\House3.jpg", "Платно", "Акрил", "Шарени къщички на колела", "40 х 60" },
+                    { 10, 4, "Розово дърво", "\\lib\\images\\Nature1.jpg", "Платно", "Акрил", "Розово дърво", "40 х 60" },
+                    { 11, 4, "Розово дърво на скала", "\\lib\\images\\Nature2.jpg", "Платно", "Акрил", "Розово дърво на скала", "40 х 60" },
+                    { 12, 4, "Бурно море", "\\lib\\images\\Nature3.jpg", "Платно", "Акрил", "Бурно море", "40 х 60" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -362,11 +376,6 @@ namespace ArtGallery.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_ArtEventId",
-                table: "Comments",
-                column: "ArtEventId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Comments_PictureId",
                 table: "Comments",
                 column: "PictureId");
@@ -375,11 +384,6 @@ namespace ArtGallery.Data.Migrations
                 name: "IX_Pictures_CategoryId",
                 table: "Pictures",
                 column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PicturesComment_CommentId",
-                table: "PicturesComment",
-                column: "CommentId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -403,22 +407,19 @@ namespace ArtGallery.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Comments");
+
+            migrationBuilder.DropTable(
                 name: "Exhibitions");
 
             migrationBuilder.DropTable(
-                name: "PicturesComment");
+                name: "ArtEvents");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Comments");
-
-            migrationBuilder.DropTable(
-                name: "ArtEvents");
 
             migrationBuilder.DropTable(
                 name: "Pictures");

@@ -27,6 +27,11 @@
             builder
                 .Property(p => p.CreatedOn)
                 .HasDefaultValueSql("GETDATE()");
+
+            builder
+                .HasMany(p => p.PictureComments)
+                .WithOne(c => c.Picture)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

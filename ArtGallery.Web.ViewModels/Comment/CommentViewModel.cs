@@ -6,7 +6,9 @@
 
     public class CommentViewModel
     {
-        [Key]
+        [Key] 
+        public int Id { get; set; }
+
         public int PictureId { get; set; }
 
         [Required]

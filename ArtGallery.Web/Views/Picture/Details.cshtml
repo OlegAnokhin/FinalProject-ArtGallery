@@ -55,7 +55,7 @@
                     {
                         <p>Брой коментари : @Model.Comments.Count()</p>
                     }
-                    <a asp-controller="Picture" asp-action="AddComment" asp-route-id="@Model.Id"
+                    <a asp-controller="Comment" asp-action="Add" asp-route-id="@Model.Id"
                        class="btn btn-success">Остави коментар</a>
                 }
                 else

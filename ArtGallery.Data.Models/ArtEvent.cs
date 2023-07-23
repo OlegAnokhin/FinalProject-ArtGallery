@@ -62,11 +62,11 @@
         [MaxLength(DescriptionMaxLength)]
         public string Description { get; set; } = null!;
 
-        /// <summary>
-        /// Коментари към обучението
-        /// </summary>
-        [Comment("Коментари към обучението")]
-        public virtual ICollection<Comment> EventComments { get; set; }
+        ///// <summary>
+        ///// Коментари към обучението
+        ///// </summary>
+        //[Comment("Коментари към обучението")]
+        //public virtual ICollection<Comment> EventComments { get; set; }
 
         /// <summary>
         /// Списък със записали се

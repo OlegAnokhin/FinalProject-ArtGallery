@@ -1,6 +1,4 @@
-﻿using ArtGallery.Data.Models;
-
-namespace ArtGallery.Web.Controllers
+﻿namespace ArtGallery.Web.Controllers
 {
 
     using Microsoft.AspNetCore.Mvc;
@@ -61,10 +59,10 @@ namespace ArtGallery.Web.Controllers
         //}
 
         [HttpGet]
-        public IActionResult Add()
+        public IActionResult Add(int pictureId)
         {
-            // var model = new CommentViewModel { PictureId = pictureId };
-            return this.View();
+            var model = new CommentViewModel { PictureId = pictureId };
+            return this.View(model);
         }
 
         [HttpPost]
@@ -87,20 +85,22 @@ namespace ArtGallery.Web.Controllers
             }
             var userId = user;
 
+            //int picId = 0;
+
             //if (Request.Cookies.TryGetValue("Id", out string idValue))
             //{
             //    int.TryParse(idValue, out picId);
             //}
 
-            bool pictureExist = await this.pictureService
-                .ExistByIdAsync(pictureId);
+            //bool pictureExist = await this.pictureService
+            //    .ExistByIdAsync(pictureId);
 
-            if (!pictureExist)
-            {
-                logger.LogError("Картина с този идентификатор не съществува");
+            //if (!pictureExist)
+            //{
+            //    logger.LogError("Картина с този идентификатор не съществува");
 
-                return this.RedirectToAction("All", "Picture");
-            }
+            //    return this.RedirectToAction("All", "Picture");
+            //}
 
             try
             {

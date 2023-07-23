@@ -58,7 +58,7 @@ namespace ArtGallery.Data.Migrations
                     b.Property<DateTime>("Start")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 7, 23, 9, 4, 11, 19, DateTimeKind.Utc).AddTicks(1376))
+                        .HasDefaultValue(new DateTime(2023, 7, 23, 16, 21, 25, 468, DateTimeKind.Utc).AddTicks(1403))
                         .HasComment("Начало на обучението");
 
                     b.HasKey("Id");
@@ -165,17 +165,15 @@ namespace ArtGallery.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommentId"), 1L, 1);
 
-                    b.Property<int?>("ArtEventId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)")
                         .HasComment("Съдържание на коментара");
 
-                    b.Property<int?>("PictureId")
-                        .HasColumnType("int");
+                    b.Property<int>("PictureId")
+                        .HasColumnType("int")
+                        .HasComment("Идентификатор на картината");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -184,8 +182,6 @@ namespace ArtGallery.Data.Migrations
                         .HasComment("Име на коментиращият");
 
                     b.HasKey("CommentId");
-
-                    b.HasIndex("ArtEventId");
 
                     b.HasIndex("PictureId");
 
@@ -210,7 +206,7 @@ namespace ArtGallery.Data.Migrations
                     b.Property<DateTime>("End")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 7, 23, 9, 4, 11, 19, DateTimeKind.Utc).AddTicks(6794))
+                        .HasDefaultValue(new DateTime(2023, 7, 23, 16, 21, 25, 468, DateTimeKind.Utc).AddTicks(6127))
                         .HasComment("Край на изложбата");
 
                     b.Property<string>("ImageUrl")
@@ -234,7 +230,7 @@ namespace ArtGallery.Data.Migrations
                     b.Property<DateTime>("Start")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 7, 23, 9, 4, 11, 19, DateTimeKind.Utc).AddTicks(6392))
+                        .HasDefaultValue(new DateTime(2023, 7, 23, 16, 21, 25, 468, DateTimeKind.Utc).AddTicks(5890))
                         .HasComment("Начало на изложбата");
 
                     b.HasKey("Id");
@@ -466,23 +462,6 @@ namespace ArtGallery.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ArtGallery.Data.Models.PictureComment", b =>
-                {
-                    b.Property<int>("PictureId")
-                        .HasColumnType("int")
-                        .HasComment("Идентификатор на картината");
-
-                    b.Property<int>("CommentId")
-                        .HasColumnType("int")
-                        .HasComment("Идентификатор на коментар");
-
-                    b.HasKey("PictureId", "CommentId");
-
-                    b.HasIndex("CommentId");
-
-                    b.ToTable("PicturesComment");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -604,15 +583,15 @@ namespace ArtGallery.Data.Migrations
                         {
                             Id = "d53a80c3-5fd9-4451-a381-f40d2f50ec08",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8fa4db39-2928-4f76-a27c-e81f32d3f4b2",
+                            ConcurrencyStamp = "5c1ea97c-cd8d-43a0-b9e8-610a470e8e58",
                             Email = "admin@ArtGallery.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ARTGALLERY.BG",
                             NormalizedUserName = "ADMIN@ARTGALLERY.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKA4YOngXwQiB0Unhsxucak6uqXNAJsUnzPKY4MCBqtX77vziWsturfwG6XmpS2cDA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMYo/eyOO2D9eA94jUYkH8cUNS8/OS3A/8zPHmdZP/DHaC8g+y9EU7zUfHIPeEspag==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4b6708ed-887f-4aaa-a109-b6b0abc9bf18",
+                            SecurityStamp = "bc26f25f-9a87-4e3e-8ad1-1cc50e4775a8",
                             TwoFactorEnabled = false,
                             UserName = "admin@ArtGallery.bg"
                         },
@@ -620,15 +599,15 @@ namespace ArtGallery.Data.Migrations
                         {
                             Id = "c1f40236-ee63-452f-8c56-18f952098074",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8404f792-9ba4-491f-a301-f3e5efb1c408",
+                            ConcurrencyStamp = "110c6c3c-515a-498c-8231-8dc798409865",
                             Email = "guest@ArtGallery.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@ARTGALLERY.BG",
                             NormalizedUserName = "GUEST@ARTGALLERY.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHfYpqpxvQM34khlAWYV6GRSK9srcGjLDMa+izGLISX8QzP7l+hsN5z1Y7ZQGkP2XA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJwoi89tRWO+Q3ALeluwYT03XKneb1G3e4qYjnSctig8rdTnGZL18ASItx5RC3fKpg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "33f1f095-f14a-4d85-9abf-f48b9b286fb0",
+                            SecurityStamp = "f2565985-755b-4347-b8fe-459954ec12ad",
                             TwoFactorEnabled = false,
                             UserName = "guest@ArtGallery.bg"
                         });
@@ -740,13 +719,13 @@ namespace ArtGallery.Data.Migrations
 
             modelBuilder.Entity("ArtGallery.Data.Models.Comment", b =>
                 {
-                    b.HasOne("ArtGallery.Data.Models.ArtEvent", null)
-                        .WithMany("EventComments")
-                        .HasForeignKey("ArtEventId");
-
-                    b.HasOne("ArtGallery.Data.Models.Picture", null)
+                    b.HasOne("ArtGallery.Data.Models.Picture", "Picture")
                         .WithMany("PictureComments")
-                        .HasForeignKey("PictureId");
+                        .HasForeignKey("PictureId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Picture");
                 });
 
             modelBuilder.Entity("ArtGallery.Data.Models.Picture", b =>
@@ -758,25 +737,6 @@ namespace ArtGallery.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("ArtGallery.Data.Models.PictureComment", b =>
-                {
-                    b.HasOne("ArtGallery.Data.Models.Comment", "Comment")
-                        .WithMany()
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ArtGallery.Data.Models.Picture", "Picture")
-                        .WithMany()
-                        .HasForeignKey("PictureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Comment");
-
-                    b.Navigation("Picture");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -833,8 +793,6 @@ namespace ArtGallery.Data.Migrations
             modelBuilder.Entity("ArtGallery.Data.Models.ArtEvent", b =>
                 {
                     b.Navigation("ArtEventParticipants");
-
-                    b.Navigation("EventComments");
                 });
 
             modelBuilder.Entity("ArtGallery.Data.Models.Category", b =>
