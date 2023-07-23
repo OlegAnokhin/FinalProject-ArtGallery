@@ -1,4 +1,6 @@
-﻿namespace ArtGallery.Web.Controllers
+﻿using ArtGallery.Data.Models;
+
+namespace ArtGallery.Web.Controllers
 {
 
     using Microsoft.AspNetCore.Mvc;

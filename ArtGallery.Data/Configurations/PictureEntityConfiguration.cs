@@ -31,6 +31,7 @@
             builder
                 .HasMany(p => p.PictureComments)
                 .WithOne(c => c.Picture)
+                .HasForeignKey(c => c.PictureId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
