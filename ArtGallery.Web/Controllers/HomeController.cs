@@ -1,23 +1,25 @@
 ﻿namespace ArtGallery.Web.Controllers
 {
-    using System.Diagnostics;
     using Microsoft.AspNetCore.Mvc;
-
     using ViewModels.Home;
     using Services.Data.Interfaces;
 
     public class HomeController : Controller
     {
         private readonly IPictureService pictureService;
-        public HomeController(IPictureService pictureService)
+        private readonly IConfiguration _configuration;
+
+        public HomeController(IPictureService pictureService, IConfiguration configuration)
         {
             this.pictureService = pictureService;
+            _configuration = configuration;
         }
 
         public async Task<IActionResult> Index()
         {
+             int.TryParse(_configuration["Settings:PictureCount"], out int pictureCount);
             IEnumerable<IndexViewModel> viewModel = 
-                await this.pictureService.LastThreePicturesAsync();
+                await this.pictureService.LastPicturesAsync(pictureCount);
 
             return View(viewModel);
         }

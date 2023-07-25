@@ -97,7 +97,7 @@
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details([FromRoute]int id)
         {
             bool pictureExist = await this.pictureService
                 .ExistByIdAsync(id);

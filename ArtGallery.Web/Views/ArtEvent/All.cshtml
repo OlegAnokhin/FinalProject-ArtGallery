@@ -16,7 +16,7 @@ else
     <div class="row">
         @foreach (var e in Model)
         {
-            <div class="container" style="display:inline">
+            <div class="container mb-3" style="display:inline">
                 <div class="row">
                     <div class="col-20">
                         <img class="card-img-top" style="width: 100%;"
@@ -24,15 +24,13 @@ else
                     </div>
                     <div class="card col-6 border-0">
                         <p class="h2"><u>@e.Name</u></p>
-                        <p></p>
                         <p class="h5">Начало на събитието: <b>@e.Start</b></p>
                         <p></p>
                     </div>
-                    <p></p>
-                    <a asp-controller="ArtEvent" asp-action="Details" asp-route-id="@e.Id" class="btn btn-warning col-1 p-2 fw-bold border-2">Детайли</a>
                 </div>
+                <a asp-controller="ArtEvent" asp-action="Details" asp-route-id="@e.Id" class="btn btn-warning col-1 p-2 fw-bold border-2">Детайли</a>
             </div>
-            <br />
+            <p></p>
         }
     </div>
     <br />

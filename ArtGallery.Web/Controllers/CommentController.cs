@@ -1,15 +1,13 @@
-﻿using ArtGallery.Data.Models;
-
-namespace ArtGallery.Web.Controllers
+﻿namespace ArtGallery.Web.Controllers
 {
-
+    using System.Security.Claims;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
 
     using Services.Data.Interfaces;
     using ViewModels.Comment;
     using ViewModels.Picture;
-    using System.Security.Claims;
+    using ArtGallery.Data.Models;
 
     [Authorize]
     public class CommentController : Controller
@@ -61,9 +59,9 @@ namespace ArtGallery.Web.Controllers
         //}
 
         [HttpGet]
-        public IActionResult Add(int pictureId)
+        public IActionResult Add([FromRoute]int id)
         {
-            var model = new CommentViewModel { PictureId = pictureId };
+            var model = new CommentViewModel { PictureId = id };
             return this.View(model);
         }
 

@@ -14,7 +14,7 @@
         /// Зарежда последно качените картини
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<IndexViewModel>> LastThreePicturesAsync();
+        Task<IEnumerable<IndexViewModel>> LastPicturesAsync(int pictureCount);
 
         /// <summary>
         /// Добавяне на категории към картината

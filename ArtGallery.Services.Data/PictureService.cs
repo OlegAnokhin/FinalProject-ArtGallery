@@ -33,12 +33,12 @@
         /// Добавяне на последно качените картини
         /// </summary>
         /// <returns></returns>
-        public async Task<IEnumerable<IndexViewModel>> LastThreePicturesAsync()
+        public async Task<IEnumerable<IndexViewModel>> LastPicturesAsync(int pictureCount)
         {
             IEnumerable<IndexViewModel> lastThreePictures = await this.dbContext
                 .Pictures
                 .OrderByDescending(p => p.CreatedOn)
-                .Take(3)
+                .Take(pictureCount)
                 .Select(p => new IndexViewModel()
                 {
                     Id = p.Id,

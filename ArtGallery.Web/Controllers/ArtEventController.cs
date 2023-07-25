@@ -137,7 +137,7 @@ namespace ArtGallery.Web.Controllers
         public async Task<IActionResult> Join(int id)
         {
             if (!User.Identity?.IsAuthenticated ?? false)
-            {
+            {   
                 return RedirectToPage("Login");
             }
 
