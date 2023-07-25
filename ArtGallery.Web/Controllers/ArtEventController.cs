@@ -52,7 +52,7 @@ namespace ArtGallery.Web.Controllers
             {
                 Start = DateTime.Today
             };
-            return View();
+            return View(model);
         }
 
         [HttpPost]

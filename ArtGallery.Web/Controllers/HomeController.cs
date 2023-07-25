@@ -17,7 +17,7 @@
 
         public async Task<IActionResult> Index()
         {
-             int.TryParse(_configuration["Settings:PictureCount"], out int pictureCount);
+            int.TryParse(_configuration["Settings:PictureCount"], out int pictureCount);
             IEnumerable<IndexViewModel> viewModel = 
                 await this.pictureService.LastPicturesAsync(pictureCount);
 
