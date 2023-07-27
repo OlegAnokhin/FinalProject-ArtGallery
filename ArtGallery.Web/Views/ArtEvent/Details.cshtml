@@ -53,18 +53,25 @@
                         </div>
                     </form>
                 }
-                <div class="d-inline-flex mt-2">
-                    <form asp-controller="ArtEvent" asp-action="Join" asp-route-id="@Model.Id">
-                        <div>
-                            <input type="submit" value="Запиши се" class="btn btn-success border-2" style="margin-right: 0.5rem" onclick=" return confirm('Успешно се записахте за това обучение !')" />
-                        </div>
-                    </form>
-                    <form asp-controller="ArtEvent" asp-action="Leave" asp-route-id="@Model.Id">
-                        <div>
-                            <input type="submit" value="Отпиши се" class="btn btn-success border-2" style="margin-right: 0.5rem" onclick=" return confirm('Желаете да се отпишете от това обучение ?')"/>
-                        </div>
-                    </form>
-                </div>
+                @if (User.Identity?.IsAuthenticated ?? false)
+                {
+                    <div class="d-inline-flex mt-2">
+                        <form asp-controller="ArtEvent" asp-action="Join" asp-route-id="@Model.Id">
+                            <div>
+                                <input type="submit" value="Запиши се" class="btn btn-success border-2" style="margin-right: 0.5rem" onclick=" return confirm('Успешно се записахте за това обучение !')" />
+                            </div>
+                        </form>
+                        <form asp-controller="ArtEvent" asp-action="Leave" asp-route-id="@Model.Id">
+                            <div>
+                                <input type="submit" value="Отпиши се" class="btn btn-success border-2" style="margin-right: 0.5rem" onclick=" return confirm('Желаете да се отпишете от това обучение ?')" />
+                            </div>
+                        </form>
+                    </div>
+                }
+                else
+                {
+                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Ако искате да се запишете</a>
+                }
             </div>
         </div>
     </div>
