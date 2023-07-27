@@ -70,5 +70,28 @@
             public const int DescriptionMinLength = 2;
             public const int DescriptionMaxLength = 250;
         }
+
+        public static class OrderAPicture
+        {
+            public const int FullnameMinLength = 5;
+            public const int FullnameMaxLength = 50;
+
+            public const int SizeMinLength = 2;
+            public const int SizeMaxLength = 50;
+            
+            public const int PhoneNumberMimLength = 2;
+            public const int PhoneNumberMaxLength = 50;
+
+            public const int MaterialMinLength = 2;
+            public const int MaterialMaxLength = 50;
+
+            public const int ImageBaseMinLength = 2;
+            public const int ImageBaseMaxLength = 250;
+
+            public const int ImageMaxSize = (10 * 1024 * 1024);
+
+            public const int DescriptionMinLength = 2;
+            public const int DescriptionMaxLength = 250;
+        }
     }
 }
