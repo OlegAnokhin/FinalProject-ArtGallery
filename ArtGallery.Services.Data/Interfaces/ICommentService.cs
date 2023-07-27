@@ -18,5 +18,21 @@
         /// <param name="model">Данни за коментара</param>
         /// <returns></returns>
         Task AddCommentAsync(int pictureId, CommentViewModel model);
+
+        /// <summary>
+        /// Изтриване на коментар
+        /// </summary>
+        /// <param name="commentId">Идентификатор на коментара</param>
+        /// <returns></returns>
+        Task DeleteCommentAsync(int commentId);
+
+        /// <summary>
+        /// Проверка за съществуване
+        /// </summary>
+        /// <param name="commentId">Идентификатор на коментара</param>
+        /// <returns></returns>
+        Task<bool> ExistsByIdAsync(int commentId);
+
+
     }
 }

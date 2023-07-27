@@ -1,5 +1,7 @@
 ﻿namespace ArtGallery.Web.Controllers
 {
+    using ArtGallery.Services.Data;
+    using ArtGallery.Web.Infrastucture.Extensions;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services.Data.Interfaces;
@@ -47,7 +49,6 @@
 
                 return this.RedirectToAction("All", "Picture");
             }
-            var userId = user;
 
             bool pictureExist = await this.pictureService
                 .ExistByIdAsync(pictureId);
@@ -69,7 +70,34 @@
                 return this.RedirectToAction("All", "Picture");
             }
 
-            return this.RedirectToAction("Details", "Picture", new { pictureId });
+            return this.RedirectToAction("Details", "Picture", new { id = pictureId });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            if (!User.IsAdmin())
+            {
+                return this.RedirectToAction("Error", "Home", StatusCode(401));
+            }
+            bool commentExist = await commentService.ExistsByIdAsync(id);
+
+            if (!commentExist)
+            {
+                logger.LogError("Коментар с такъв идентификатор не съществува.");
+                return this.RedirectToAction("All", "Picture");
+            }
+
+            try
+            {
+                await this.commentService.DeleteCommentAsync(id);
+                return this.RedirectToAction("All", "Picture");
+            }
+            catch (Exception e)
+            {
+                logger.LogError("Възникна непредвидена грешка", e);
+                return this.RedirectToAction("All", "Picture");
+            }
         }
     }
 }

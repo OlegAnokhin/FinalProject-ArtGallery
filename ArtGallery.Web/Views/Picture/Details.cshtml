@@ -1,4 +1,5 @@
-﻿@model DetailsPictureViewModel;
+﻿@using ArtGallery.Web.Infrastucture.Extensions;
+@model DetailsPictureViewModel;
 
 @{
     ViewBag.Title = "Детайли на картината";
@@ -38,7 +39,16 @@
                                 <blockquote class="blockquote mb-0">
                                     <p class="h6">Име: @comment.Username</p>
                                     <hr />
-                                    <p class ="h6">Коментар: @(comment.Content)<p>
+                                    <p class="h6">Коментар: @(comment.Content)<p>
+                                            @if (User.IsAdmin())
+                                            {
+                                            <form class="mt-2" asp-controller="Comment" asp-action="Delete" asp-route-id="@comment.Id">
+                                                <div>
+                                                    <input type="submit" value="Изтрий"
+                                                           class="btn btn-danger m-2" onclick="return confirm('Наистина ли искате да изтриете този коментар ?')" />
+                                                </div>
+                                            </form>
+                                            }
                                 </blockquote>
                             </div>
                         </div>

@@ -5,7 +5,6 @@
     using Services.Data.Interfaces;
     using Services.Data.Models.Picture;
     using Infrastucture.Extensions;
-    using ViewModels.Comment;
     using ViewModels.Picture;
 
     [Authorize]
@@ -209,45 +208,10 @@
             return this.RedirectToAction("All", "Picture");
         }
 
-        //[HttpGet]
-        //public IActionResult AddComment(int picId)
-        //{
-        //    var model = new CommentViewModel { PictureId = picId };
-        //    return View(model);
-        //}
-
-        //[HttpPost]
-        //public async Task<IActionResult> AddComment(int pictureId, CommentViewModel model)
-        //{
-        //    bool pictureExist = await this.pictureService
-        //        .ExistByIdAsync(pictureId);
-
-        //    if (!pictureExist)
-        //    {
-        //        logger.LogError("Картина с този идентификатор не съществува");
-
-        //        return this.RedirectToAction("All", "Picture");
-        //    }
-
-        //    try
-        //    {
-        //        await this.commentService.AddCommentAsync(pictureId, model);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        logger.LogError("Възникна непредвидена грешка");
-        //        return this.RedirectToAction("All", "Picture");
-        //    }
-
-        //    return this.RedirectToAction("Details", "Picture", new { pictureId });
-
-        //}
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> Error(int statusCode)
         {
             return RedirectToAction("Error", "Home", statusCode);
         }
-
     }
 }

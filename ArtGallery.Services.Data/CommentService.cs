@@ -58,7 +58,8 @@
             Comment comment = new Comment()
             {
                 Username = model.Username,
-                Content = model.Content
+                Content = model.Content,
+                PictureId = pictureId
             };
 
             picture.PictureComments.Add(comment);
@@ -66,5 +67,35 @@
             await dbContext.Comments.AddAsync(comment);
             await dbContext.SaveChangesAsync();
         }
+
+        /// <summary>
+        /// Изтриване на коментар
+        /// </summary>
+        /// <param name="commentId">Идентификатор на коментара</param>
+        /// <returns></returns>
+        public async Task DeleteCommentAsync(int commentId)
+        {
+            var comment = await this.dbContext
+                .Comments
+                .FirstAsync(c => c.CommentId == commentId);
+
+            dbContext.Comments.Remove(comment);
+            await dbContext.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Проверка за съществуване
+        /// </summary>
+        /// <param name="commentId">Идентификатор на коментара</param>
+        /// <returns></returns>
+        public async Task<bool> ExistsByIdAsync(int commentId)
+        {
+            bool result = await this.dbContext
+                .Comments
+                .AnyAsync(c => c.CommentId==commentId);
+            return result;
+        }
+
+
     }
 }
