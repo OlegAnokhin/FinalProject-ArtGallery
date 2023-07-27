@@ -1,13 +1,10 @@
 ﻿namespace ArtGallery.Web.Controllers
 {
-    using System.Security.Claims;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
-
+    using Microsoft.AspNetCore.Mvc;
     using Services.Data.Interfaces;
+    using System.Security.Claims;
     using ViewModels.Comment;
-    using ViewModels.Picture;
-    using ArtGallery.Data.Models;
 
     [Authorize]
     public class CommentController : Controller
@@ -25,39 +22,6 @@
             this.logger = logger;
         }
 
-
-        //// Action за добавяне на Comment към Picture
-        //[HttpPost]
-        //public IActionResult AddCommentToPicture(int pictureId, Comment comment)
-        //{
-        //    commentService.AddCommentToPicture(pictureId, comment);
-        //    return RedirectToAction("Details", "Picture", new { pictureId });
-        //}
-
-
-        //private static List<KeyValuePair<string, string>> Comments = new List<KeyValuePair<string, string>>();
-
-        //public IActionResult Show()
-        //{
-        //    if (Comments.Count() < 1)
-        //    {
-        //        return View(new CommentFormModel());
-        //    }
-
-        //    var chatModel = new CommentFormModel()
-        //    {
-        //        Comments = Comments
-        //            .Select(m => new CommentViewModel()
-        //            {
-        //                Username = m.Key,
-        //                Content = m.Value
-        //            })
-        //            .ToList()
-        //    };
-
-        //    return View(chatModel);
-        //}
-
         [HttpGet]
         public IActionResult Add([FromRoute]int id)
         {
@@ -69,11 +33,11 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(int pictureId, CommentViewModel model)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    logger.LogError("Възникна непредвидена грешка");
-            //    return this.RedirectToAction("All", "Picture");
-            //}
+            if (!ModelState.IsValid)
+            {
+                logger.LogError("Възникна непредвидена грешка");
+                return this.RedirectToAction("All", "Picture");
+            }
 
             var user = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
@@ -85,22 +49,15 @@
             }
             var userId = user;
 
-            //int picId = 0;
+            bool pictureExist = await this.pictureService
+                .ExistByIdAsync(pictureId);
 
-            //if (Request.Cookies.TryGetValue("Id", out string idValue))
-            //{
-            //    int.TryParse(idValue, out picId);
-            //}
+            if (!pictureExist)
+            {
+                logger.LogError("Картина с този идентификатор не съществува");
 
-            //bool pictureExist = await this.pictureService
-            //    .ExistByIdAsync(pictureId);
-
-            //if (!pictureExist)
-            //{
-            //    logger.LogError("Картина с този идентификатор не съществува");
-
-            //    return this.RedirectToAction("All", "Picture");
-            //}
+                return this.RedirectToAction("All", "Picture");
+            }
 
             try
             {
@@ -113,13 +70,6 @@
             }
 
             return this.RedirectToAction("Details", "Picture", new { pictureId });
-
-            //var newMessage = comment.CurrentComment;
-
-            //Comments.Add(new KeyValuePair<string, string>
-            //    (newMessage.Username, newMessage.Content));
-
-            //return RedirectToAction("Details", "Picture");
         }
     }
 }

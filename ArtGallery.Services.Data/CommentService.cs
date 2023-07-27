@@ -41,18 +41,6 @@
                     Username = c.Username,
                     Content = c.Content
                 }).ToArray();
-
-            //IEnumerable<CommentViewModel> allComments = await this.dbContext
-            //    .PicturesComment
-            //    .Include(c => c.Comment)
-            //    .Where(p => p.PictureId == pictureId)
-            //    .Select(c => new CommentViewModel()
-            //    {
-            //        Username = c.Comment.Username,
-            //        Content = c.Comment.Content
-            //    }).ToArrayAsync();
-
-            //return allComments;
         }
 
         /// <summary>
@@ -75,13 +63,6 @@
 
             picture.PictureComments.Add(comment);
 
-            //var pictureComment = new PictureComment()
-            //{
-            //    PictureId = pictureId,
-            //    CommentId = comment.CommentId
-            //};
-
-            //await dbContext.AddAsync(pictureComment);
             await dbContext.Comments.AddAsync(comment);
             await dbContext.SaveChangesAsync();
         }
