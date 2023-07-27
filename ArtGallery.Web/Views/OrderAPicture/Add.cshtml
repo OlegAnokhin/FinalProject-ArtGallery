@@ -1,0 +1,73 @@
+﻿@using (Html.BeginForm("Upload", "Picture", FormMethod.Post, new { enctype = "multipart/form-data" })) ;
+@model OrderAPictureFormModel;
+
+@{
+    ViewData["Title"] = "Поръчване на картина";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+@if (User.Identity?.IsAuthenticated ?? false)
+{
+    <div class="row">
+        <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+            <form asp-action="Add" method="post">
+                <div class="mb-3">
+                    <label asp-for="Fullname" class="form-label">Вашето име и фамилия</label>
+                    <input asp-for="Fullname" class="form-control" aria-required="true" />
+                    <span asp-validation-for="Fullname" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Size" class="form-label">Телефонен номер</label>
+                    <input asp-for="Size" class="form-control" aria-required="true" />
+                    <span asp-validation-for="Size" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Size" class="form-label">Размер на картината</label>
+                    <input asp-for="Size" class="form-control" aria-required="true" />
+                    <span asp-validation-for="Size" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Material" class="form-label">Материал</label>
+                    <input asp-for="Material" class="form-control" aria-required="true" />
+                    <span asp-validation-for="Material" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ImageBase" class="form-label">Основата на картината</label>
+                    <input asp-for="ImageBase" class="form-control" aria-required="true" />
+                    <span asp-validation-for="ImageBase" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Image" class="form-label">Добавете изображението</label>
+                    <input asp-for="Image" class="form-control" aria-required="true" />
+                    <span asp-validation-for="Image" class="text-danger"></span>
+
+                    <input type="file" name="imageFile" id="imageFile" accept="image/*" />
+                    <input type="submit" value="Upload Image" />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label">Описание на картината</label>
+                    <input asp-for="Description" class="form-control" aria-required="true" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="mb-3 text-center">
+                    <input class="btn btn-primary" type="submit" value="Запази" />
+                </div>
+            </form>
+        </div>
+    </div>
+}
+else
+{
+    <div>
+        <p class="p4">Услугата е достъпна само за регистрирани потребители.</p>
+        <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Регистрирайте нов профил.</a>
+        <p></p>
+        <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Влезте в профила си.</a>
+    </div>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -26,7 +26,7 @@
         public string UserId { get; set; } = null!;
 
         /// <summary>
-        /// Име на картината
+        /// Вашите имена
         /// </summary>
         [Comment("Вашите имена")]
         [Required]
@@ -78,7 +78,7 @@
         /// </summary>
         [Comment("Добавете изображението")]
         [MaxByteArraySize(ImageMaxSize)]
-        public byte[] ImageAddress { get; set; } = null!;
+        public byte[] ImageAddress { get; set; }
 
     }
 }

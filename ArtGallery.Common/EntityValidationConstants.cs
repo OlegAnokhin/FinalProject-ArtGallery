@@ -79,7 +79,7 @@
             public const int SizeMinLength = 2;
             public const int SizeMaxLength = 50;
             
-            public const int PhoneNumberMimLength = 2;
+            public const int PhoneNumberMinLength = 2;
             public const int PhoneNumberMaxLength = 50;
 
             public const int MaterialMinLength = 2;
