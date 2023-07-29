@@ -3,7 +3,7 @@
     using System.ComponentModel.DataAnnotations;
     using Microsoft.EntityFrameworkCore;
 
-    using ArtGallery.Common;
+    using Common;
     using static Common.EntityValidationConstants.OrderAPicture;
 
     /// <summary>
@@ -19,11 +19,11 @@
         public int Id { get; set; }
 
         /// <summary>
-        /// Идентификатор на потребителя
+        /// Име на заявка
         /// </summary>
-        [Comment("Идентификатор на потребителя")]
+        [Comment("Име на заявка")]
         [Required]
-        public string UserId { get; set; } = null!;
+        public string FileName { get; set; } = null!;
 
         /// <summary>
         /// Вашите имена
@@ -70,15 +70,15 @@
         /// </summary>
         [Comment("Допълнителни желания към картината")]
         [Required]
-        [MaxLength(DescriptionMaxLength)]
+       // [MaxLength(DescriptionMaxLength)]
         public string Description { get; set; } = null!;
 
         /// <summary>
-        /// Адреса на изображението
+        /// Изображението
         /// </summary>
         [Comment("Добавете изображението")]
         [MaxByteArraySize(ImageMaxSize)]
-        public byte[] ImageAddress { get; set; }
+        public byte[] ImageData { get; set; }
 
     }
 }

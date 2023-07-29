@@ -1,8 +1,9 @@
 ﻿namespace ArtGallery.Web.ViewModels.OrderAPicture
 {
     using System.ComponentModel.DataAnnotations;
+    using Microsoft.AspNetCore.Http;
 
-    using ArtGallery.Common;
+    using Common;
     using static Common.EntityValidationConstants.OrderAPicture;
 
     public class OrderAPictureFormModel
@@ -48,11 +49,12 @@
         public string ImageBase { get; set; } = null!;
 
         /// <summary>
-        /// Адреса на изображението
+        /// Изображението
         /// </summary>
         [Display(Name = "Добавете изображението")]
-        [MaxByteArraySize(ImageMaxSize)]
-        public byte[] Image { get; set; }
+        [DataType(DataType.Upload)]
+        //[AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png" }, ErrorMessage = "Моля изберете файл с разширение: .jpg, .jpeg, .png")]
+        public IFormFile Image { get; set; }
 
 
         /// <summary>
