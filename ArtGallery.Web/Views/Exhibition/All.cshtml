@@ -3,12 +3,12 @@
     ViewData["Title"] = "Изложби";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<h2 id="title" class="text-center">@ViewBag.Title</h2>
 <hr />
 
 @if (!Model.Any())
 {
-    <h2 class="text-center">Няма предстоящи изложби!</h2>
+    <h2 id="title" class="text-center">Няма предстоящи изложби!</h2>
 }
 
 else

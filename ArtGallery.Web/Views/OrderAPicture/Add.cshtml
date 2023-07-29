@@ -4,7 +4,7 @@
     ViewData["Title"] = "Поръчване на картина";
 }
 
-<h2 class="text-center">@ViewData["Title"]</h2>
+<h2 id="title" class="text-center">@ViewData["Title"]</h2>
 <hr />
 @using (Html.BeginForm("Add", "OrderAPicture", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -58,7 +58,7 @@
     else
     {
         <div>
-            <p class="p4">Услугата е достъпна само за регистрирани потребители.</p>
+            <p id="title" class="p4">Услугата е достъпна само за регистрирани потребители.</p>
             <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Регистрирайте нов профил.</a>
             <p></p>
             <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Влезте в профила си.</a>

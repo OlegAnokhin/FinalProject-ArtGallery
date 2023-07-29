@@ -3,7 +3,7 @@
     ViewData["Title"] = "Галерия";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<h2 id="title" class="text-center">@ViewBag.Title</h2>
 <hr />
 
 <form method="get">
@@ -95,7 +95,7 @@
 
 @if (!Model.Pictures.Any())
 {
-    <h2 class="text-center">Няма намерени картини!</h2>
+    <h2 id="title" class="text-center">Няма намерени картини!</h2>
 }
 
 <div class="row">

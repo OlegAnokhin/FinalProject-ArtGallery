@@ -28,3 +28,7 @@ body {
 #title {
     color: #805500
 }
+
+.form-control {
+    background-color: dimgray
+}

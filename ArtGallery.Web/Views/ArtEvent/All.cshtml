@@ -3,12 +3,12 @@
     ViewData["Title"] = "Арт клас - обучение";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<h2 id="title" class="text-center">@ViewBag.Title</h2>
 <hr />
 
 @if (!Model.Any())
 {
-    <h2 class="text-center">Няма предстоящи обучения!</h2>
+    <h2 id="title" class="text-center">Няма предстоящи обучения!</h2>
 }
 
 else
@@ -35,6 +35,6 @@ else
     </div>
     <br />
     <br />
-    <p class="h5"> Участвайте в конкурс за детска рисунка: <a href="https://www.facebook.com/malkitehudojniciVN"> <img src="\lib\images\icons8-facebook-48.png"> </a></p>
+    <p id="title" class="h5"> Участвайте в конкурс за детска рисунка: <a href="https://www.facebook.com/malkitehudojniciVN"> <img src="\lib\images\icons8-facebook-48.png"> </a></p>
 
 }

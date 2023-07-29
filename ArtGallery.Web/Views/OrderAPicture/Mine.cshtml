@@ -4,12 +4,12 @@
     ViewData["Title"] = "Моите поръчки";
 }
 
-<h2 class="text-center">@ViewData["Title"]</h2>
+<h2 id="title" class="text-center">@ViewData["Title"]</h2>
 <hr />
 
 @if (!Model.Any())
 {
-    <h2 class="text-center">Нямате поръчки!</h2>
+    <h2 id="title" class="text-center">Нямате поръчки!</h2>
 }
 
 else
