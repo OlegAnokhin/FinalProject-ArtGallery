@@ -2,15 +2,22 @@
 @model IEnumerable<IndexViewModel>
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Арт галерия PM";
 
     var pictures = Model.ToList();
 }
+<h2 id="title" class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<div>
+    <img class="card-img-top" style="width: 100%; height: auto;"
+         src="/lib/images/backgound2.jpg" alt="My Image" />
+</div>
 
 @if (!pictures.Any())
 {
     <div class="mt-4 p-5 bg-light">
-        <p class="lead">
+        <p id ="title" class="lead">
             Все още няма добавени картини.
         </p>
         <hr class="my-4">
@@ -26,7 +33,7 @@
 
 <div class="mb-5"></div>
 
-<h1 class="display-4">Последно добавени картини.</h1>
+<h1 id="title" class="display-6">Последно добавени картини :</h1>
 
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">

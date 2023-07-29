@@ -1,5 +1,6 @@
 ﻿namespace ArtGallery.Services.Data
 {
+    using Microsoft.EntityFrameworkCore;
     using ArtGallery.Data;
     using ArtGallery.Data.Models;
     using Interfaces;
@@ -52,6 +53,26 @@
 
             await dbContext.AddAsync(order);
             await dbContext.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Преглед на мои поръчки
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IEnumerable<MyOrdersViewModel>> GetMyOrdersAsync()
+        {
+            return await this.dbContext.OrdersAPictures
+                .Select(o => new MyOrdersViewModel
+                {
+                    Id = o.Id,
+                    Fullname = o.Fullname,
+                    PhoneNumber = o.PhoneNumber,
+                    Size = o.Size,
+                    Material = o.Material,
+                    ImageBase = o.ImageBase,
+                    Image = o.ImageData,
+                    Description = o.Description
+                }).ToListAsync();
         }
     }
 }

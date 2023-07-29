@@ -13,9 +13,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-black border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Art Gallery</a>
+                <a id="button" class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Art Gallery</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -23,19 +23,22 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
+                            <a id="button" class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Picture" asp-action="All">Галерия</a>
+                            <a id="button" class="nav-link" asp-area="" asp-controller="Picture" asp-action="All">Галерия</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Exhibition" asp-action="All">Изложби</a>
+                            <a id="button" class="nav-link" asp-area="" asp-controller="Exhibition" asp-action="All">Изложби</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ArtEvent" asp-action="All">Арт-класове</a>
+                            <a id="button" class="nav-link" asp-area="" asp-controller="ArtEvent" asp-action="All">Арт-класове</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="OrderAPicture" asp-action="Add">Поръчване на картина</a>
+                            <a id="button" class="nav-link" asp-area="" asp-controller="OrderAPicture" asp-action="Add">Поръчване на картина</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="button" class="nav-link" asp-area="" asp-controller="OrderAPicture" asp-action="Mine">Моите поръчки</a>
                         </li>
                         @if (User.IsAdmin())
                         {
@@ -50,7 +53,7 @@
                             </li>
                         }
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">За мен</a>
+                            <a id="button" class="nav-link" asp-area="" asp-controller="Home" asp-action="About">За мен</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />

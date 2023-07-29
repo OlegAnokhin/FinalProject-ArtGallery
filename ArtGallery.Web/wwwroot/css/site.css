@@ -13,6 +13,18 @@ html {
   min-height: 100%;
 }
 
+header {
+    background-color: black
+}
+
+#button {
+    color: #805500
+}
+
 body {
-  margin-bottom: 60px;
+  margin-bottom: 30px;
+    background-color: black
+}
+#title {
+    color: #805500
 }

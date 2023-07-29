@@ -11,5 +11,10 @@
         /// <returns></returns>
         Task AddAsync(OrderAPictureFormModel model);
 
+        /// <summary>
+        /// Преглед на мои поръчки
+        /// </summary>
+        /// <returns></returns>
+        Task<IEnumerable<MyOrdersViewModel>> GetMyOrdersAsync();
     }
 }

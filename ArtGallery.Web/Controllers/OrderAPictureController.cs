@@ -23,7 +23,7 @@
         [AllowAnonymous]
         public IActionResult Add()
         {
-            return this.View();
+            return View();
         }
 
         [HttpPost]
@@ -37,7 +37,7 @@
             }
             if (!ModelState.IsValid)
             {
-                return this.View();
+                return View();
             }
 
             try
@@ -49,7 +49,23 @@
                 logger.LogError("OrderAPictureController/Add", e);
                 ViewBag.ErrorMessage = "Възникна непредвидена грешка";
             }
-            return this.RedirectToAction("All", "Picture");
+            return RedirectToAction("All", "Picture");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Mine()
+        {
+            try
+            {
+                var model = await orderAPictureService.GetMyOrdersAsync();
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                logger.LogError("OrderAPictureController/All", e);
+                ViewBag.ErrorMessage = "Възникна непредвидена грешка";
+                return RedirectToAction("All", "Picture");
+            }
         }
 
     }
