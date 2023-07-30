@@ -26,14 +26,16 @@
         }
 
         /// <summary>
-        /// Добавяне на поръчка
+        /// Добавяне на картина
         /// </summary>
-        /// <param name="model">Модел на поръчката</param>
+        /// <param name="model">Данни за картина</param>
+        /// <param name="userId">Идентификатор на потребителя</param>
         /// <returns></returns>
-        public async Task AddAsync(OrderAPictureFormModel model)
+        public async Task AddAsync(OrderAPictureFormModel model, string userId)
         {
             OrderAPicture order = new OrderAPicture
             {
+                UserId = userId,
                 FullName = model.FullName,
                 PhoneNumber = model.PhoneNumber,
                 Size = model.Size,
@@ -58,10 +60,12 @@
         /// <summary>
         /// Преглед на мои поръчки
         /// </summary>
+        /// <param name="userId">Идентификатор на потребителя</param>
         /// <returns></returns>
-        public async Task<IEnumerable<MyOrdersViewModel>> GetMyOrdersAsync()
+        public async Task<IEnumerable<MyOrdersViewModel>> GetMyOrdersAsync(string userId)
         {
             return await this.dbContext.OrdersAPictures
+                .Where(o => o.UserId == userId)
                 .Select(o => new MyOrdersViewModel
                 {
                     Id = o.Id,
@@ -73,6 +77,21 @@
                     Image = o.ImageData,
                     Description = o.Description
                 }).ToListAsync();
+        }
+
+        /// <summary>
+        /// Изтриване на поръчка
+        /// </summary>
+        /// <param name="orderId">Идентификатор на поръчката</param>
+        /// <returns></returns>
+        public async Task DeleteOrderByIdAsync(int orderId)
+        {
+            OrderAPicture order = await this.dbContext
+                .OrdersAPictures
+                .FirstAsync(o => o.Id == orderId);
+
+            dbContext.OrdersAPictures.Remove(order);
+            await dbContext.SaveChangesAsync();
         }
     }
 }

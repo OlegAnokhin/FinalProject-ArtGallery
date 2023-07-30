@@ -41,7 +41,7 @@ else
                         <p></p>
                     </div>
                 </div>
-                <form class="mt-2" asp-controller="OrderAPicture" asp-action="Delete">
+                <form class="mt-2" asp-controller="OrderAPicture" asp-action="Delete" asp-route-id="@e.Id">
                     <div>
                         <input type="submit" value="Изтрий"
                                class="btn btn-secondary mb-2" onclick="return confirm('Наистина ли искате да изтриете тази поръчка ?')" />
