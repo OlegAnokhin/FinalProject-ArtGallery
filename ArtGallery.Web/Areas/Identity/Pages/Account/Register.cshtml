@@ -4,12 +4,12 @@
     ViewData["Title"] = "Регистрация";
 }
 
-<h1 class="text-center">@ViewData["Title"]</h1>
+<h1 id="title" class="text-center">@ViewData["Title"]</h1>
 
 <div class="row">
     <div class="col-md-4 offset-md-4">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2>Създай нов профил.</h2>
+            <h2 id="title" class="text-center">Създай нов профил.</h2>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating mb-2">
@@ -27,7 +27,7 @@
                 <label asp-for="Input.ConfirmPassword"></label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Регистрирай се</button>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-secondary">Регистрирай се</button>
         </form>
     </div>
 </div>

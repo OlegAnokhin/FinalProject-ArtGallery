@@ -37,9 +37,12 @@
                         <li class="nav-item">
                             <a id="button" class="nav-link" asp-area="" asp-controller="OrderAPicture" asp-action="Add">Поръчване на картина</a>
                         </li>
-                        <li class="nav-item">
-                            <a id="button" class="nav-link" asp-area="" asp-controller="OrderAPicture" asp-action="Mine">Моите поръчки</a>
-                        </li>
+                        @if (User.Identity?.IsAuthenticated ?? false)
+                        {
+                            <li class="nav-item">
+                                <a id="button" class="nav-link" asp-area="" asp-controller="OrderAPicture" asp-action="Mine">Моите поръчки</a>
+                            </li>
+                        }
                         @if (User.IsAdmin())
                         {
                             <li class="nav-item">

@@ -5,19 +5,19 @@
     <div class="card mb-3">
         <img class="card-img-top" src="@Model.ImageAddress" alt="Picture Image">
         <div class="card-body text-center">
-            <h4>@Model.Name</h4>
+            <h4 id="title">@Model.Name</h4>
 
             <a asp-controller="Picture" asp-action="Details" asp-route-id="@Model.Id"
-               class="btn btn-success">Детайли</a>
+               class="btn btn-secondary">Детайли</a>
 
             @if (this.User.IsAdmin())
             {
                 <a asp-controller="Picture" asp-action="Edit" asp-route-id="@Model.Id"
-                   class="btn btn-warning">Редактирай</a>
+                   class="btn btn-secondary">Редактирай</a>
                 <form class="mt-2" asp-controller="Picture" asp-action="Delete" asp-route-id="@Model.Id">
                     <div>
-                        <input type="submit" value="Изтрий" 
-                               class="btn btn-danger mb-2" onclick="return confirm('Наистина ли искате да изтриете картината')" />
+                        <input type="submit" value="Изтрий"
+                               class="btn btn-secondary mb-2" onclick="return confirm('Наистина ли искате да изтриете картината')" />
                     </div>
                 </form>
             }

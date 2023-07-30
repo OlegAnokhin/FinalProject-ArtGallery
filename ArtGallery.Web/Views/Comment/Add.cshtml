@@ -14,16 +14,16 @@
         </div>
         <div class="col-8">
             <p></p>
-            <label>Вашето име: </label>
+            <p>Вашето име: </p>
             <input asp-for="Username" class="form-control">
         </div>
         <p></p>
         <div class="col-8">
             <p></p>
-            <label>Съобщение: </label>
+            <p>Съобщение: </p>
             <textarea asp-for="Content" class="form-control" rows="5"></textarea>
             <p></p>
-            <input class="btn btn-primary mt-2 float-lg-right" type="submit" value="Изпрати" asp-route-id="@Model.PictureId" />
+            <input class="btn btn-secondary mt-2 float-lg-right" type="submit" value="Изпрати" asp-route-id="@Model.PictureId" />
         </div>
     </div>
 </form>

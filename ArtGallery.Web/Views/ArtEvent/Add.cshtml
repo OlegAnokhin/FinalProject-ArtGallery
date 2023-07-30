@@ -10,32 +10,32 @@
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form asp-action="Add" method="post">
             <div class="mb-3">
-                <label id="button" asp-for="Name" class="form-label">Име на обучението</label>
+                <label id="title" asp-for="Name" class="form-label">Име на обучението</label>
                 <input asp-for="Name" class="form-control" aria-required="true" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label id="button" asp-for="Start" class="form-label">Начало на обучението</label>
+                <label id="title" asp-for="Start" class="form-label">Начало на обучението</label>
                 <input asp-for="Start" class="form-control" aria-required="true" />
                 <span asp-validation-for="Start" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label id="button" asp-for="ImageAddress" class="form-label">Адреса на изображението</label>
+                <label id="title" asp-for="ImageAddress" class="form-label">Адреса на изображението</label>
                 <input asp-for="ImageAddress" class="form-control" aria-required="true" />
                 <span asp-validation-for="ImageAddress" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label id="button" asp-for="Place" class="form-label">Мястото на обучението</label>
+                <label id="title" asp-for="Place" class="form-label">Мястото на обучението</label>
                 <input asp-for="Place" class="form-control" aria-required="true" />
                 <span asp-validation-for="Place" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label id="button" asp-for="Description" class="form-label">Описание на обучението</label>
+                <label id="title" asp-for="Description" class="form-label">Описание на обучението</label>
                 <input asp-for="Description" class="form-control" aria-required="true" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="mb-3 text-center">
-                <input id="button" class="btn btn-light" type="submit" value="Запази" />
+                <input class="btn btn-secondary" type="submit" value="Запази" />
             </div>
         </form>
     </div>

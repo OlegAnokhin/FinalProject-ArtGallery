@@ -10,7 +10,7 @@
     <div class="row">
         <div class="form-group col-md-3 d-flex justify-content-between">
             <div class="form-group">
-                <label asp-for="Category">Категория</label>
+                <label id="title" asp-for="Category">Категория</label>
                 <select asp-for="Category" class="form-control">
                     <option value="">Всички</option>
                     @foreach (var category in Model.Categories)
@@ -21,7 +21,7 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="PicturesPerPage"></label>
+                <label id="title" asp-for="PicturesPerPage"></label>
                 <select asp-for="PicturesPerPage" class="form-control">
                     <option value="3">3</option>
                     <option value="6">6</option>
@@ -31,13 +31,13 @@
         </div>
 
         <div class="form-group col-md-3">
-            <label asp-for="SearchString"></label>
+            <label id="title" asp-for="SearchString"></label>
             <input asp-for="SearchString" class="form-control" placeholder="...">
         </div>
 
         <div class="form-group col-md-3">
             <div class="form-group">
-                <label asp-for="PictureSorting"></label>
+                <label id="title" asp-for="PictureSorting"></label>
                 <select asp-for="PictureSorting" class="form-control">
                     <option value="0">Най-нови</option>
                     <option value="1">Най-стари </option>
@@ -47,7 +47,7 @@
 
         <div class="col-md-3">
             <div class="form-group mt-4 p-2">
-                <input type="submit" value="Search" class="btn btn-primary" />
+                <input type="submit" value="Search" class="btn btn-secondary" />
             </div>
         </div>
     </div>
@@ -67,7 +67,7 @@
 
 <div class="row mb-5">
     <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-start">
-        <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
+        <a class="btn btn-secondary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
            asp-controller="Picture"
            asp-action="All"
            asp-route-currentPage="@previousPage"
@@ -82,7 +82,7 @@
     }
 
     <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-end">
-        <a class="btn btn-primary
+        <a class="btn btn-secondary
            @(shouldNextPageBeDisabled ? "disabled" : string.Empty)"
            asp-controller="Picture"
            asp-action="All"

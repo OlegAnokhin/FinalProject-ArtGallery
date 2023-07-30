@@ -26,9 +26,9 @@
             <p></p>
         </div>
         <p></p>
-        <div class="card col-10 border-2" style="width: 100%;">
+        <div class="card col-10 border-2" style="width: 100%; color: aliceblue">
             <div class="card-body">
-                <h5 class="card-title">Коментари</h5>
+                <h5 id="title" class="card-title">Коментари</h5>
                 <p></p>
                 @if (Model.Comments.Any())
                 {
@@ -45,7 +45,7 @@
                                             <form class="mt-2" asp-controller="Comment" asp-action="Delete" asp-route-id="@comment.Id">
                                                 <div>
                                                     <input type="submit" value="Изтрий"
-                                                           class="btn btn-danger m-2" onclick="return confirm('Наистина ли искате да изтриете този коментар ?')" />
+                                                           class="btn btn-secondary m-2" onclick="return confirm('Наистина ли искате да изтриете този коментар ?')" />
                                                 </div>
                                             </form>
                                             }
@@ -66,7 +66,7 @@
                         <p>Брой коментари : @Model.Comments.Count()</p>
                     }
                     <a asp-controller="Comment" asp-action="Add" asp-route-id="@Model.Id"
-                       class="btn btn-success">Остави коментар</a>
+                       class="btn btn-secondary">Остави коментар</a>
                 }
                 else
                 {

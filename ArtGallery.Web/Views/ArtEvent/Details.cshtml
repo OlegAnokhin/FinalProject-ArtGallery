@@ -49,7 +49,7 @@
                     <form class="mt-2" asp-controller="ArtEvent" asp-action="Delete" asp-route-id="@Model.Id">
                         <div>
                             <input type="submit" value="Изтрий"
-                                   class="btn btn-danger m-2" onclick="return confirm('Наистина ли искате да изтриете това обучение ?')" />
+                                   class="btn btn-secondary m-2" onclick="return confirm('Наистина ли искате да изтриете това обучение ?')" />
                         </div>
                     </form>
                 }
@@ -58,12 +58,12 @@
                     <div class="d-inline-flex mt-2">
                         <form asp-controller="ArtEvent" asp-action="Join" asp-route-id="@Model.Id">
                             <div>
-                                <input type="submit" value="Запиши се" class="btn btn-success border-2" style="margin-right: 0.5rem" onclick=" return confirm('Успешно се записахте за това обучение !')" />
+                                <input type="submit" value="Запиши се" class="btn btn-secondary border-2" style="margin-right: 0.5rem" onclick=" return confirm('Успешно се записахте за това обучение !')" />
                             </div>
                         </form>
                         <form asp-controller="ArtEvent" asp-action="Leave" asp-route-id="@Model.Id">
                             <div>
-                                <input type="submit" value="Отпиши се" class="btn btn-success border-2" style="margin-right: 0.5rem" onclick=" return confirm('Желаете да се отпишете от това обучение ?')" />
+                                <input type="submit" value="Отпиши се" class="btn btn-secondary border-2" style="margin-right: 0.5rem" onclick=" return confirm('Желаете да се отпишете от това обучение ?')" />
                             </div>
                         </form>
                     </div>

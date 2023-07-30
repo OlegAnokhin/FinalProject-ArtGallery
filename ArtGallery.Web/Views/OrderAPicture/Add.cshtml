@@ -14,43 +14,43 @@
             <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
 
                 <div class="mb-3">
-                    <label asp-for="Fullname" class="form-label">Вашето име и фамилия</label>
+                    <label id="title" asp-for="Fullname" class="form-label">Име и фамилия</label>
                     <input asp-for="Fullname" class="form-control" aria-required="true" />
                     <span asp-validation-for="Fullname" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="PhoneNumber" class="form-label">Телефонен номер</label>
+                    <label id="title" asp-for="PhoneNumber" class="form-label">Телефонен номер</label>
                     <input asp-for="PhoneNumber" class="form-control" aria-required="true" />
                     <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="Size" class="form-label">Размер на картината</label>
+                    <label id="title" asp-for="Size" class="form-label">Размер на картината</label>
                     <input asp-for="Size" class="form-control" aria-required="true" />
                     <span asp-validation-for="Size" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="Material" class="form-label">Материал</label>
+                    <label id="title" asp-for="Material" class="form-label">Материал/боя</label>
                     <input asp-for="Material" class="form-control" aria-required="true" />
                     <span asp-validation-for="Material" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="ImageBase" class="form-label">Основата на картината</label>
+                    <label id="title" asp-for="ImageBase" class="form-label">Основата на картината</label>
                     <input asp-for="ImageBase" class="form-control" aria-required="true" />
                     <span asp-validation-for="ImageBase" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="Description" class="form-label">Описание на картината</label>
+                    <label id="title" asp-for="Description" class="form-label">Описание на картината</label>
                     <input asp-for="Description" class="form-control" aria-required="true" />
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <div>
+                    <div id="title">
                         @Html.LabelFor(m => m.Image)
                         @Html.TextBoxFor(m => m.Image, new { type = "file" })
                     </div>
                 </div>
                 <div class="mb-3 text-center">
-                    <input class="btn btn-primary" type="submit" value="Запази" />
+                    <input class="btn btn-secondary" type="submit" value="Запази" />
                 </div>
             </div>
         </div>

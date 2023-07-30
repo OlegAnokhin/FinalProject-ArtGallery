@@ -10,37 +10,37 @@
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form asp-action="Add" method="post">
             <div class="mb-3">
-                <label asp-for="Name" class="form-label">Име на изложбата</label>
+                <label id="title" asp-for="Name" class="form-label">Име на изложбата</label>
                 <input asp-for="Name" class="form-control" aria-required="true" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Start" class="form-label">Начало на изложбата</label>
+                <label id="title" asp-for="Start" class="form-label">Начало на изложбата</label>
                 <input asp-for="Start" class="form-control" aria-required="true" />
                 <span asp-validation-for="Start" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="End" class="form-label">Края на изложбата</label>
+                <label id="title" asp-for="End" class="form-label">Края на изложбата</label>
                 <input asp-for="End" class="form-control" aria-required="true" />
                 <span asp-validation-for="End" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="ImageUrl" class="form-label">Адреса на изображинието</label>
+                <label id="title" asp-for="ImageUrl" class="form-label">Адреса на изображението</label>
                 <input asp-for="ImageUrl" class="form-control" aria-required="true" />
                 <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Place" class="form-label">Мястото на изложбата</label>
+                <label id="title" asp-for="Place" class="form-label">Мястото на изложбата</label>
                 <input asp-for="Place" class="form-control" aria-required="true" />
                 <span asp-validation-for="Place" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Description" class="form-label">Описание на изложбата</label>
+                <label id="title" asp-for="Description" class="form-label">Описание на изложбата</label>
                 <input asp-for="Description" class="form-control" aria-required="true" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="mb-3 text-center">
-                <input class="btn btn-primary" type="submit" value="Запази" />
+                <input class="btn btn-secondary" type="submit" value="Запази" />
             </div>
         </form>
     </div>

@@ -32,3 +32,11 @@ body {
 .form-control {
     background-color: dimgray
 }
+
+.card {
+    background-color: black
+}
+
+p {
+    color: #805500
+}

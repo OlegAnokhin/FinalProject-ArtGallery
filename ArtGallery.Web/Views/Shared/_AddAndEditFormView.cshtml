@@ -4,32 +4,32 @@
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form asp-action="Add" method="post">
             <div class="mb-3">
-                <label asp-for="Name" class="form-label">Име</label>
+                <label id="title" asp-for="Name" class="form-label">Име</label>
                 <input asp-for="Name" class="form-control" aria-required="true" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Size" class="form-label">Размер</label>
+                <label id="title" asp-for="Size" class="form-label">Размер</label>
                 <input asp-for="Size" class="form-control" aria-required="true" />
                 <span asp-validation-for="Size" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Material" class="form-label">Материал</label>
+                <label id="title" asp-for="Material" class="form-label">Материал</label>
                 <input asp-for="Material" class="form-control" aria-required="true" />
                 <span asp-validation-for="Material" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="ImageAddress" class="form-label">Адресът на картината</label>
+                <label id="title" asp-for="ImageAddress" class="form-label">Адресът на картината</label>
                 <input asp-for="ImageAddress" class="form-control" aria-required="true" />
                 <span asp-validation-for="ImageAddress" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="ImageBase" class="form-label">Основата на картината</label>
+                <label id="title" asp-for="ImageBase" class="form-label">Основата на картината</label>
                 <input asp-for="ImageBase" class="form-control" aria-required="true" />
                 <span asp-validation-for="ImageBase" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="CategoryId" class="form-label">Категория</label>
+                <label id="title" asp-for="CategoryId" class="form-label">Категория</label>
                 <select asp-for="CategoryId" class="form-control">
                     @foreach (var category in Model.Categories)
                     {
@@ -39,12 +39,12 @@
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Description" class="form-label">Описание</label>
+                <label id="title" asp-for="Description" class="form-label">Описание</label>
                 <input asp-for="Description" class="form-control" aria-required="true" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="mb-3 text-center">
-                <input class="btn btn-primary" type="submit" value="Запази" />
+                <input class="btn btn-secondary" type="submit" value="Запази" />
             </div>
         </form>
     </div>
