@@ -1,4 +1,6 @@
 # ArtGallery
+![2023-07-30](https://github.com/OlegAnokhin/FinalProject-ArtGallery/assets/102062768/50f9b4bc-6b4d-482e-a7eb-a5a1146e7094)
+
 За направата на проекта съм ползвал **ASP.NET MVC**, **Entity framework core**,**Bootstrap**, **Razor**, **HTML**, **CSS**, **Microsoft SQL Server**.
 
 # За проекта:
