@@ -1,11 +1,10 @@
 ﻿namespace ArtGallery.Web.Controllers
 {
-    using ArtGallery.Services.Data;
-    using ArtGallery.Web.Infrastucture.Extensions;
+    using System.Security.Claims;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Infrastucture.Extensions;
     using Services.Data.Interfaces;
-    using System.Security.Claims;
     using ViewModels.Comment;
 
     [Authorize]
