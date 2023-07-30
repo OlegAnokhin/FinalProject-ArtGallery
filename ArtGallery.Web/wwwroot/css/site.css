@@ -17,14 +17,30 @@ header {
     background-color: black
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: black
+}
+
+footer {
+    padding: 20px;
+    text-align: center;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
 #button {
     color: #805500
 }
 
-body {
-  margin-bottom: 30px;
-    background-color: black
-}
 #title {
     color: #805500
 }
