@@ -34,7 +34,7 @@
         {
             OrderAPicture order = new OrderAPicture
             {
-                Fullname = model.Fullname,
+                FullName = model.FullName,
                 PhoneNumber = model.PhoneNumber,
                 Size = model.Size,
                 Material = model.Material,
@@ -65,7 +65,7 @@
                 .Select(o => new MyOrdersViewModel
                 {
                     Id = o.Id,
-                    Fullname = o.Fullname,
+                    FullName = o.FullName,
                     PhoneNumber = o.PhoneNumber,
                     Size = o.Size,
                     Material = o.Material,

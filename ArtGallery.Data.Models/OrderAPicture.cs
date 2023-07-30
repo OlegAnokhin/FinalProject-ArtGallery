@@ -1,5 +1,6 @@
 ﻿namespace ArtGallery.Data.Models
 {
+    using Microsoft.AspNetCore.Identity;
     using System.ComponentModel.DataAnnotations;
     using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,11 @@
         [Comment("Идентификатор")]
         public int Id { get; set; }
 
+        [Comment("Идентификатор на потребителя")]
+        public string UserId { get; set; }
+
+        public IdentityUser User { get; set; }
+
         /// <summary>
         /// Име на заявка
         /// </summary>
@@ -31,7 +37,7 @@
         [Comment("Вашите имена")]
         [Required]
         [MaxLength(FullnameMaxLength)]
-        public string Fullname { get; set; } = null!;
+        public string FullName { get; set; } = null!;
 
         /// <summary>
         /// Вашият телефонен номер

@@ -3,7 +3,6 @@
     using System.ComponentModel.DataAnnotations;
     using Microsoft.AspNetCore.Http;
 
-    using Common;
     using static Common.EntityValidationConstants.OrderAPicture;
 
     public class OrderAPictureFormModel
@@ -14,7 +13,7 @@
         [Display(Name = "Вашите имена")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Полето '{0}' е задължително")]
         [StringLength(FullnameMaxLength, MinimumLength = FullnameMinLength, ErrorMessage = "Полето '{0}' трябва да е между {2} и {1} символа")]
-        public string Fullname { get; set; } = null!;
+        public string FullName { get; set; } = null!;
 
         /// <summary>
         /// Вашият телефонен номер

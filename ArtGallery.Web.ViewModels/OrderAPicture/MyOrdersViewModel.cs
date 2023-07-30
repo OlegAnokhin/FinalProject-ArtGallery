@@ -1,6 +1,5 @@
 ﻿namespace ArtGallery.Web.ViewModels.OrderAPicture
 {
-    using Microsoft.AspNetCore.Http;
     using System.ComponentModel.DataAnnotations;
 
     public class MyOrdersViewModel
@@ -14,7 +13,7 @@
         /// Вашите имена
         /// </summary>
         [Display(Name = "Вашите имена")]
-        public string Fullname { get; set; } = null!;
+        public string FullName { get; set; } = null!;
 
         /// <summary>
         /// Вашият телефонен номер
