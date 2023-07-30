@@ -58,7 +58,6 @@ else
     public static string GetImageSrc(byte[] imageData)
     {
         string base64 = Convert.ToBase64String(imageData);
-        // Променете mimeType според типа на картинката, ако е различен
         string mimeType = "image/png";
 
         return $"data:{mimeType};base64,{base64}";

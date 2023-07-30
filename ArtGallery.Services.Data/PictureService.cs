@@ -7,6 +7,7 @@
     using ArtGallery.Data;
     using ArtGallery.Data.Models;
     using Web.ViewModels.Home;
+    using Web.ViewModels.Comment;
     using Web.ViewModels.Picture;
     using Web.ViewModels.Picture.Enums;
 
@@ -42,8 +43,8 @@
                 .Select(p => new IndexViewModel()
                 {
                     Id = p.Id,
-                    Title = p.Name,
-                    ImageUrl = p.ImageAddress
+                    PictureTitle = p.Name,
+                    PictureImageUrl = p.ImageAddress
                 })
                 .ToArrayAsync();
 
@@ -179,6 +180,17 @@
                 .Include(pc => pc.PictureComments)
                 .FirstAsync(p => p.Id == pictureId);
 
+            var comments = await this.dbContext
+                .Comments
+                .Where(p => p.PictureId == pictureId)
+                .Select(c => new CommentViewModel()
+                {
+                    CommentId = c.CommentId,
+                    PictureId = pictureId,
+                    Username = c.Username,
+                    Content = c.Content
+                }).ToArrayAsync();
+
             return new DetailsPictureViewModel()
             {
                 Id = picture.Id,
@@ -189,7 +201,8 @@
                 ImageBase = picture.ImageBase,
                 Category = picture.Category.Name,
                 Description = picture.Description,
-                Date = picture.CreatedOn
+                Date = picture.CreatedOn,
+                Comments = comments
             };
         }
 

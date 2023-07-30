@@ -1,4 +1,6 @@
-﻿namespace ArtGallery.Services.Data
+﻿using ArtGallery.Web.ViewModels.Home;
+
+namespace ArtGallery.Services.Data
 {
     using Microsoft.EntityFrameworkCore;
     using ArtGallery.Data;
@@ -192,5 +194,20 @@
 
             return count;
         }
+
+        //public async Task<IndexViewModel> LastArtEventAsync()
+        //{
+        //    var lastArtEvent = await this.dbContext
+        //        .ArtEvents
+        //        .OrderByDescending(e => e.Start)
+        //        .Select(e => new IndexViewModel()
+        //        {
+        //            ArtEventTitle = e.Name,
+        //            ArtEventImageUrl = e.ImageAddress
+        //        })
+        //        .FirstAsync();
+
+        //    return lastArtEvent;
+        //}
     }
 }

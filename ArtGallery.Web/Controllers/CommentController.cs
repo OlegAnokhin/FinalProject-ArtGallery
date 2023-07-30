@@ -74,13 +74,13 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete([FromRoute] int id)
+        public async Task<IActionResult> Delete([FromRoute] int CommentId)
         {
             if (!User.IsAdmin())
             {
                 return this.RedirectToAction("Error", "Home", StatusCode(401));
             }
-            bool commentExist = await commentService.ExistsByIdAsync(id);
+            bool commentExist = await commentService.ExistsByIdAsync(CommentId);
 
             if (!commentExist)
             {
@@ -90,7 +90,7 @@
 
             try
             {
-                await this.commentService.DeleteCommentAsync(id);
+                await this.commentService.DeleteCommentAsync(CommentId);
                 return this.RedirectToAction("All", "Picture");
             }
             catch (Exception e)

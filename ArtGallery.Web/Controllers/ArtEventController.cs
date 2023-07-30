@@ -1,14 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-
-namespace ArtGallery.Web.Controllers
+﻿namespace ArtGallery.Web.Controllers
 {
 
-    using Microsoft.AspNetCore.Mvc;
+    using Infrastucture.Extensions;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using Services.Data.Interfaces;
     using System.Security.Claims;
     using ViewModels.ArtEvent;
-    using Services.Data.Interfaces;
-    using Infrastucture.Extensions;
 
     [Authorize]
     public class ArtEventController : Controller

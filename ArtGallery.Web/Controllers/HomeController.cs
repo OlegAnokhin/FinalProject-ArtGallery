@@ -7,19 +7,26 @@
     public class HomeController : Controller
     {
         private readonly IPictureService pictureService;
-        private readonly IConfiguration _configuration;
+        private readonly IArtEventService artEventService;
+        private readonly IConfiguration configuration;
 
-        public HomeController(IPictureService pictureService, IConfiguration configuration)
+        public HomeController(
+            IPictureService pictureService,
+            IArtEventService artEventService,
+            IConfiguration configuration)
         {
             this.pictureService = pictureService;
-            _configuration = configuration;
+            this.artEventService = artEventService;
+            this.configuration = configuration;
         }
 
         public async Task<IActionResult> Index()
         {
-            int.TryParse(_configuration["Settings:PictureCount"], out int pictureCount);
+            int.TryParse(configuration["Settings:PictureCount"], out int pictureCount);
             IEnumerable<IndexViewModel> viewModel = 
                 await this.pictureService.LastPicturesAsync(pictureCount);
+
+          // viewModel = this.artEventService.LastArtEventAsync();
 
             return View(viewModel);
         }

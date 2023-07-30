@@ -1,5 +1,6 @@
 ﻿namespace ArtGallery.Services.Data.Interfaces
 {
+    using Web.ViewModels.Home;
     using Web.ViewModels.ArtEvent;
 
     /// <summary>
@@ -72,5 +73,11 @@
         Task LeaveFromArtEventAsync(string userId, AllArtEventViewModel model);
 
         Task<int> GetCountOfParticipantAsync(int eventId);
+
+        ///// <summary>
+        ///// Зарежда последно обучение
+        ///// </summary>
+        ///// <returns></returns>
+        //Task<IndexViewModel> LastArtEventAsync();
     }
 }

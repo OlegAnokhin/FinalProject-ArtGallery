@@ -8,13 +8,25 @@
         public int  Id { get; set; }
 
         /// <summary>
-        /// Име на картината
+        /// Заглавие на картината
         /// </summary>
-        public string Title { get; set; } = null!;
+        public string PictureTitle { get; set; } = null!;
 
         /// <summary>
-        /// Адреса на изображение
+        /// Адреса на изображение на картината
         /// </summary>
-        public string ImageUrl { get; set; } = null!;
+        public string PictureImageUrl { get; set; } = null!;
+        
+        ///// <summary>
+        ///// Заглавие на АртЕвент
+        ///// </summary>
+        //public string ArtEventTitle { get; set; } = null!;
+
+        ///// <summary>
+        ///// Адреса на изображение на АртЕвента
+        ///// </summary>
+        //public string ArtEventImageUrl { get; set; } = null!;
+
+
     }
 }
