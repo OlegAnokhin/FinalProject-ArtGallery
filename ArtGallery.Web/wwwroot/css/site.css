@@ -37,6 +37,11 @@ footer {
     right: 0;
 }
 
+.carousel {
+    width: 45%;
+    height: auto;
+}
+
 #button {
     color: #805500
 }
