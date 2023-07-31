@@ -27,3 +27,28 @@
 
 # Диаграма на базата
 ![DBArtGalleryDiagram](https://github.com/OlegAnokhin/MVC-ArtGallery/assets/102062768/33d51b51-cd92-444b-a6cc-8574e1e07fa2)
+
+# ArtGallery
+To make the project I used **ASP.NET MVC**, **Entity framework core**,**Bootstrap**, **Razor**, **HTML**, **CSS**, **Microsoft SQL Server**.
+
+# About the project:
+The project is an artist`s personal site, an online gallery type.
+There are 3 types of users: admin, user and unregistered user - guest.
+* The admin has all the the rights to add and delete paintings, exhibitions, trainings and comments.
+* The user has the right to view everything, can comment on the paintings and delete the comments, sign up for upcoming trainings and unsubscibe from them, order a painting based on his photo or description.
+* The guest is only allowed to browse.
+
+# Functions written:
+* Search by picture name.
+* Sort by set quantity.
+* Sort by newest and oldest.
+* Previous and next page.
+* Database recording of all kinds of types and variables.
+* Converting and saving an image on request.
+* Carousel of recently added pictures.
+* Adding links to other sites.
+
+# For the launch:
+* The project has sample data added in all categories and users, that will be loaded when the migration is applied.
+* Admin: admin@ArtGallery.bg and password: admin123
+* Username: guest@ArtGallery.bg and password: guest123 
