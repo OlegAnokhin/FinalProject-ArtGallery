@@ -7,14 +7,14 @@
         <div class="card-body text-center">
             <h4 id="title">@Model.Name</h4>
 
-            <a asp-controller="Picture" asp-action="Details" asp-route-id="@Model.Id"
+            <a asp-area="" asp-controller="Picture" asp-action="Details" asp-route-id="@Model.Id"
                class="btn btn-secondary">Детайли</a>
 
             @if (this.User.IsAdmin())
             {
-                <a asp-controller="Picture" asp-action="Edit" asp-route-id="@Model.Id"
+                <a asp-area="" asp-controller="Picture" asp-action="Edit" asp-route-id="@Model.Id"
                    class="btn btn-secondary">Редактирай</a>
-                <form class="mt-2" asp-controller="Picture" asp-action="Delete" asp-route-id="@Model.Id">
+                <form class="mt-2" asp-area="" asp-controller="Picture" asp-action="Delete" asp-route-id="@Model.Id">
                     <div>
                         <input type="submit" value="Изтрий"
                                class="btn btn-secondary mb-2" onclick="return confirm('Наистина ли искате да изтриете картината')" />

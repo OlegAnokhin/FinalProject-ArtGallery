@@ -1,7 +1,15 @@
 ﻿@{
-    ViewData["Title"] = "Добре дошъл в панелa за администратори.";
+    ViewData["Title"] = "Добре дошъл в панел за администратор.";
 }
 
 <h2 id="title" class="text-center">@ViewData["Title"]</h2>
 <hr />
 
+<div id="title" class="mt-4 p-5 text-center">
+    <a asp-area="Admin" asp-controller="User" asp-action="All"
+       class="btn btn-secondary btn-lg m-2">Всички потребители</a>
+    <a asp-area="Admin" asp-controller="Order" asp-action="All"
+       class="btn btn-secondary btn-lg m-2">Всички заявки</a>
+    <a asp-area="Admin" asp-controller="Comment" asp-action="All"
+       class="btn btn-secondary btn-lg m-2">Всички коментари</a>
+</div>
