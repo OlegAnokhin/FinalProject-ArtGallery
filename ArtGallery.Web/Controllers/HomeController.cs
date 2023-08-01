@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Mvc;
     using ViewModels.Home;
     using Services.Data.Interfaces;
+    using static Common.GeneralAppConstants;
 
     public class HomeController : Controller
     {
@@ -22,6 +23,11 @@
 
         public async Task<IActionResult> Index()
         {
+            if (this.User.IsInRole(AdminRoleName))
+            {
+                return this.RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+
             int.TryParse(configuration["Settings:PictureCount"], out int pictureCount);
             IEnumerable<IndexViewModel> viewModel = 
                 await this.pictureService.LastPicturesAsync(pictureCount);

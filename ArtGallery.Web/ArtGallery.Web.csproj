@@ -29,4 +29,8 @@
     <ProjectReference Include="..\ArtGallery.Web.ViewModels\ArtGallery.Web.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admin\ViewModels\" />
+  </ItemGroup>
+
 </Project>
