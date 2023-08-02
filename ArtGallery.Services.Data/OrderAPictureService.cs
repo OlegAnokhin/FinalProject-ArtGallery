@@ -26,6 +26,26 @@
         }
 
         /// <summary>
+        /// Взимане на всички поръчки
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IEnumerable<MyOrdersViewModel>> AllAsync()
+        {
+            return await this.dbContext.OrdersAPictures
+                .Select(o => new MyOrdersViewModel
+                {
+                    Id = o.Id,
+                    FullName = o.FullName,
+                    PhoneNumber = o.PhoneNumber,
+                    Size = o.Size,
+                    Material = o.Material,
+                    ImageBase = o.ImageBase,
+                    Image = o.ImageData,
+                    Description = o.Description
+                }).ToListAsync();
+        }
+
+        /// <summary>
         /// Добавяне на картина
         /// </summary>
         /// <param name="model">Данни за картина</param>

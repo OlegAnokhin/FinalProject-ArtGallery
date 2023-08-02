@@ -1,0 +1,65 @@
+﻿@model IEnumerable<MyOrdersViewModel>
+
+@{
+    ViewData["Title"] = "Всички поръчки";
+}
+
+<h2 id="title" class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+@if (!Model.Any())
+{
+    <h2 id="title" class="text-center">Нямате поръчки!</h2>
+}
+
+else
+{
+    <div class="row">
+        @foreach (var e in Model)
+        {
+            <div class="container mb-3" style="display: inline">
+                <div class="row">
+                    <div class="col-20">
+                        @if (e.Image != null)
+                        {
+                            <img class="card-img-top" style="width: 50%; height: auto;"
+                                 src="@GetImageSrc(e.Image)" alt="My Image" />
+                        }
+                        else
+                        {
+                            <p>Изображението не намерено.</p>
+                        }
+                    </div>
+                    <p></p>
+                    <div class="card col-6 border-0">
+                        <p class="h5">Име и фамилия: <b>@e.FullName</b></p>
+                        <p class="h5">Телефон: <b>@e.PhoneNumber</b></p>
+                        <p class="h5">Основа: <b>@e.ImageBase</b></p>
+                        <p class="h5">Техника: <b>@e.Material</b></p>
+                        <p class="h5">Размер: <b>@e.Size</b></p>
+                        <p class="h5">Описание: <b>@e.Description</b></p>
+                        <p></p>
+                    </div>
+                </div>
+                <form class="mt-2" asp-controller="OrderAPicture" asp-action="Delete" asp-route-id="@e.Id">
+                    <div>
+                        <input type="submit" value="Изтрий"
+                               class="btn btn-secondary mb-2" onclick="return confirm('Наистина ли искате да изтриете тази поръчка ?')" />
+                    </div>
+                </form>
+            </div>
+            <p></p>
+        }
+    </div>
+}
+
+@functions {
+    // Външна функция, която ще генерира data URI от byte[]
+    public static string GetImageSrc(byte[] imageData)
+    {
+        string base64 = Convert.ToBase64String(imageData);
+        string mimeType = "image/png";
+
+        return $"data:{mimeType};base64,{base64}";
+    }
+}

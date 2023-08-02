@@ -2,23 +2,21 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Services.Data.Interfaces;
-    using ViewModels.User;
 
-    public class UserController : BaseAdminController
+    public class OrderController : BaseAdminController
     {
-        private readonly IUserService userService;
+        private readonly IOrderAPictureService orderService;
 
-        public UserController(IUserService userService)
+        public OrderController(IOrderAPictureService orderService)
         {
-            this.userService = userService;
+            this.orderService = orderService;
         }
 
         public async Task<IActionResult> All()
         {
             try
             {
-                IEnumerable<UserViewModel> model = await this.userService.AllAsync(); 
-
+                var model = await orderService.AllAsync();
                 return View(model);
             }
             catch (Exception e)

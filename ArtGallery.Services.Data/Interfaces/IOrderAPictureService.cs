@@ -5,6 +5,12 @@
     public interface IOrderAPictureService
     {
         /// <summary>
+        /// Взимане на всички поръчки
+        /// </summary>
+        /// <returns></returns>
+        Task<IEnumerable<MyOrdersViewModel>> AllAsync();
+
+        /// <summary>
         /// Добавяне на картина
         /// </summary>
         /// <param name="model">Данни за картина</param>
