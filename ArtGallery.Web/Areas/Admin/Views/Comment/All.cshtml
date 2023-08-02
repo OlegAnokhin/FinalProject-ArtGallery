@@ -1,0 +1,41 @@
+﻿@model IEnumerable<CommentViewModel>
+
+@{
+    ViewData["Title"] = "Всички коментари" ;
+}
+
+<h2 id="title" class="text-center">@ViewBag.Title</h2>
+<hr />
+
+@if (!Model.Any())
+{
+    <h2 id="title" class="text-center">Няма оставени коментари!</h2>
+}
+
+else
+{
+    <div class="row">
+        @foreach (var e in Model)
+        {
+            <div class="container" style="display:inline">
+                <div class="row">
+                    
+                    <div class="card col-6 border-0">
+                        <p class="h5">Идентификатор на картината: <b>@e.PictureId</b></p>
+                        <p></p>
+                        <p class="h5">Идентификатор на коментара: <b>@e.CommentId</b></p>
+                        <p></p>
+                        <p class="h5">Име на потребителя: <b>@e.Username</b></p>
+                        <p></p>
+                        <p class="h5">Коментар: <b>@e.Content</b></p>
+                        <p></p>
+                    </div>
+                    <p></p>
+                    <a asp-controller="Comment" asp-action="Delete" asp-route-id="@e.CommentId" class="btn btn-secondary col-1 p-2 fw-bold">Изтрий</a>
+                </div>
+            </div>
+            <p></p>
+            <hr />
+        }
+    </div>
+}

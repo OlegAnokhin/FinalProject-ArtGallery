@@ -25,9 +25,27 @@
         {
             this.dbContext = dbContext;
         }
+
         /// <summary>
         /// Взимане на всички коментари
         /// </summary>
+        /// <returns></returns>
+        public async Task<IEnumerable<CommentViewModel>> AllCommentsWithAdminAsync()
+        {
+            return await this.dbContext.Comments
+                .Select(c => new CommentViewModel()
+                {
+                    CommentId = c.CommentId,
+                    PictureId = c.PictureId,
+                    Username = c.Username,
+                    Content = c.Content
+                }).ToArrayAsync();
+        }
+
+        /// <summary>
+        /// Взимане на всички коментари
+        /// </summary>
+        /// <param name="pictureId">Идентификатор на картината</param>
         /// <returns></returns>
         public async Task<IEnumerable<CommentViewModel>> AllCommentsAsync(int pictureId)
         {

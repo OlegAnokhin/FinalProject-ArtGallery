@@ -3,23 +3,23 @@
     using Microsoft.AspNetCore.Mvc;
     using Services.Data.Interfaces;
 
-    public class OrderController : BaseAdminController
+    public class CommentController : BaseAdminController
     {
-        private readonly IOrderAPictureService orderService;
+        private readonly ICommentService commentService;
 
-        public OrderController(IOrderAPictureService orderService)
+        public CommentController(ICommentService commentService)
         {
-            this.orderService = orderService;
+            this.commentService = commentService;
         }
 
         public async Task<IActionResult> All()
         {
             try
             {
-                var model = await orderService.AllAsync();
+                var model = await commentService.AllCommentsWithAdminAsync();
                 return View(model);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 ViewBag.ErrorMessage = "Възникна непредвидена грешка";
                 return RedirectToAction("Index", "Home");

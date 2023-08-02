@@ -6,7 +6,6 @@
 
     public class CommentViewModel
     {
-        [Key] 
         public int CommentId { get; set; }
 
         public int PictureId { get; set; }

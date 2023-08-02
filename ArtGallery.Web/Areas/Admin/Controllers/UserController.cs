@@ -21,7 +21,7 @@
 
                 return View(model);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 ViewBag.ErrorMessage = "Възникна непредвидена грешка";
                 return RedirectToAction("Index", "Home");

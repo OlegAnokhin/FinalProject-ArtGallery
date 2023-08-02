@@ -7,6 +7,13 @@
         /// <summary>
         /// Взимане всички на коментарите
         /// </summary>
+        /// <returns></returns>
+        Task<IEnumerable<CommentViewModel>> AllCommentsWithAdminAsync();
+
+
+        /// <summary>
+        /// Взимане всички на коментарите
+        /// </summary>
         /// <param name="id">Идентификатор на картината</param>
         /// <returns></returns>
         Task<IEnumerable<CommentViewModel>> AllCommentsAsync(int id);
