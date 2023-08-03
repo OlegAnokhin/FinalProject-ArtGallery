@@ -1,23 +1,37 @@
 ﻿namespace ArtGallery.Web.Areas.Admin.Controllers
 {
+    using Microsoft.Extensions.Caching.Memory;
     using Microsoft.AspNetCore.Mvc;
     using Services.Data.Interfaces;
     using Infrastucture.Extensions;
+    using ViewModels.Comment;
+    using static Common.GeneralAppConstants;
 
     public class CommentController : BaseAdminController
     {
         private readonly ICommentService commentService;
+        private readonly IMemoryCache memoryCache;
 
-        public CommentController(ICommentService commentService)
+        public CommentController(ICommentService commentService, IMemoryCache memoryCache)
         {
             this.commentService = commentService;
+            this.memoryCache = memoryCache;
         }
 
+        [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Client, NoStore = false)]
         public async Task<IActionResult> All()
         {
             try
             {
-                var model = await commentService.AllCommentsWithAdminAsync();
+                var model = this.memoryCache.Get<IEnumerable<CommentViewModel>>(CommentCasheKey);
+
+                if (model == null)
+                {
+                    model = await commentService.AllCommentsWithAdminAsync();
+                    var casheOptions = new MemoryCacheEntryOptions()
+                        .SetAbsoluteExpiration(TimeSpan.FromMinutes(10));
+                    this.memoryCache.Set(CommentCasheKey, model, casheOptions);
+                }
                 return View(model);
             }
             catch (Exception e)
