@@ -17,7 +17,7 @@
             this.memoryCache = memoryCache;
         }
 
-        [ResponseCache(Duration = 120)]
+        [ResponseCache(Duration = 120, Location = ResponseCacheLocation.Client, NoStore = false)]
         public async Task<IActionResult> All()
         {
             try
