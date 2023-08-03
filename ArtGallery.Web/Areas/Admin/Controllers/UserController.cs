@@ -18,6 +18,7 @@
             this.memoryCache = memoryCache;
         }
 
+        [ResponseCache(Duration = 30)]
         public async Task<IActionResult> All()
         {
             try
