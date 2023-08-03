@@ -51,7 +51,7 @@
 
             if (!commentExist)
             {
-                return this.RedirectToAction("Index", "Home");
+                return this.RedirectToAction("All", "Comment");
             }
 
             try
