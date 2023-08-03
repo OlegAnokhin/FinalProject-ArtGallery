@@ -11,5 +11,8 @@
         public const string AdminRoleName = "Administrator";
         public const string DevelopmentAdminEmail = "admin@ArtGallery.bg";
 
+        public const string UsersCasheKey = "UserCashe";
+        public const string CommentCasheKey = "CommentCashe";
+        public const string OrderCasheKey = "OrderCashe";
     }
 }

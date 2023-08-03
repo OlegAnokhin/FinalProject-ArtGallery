@@ -41,6 +41,8 @@ namespace ArtGallery.Web
 
             builder.Services.AddApplicationServices(typeof(IPictureService));
 
+            builder.Services.AddMemoryCache();
+
             builder.Services.AddControllersWithViews();
 
             WebApplication app = builder.Build();
