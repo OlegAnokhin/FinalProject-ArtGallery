@@ -1,24 +1,28 @@
-﻿using ArtGallery.Web.Infrastucture.Extensions;
-
-namespace ArtGallery.Web.Controllers
+﻿namespace ArtGallery.Web.Controllers
 {
+    using Microsoft.Extensions.Caching.Memory;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using ArtGallery.Services.Data.Interfaces;
+    using Infrastucture.Extensions;
     using ViewModels.OrderAPicture;
+    using static Common.GeneralAppConstants;
 
     [Authorize]
     public class OrderAPictureController :Controller
     {
         private readonly IOrderAPictureService orderAPictureService;
         private readonly ILogger<OrderAPictureController> logger;
+        private readonly IMemoryCache memoryCache;
 
         public OrderAPictureController(
             IOrderAPictureService orderAPictureService,
-            ILogger<OrderAPictureController> logger)
+            ILogger<OrderAPictureController> logger,
+            IMemoryCache memoryCache)
         {
             this.orderAPictureService = orderAPictureService;
             this.logger = logger;
+            this.memoryCache = memoryCache;
         }
 
         [HttpGet]
@@ -52,6 +56,8 @@ namespace ArtGallery.Web.Controllers
                 logger.LogError("OrderAPictureController/Add", e);
                 ViewBag.ErrorMessage = "Възникна непредвидена грешка";
             }
+            this.memoryCache.Remove(OrderCasheKey);
+
             return RedirectToAction("Mine", "OrderAPicture");
         }
 
@@ -93,8 +99,9 @@ namespace ArtGallery.Web.Controllers
                 logger.LogError("OrderAPictureController/Add", e);
                 ViewBag.ErrorMessage = "Възникна непредвидена грешка";
             }
+            this.memoryCache.Remove(OrderCasheKey);
+
             return RedirectToAction("Mine", "OrderAPicture");
         }
-
     }
 }

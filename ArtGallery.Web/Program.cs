@@ -43,6 +43,8 @@ namespace ArtGallery.Web
 
             builder.Services.AddMemoryCache();
 
+            builder.Services.AddResponseCaching();
+
             builder.Services.AddControllersWithViews();
 
             WebApplication app = builder.Build();
@@ -64,6 +66,8 @@ namespace ArtGallery.Web
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseResponseCaching();
 
             app.UseAuthentication();
             app.UseAuthorization();
