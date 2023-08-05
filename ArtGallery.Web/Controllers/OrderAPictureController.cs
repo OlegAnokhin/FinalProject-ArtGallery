@@ -101,6 +101,10 @@
             }
             this.memoryCache.Remove(OrderCasheKey);
 
+            if (User.IsAdmin())
+            {
+                return RedirectToAction("All", "Order", new { area = "Admin" });
+            }
             return RedirectToAction("Mine", "OrderAPicture");
         }
     }

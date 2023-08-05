@@ -209,7 +209,7 @@
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> Error(int statusCode)
+        public IActionResult Error(int statusCode)
         {
             return RedirectToAction("Error", "Home", statusCode);
         }
