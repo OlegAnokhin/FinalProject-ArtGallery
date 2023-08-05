@@ -14,6 +14,14 @@
 
 else
 {
+    if (Model.Count() == 1)
+    {
+        <p><b> Имате @Model.Count() поръчкa.</b></p>
+    }
+    else
+    {
+        <p><b> Имате @Model.Count() поръчки.</b></p>
+    }
     <div class="row">
         @foreach (var e in Model)
         {
