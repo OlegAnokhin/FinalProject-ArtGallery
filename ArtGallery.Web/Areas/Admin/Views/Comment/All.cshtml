@@ -30,7 +30,8 @@ else
                         <p class="h5">Коментар: <b>@c.Content</b></p>
                     </div>
                     @*<a href="#" class="delete-comment" data-comment-id="@c.CommentId">Изтрий коментара</a>*@
-                    <form class="mt-2" asp-controller="Comment" asp-action="Delete" asp-route-id="@c.CommentId">
+                    @*<button class="btn-delete" data-id="@c.CommentId">Изтрий</button>*@
+                    <form asp-controller="Comment" asp-action="Delete" asp-route-commentId="@c.CommentId">
                         <input type="submit" value="Изтрий"
                                class="btn btn-secondary m-2" 
                                onclick="return confirm('Наистина ли искате да изтриете този коментар ?')" />
@@ -54,8 +55,7 @@ else
 
         function onDeleteCommentClick(event) {
             event.preventDefault(); // Предотвратява натискането на връзката
-
-            var commentId = event.target.dataset.commentId; // Вземаме идентификатора от data-comment-id атрибута
+            var commentId = event.target.dataset.CommentId; // Вземаме идентификатора от data-comment-id атрибута
             if (confirm("Сигурни ли сте, че искате да изтриете този коментар beee?")) {
                 // Тук можете да изпратите заявката за изтриване към сървъра, например чрез fetch или друг подходящ механизъм
                 // Например:

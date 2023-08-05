@@ -4,7 +4,6 @@
     using Microsoft.Extensions.Caching.Memory;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Infrastucture.Extensions;
     using Services.Data.Interfaces;
     using ViewModels.Comment;
     using static Common.GeneralAppConstants;
@@ -79,33 +78,33 @@
             return this.RedirectToAction("Details", "Picture", new { id = pictureId });
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Delete([FromRoute] int CommentId)
-        {
-            if (!User.IsAdmin())
-            {
-                return this.RedirectToAction("Error", "Home", StatusCode(401));
-            }
-            bool commentExist = await commentService.ExistsByIdAsync(CommentId);
+        //[HttpPost]
+        //public async Task<IActionResult> Delete([FromRoute] int CommentId)
+        //{
+        //    if (!User.IsAdmin())
+        //    {
+        //        return this.RedirectToAction("Error", "Home", StatusCode(401));
+        //    }
+        //    bool commentExist = await commentService.ExistsByIdAsync(CommentId);
 
-            if (!commentExist)
-            {
-                logger.LogError("Коментар с такъв идентификатор не съществува.");
-                return this.RedirectToAction("All", "Picture");
-            }
+        //    if (!commentExist)
+        //    {
+        //        logger.LogError("Коментар с такъв идентификатор не съществува.");
+        //        return this.RedirectToAction("All", "Picture");
+        //    }
 
-            try
-            {
-                await this.commentService.DeleteCommentAsync(CommentId);
-                this.memoryCache.Remove(CommentCasheKey);
+        //    try
+        //    {
+        //        await this.commentService.DeleteCommentAsync(CommentId);
+        //        this.memoryCache.Remove(CommentCasheKey);
 
-                return this.RedirectToAction("All", "Picture");
-            }
-            catch (Exception e)
-            {
-                logger.LogError("Възникна непредвидена грешка", e);
-                return this.RedirectToAction("All", "Picture");
-            }
-        }
+        //        return this.RedirectToAction("All", "Picture");
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        logger.LogError("Възникна непредвидена грешка", e);
+        //        return this.RedirectToAction("All", "Picture");
+        //    }
+        //}
     }
 }

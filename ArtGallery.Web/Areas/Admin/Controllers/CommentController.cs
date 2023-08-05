@@ -41,7 +41,7 @@
             }
         }
         [HttpPost]
-        public async Task<IActionResult> Delete(int commentId)
+        public async Task<IActionResult> Delete([FromRoute] int commentId)
         {
             if (!User.IsAdmin())
             {
@@ -51,13 +51,13 @@
 
             if (!commentExist)
             {
-                return this.RedirectToAction("All", "Comment");
+                return this.RedirectToAction("All", "Comment", new { area = "Admin" });
             }
 
             try
             {
                 await this.commentService.DeleteCommentAsync(commentId);
-                return this.RedirectToAction("All", "Comment");
+                return this. RedirectToAction("All", "Comment", new { area = "Admin" });
             }
             catch (Exception)
             {
