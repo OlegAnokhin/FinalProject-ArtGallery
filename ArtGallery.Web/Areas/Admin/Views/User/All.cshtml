@@ -24,7 +24,7 @@
             <td><p>@user.Email</p></td>
             <td><p>@user.Email</p></td>
             <td>
-                @if (user.Email == "admin@ArtGallery.bg")
+                    @if (user.Email.Contains("admin"))
                 {
                     <label>✔</label>
                 }
