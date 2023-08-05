@@ -67,7 +67,7 @@
             try
             {
                 await exhibitionService.AddAsync(model);
-                return View(model);
+                return RedirectToAction("All", "Exhibition");
             }
             catch (Exception e)
             {
