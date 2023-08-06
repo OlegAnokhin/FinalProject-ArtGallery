@@ -27,7 +27,8 @@
 * Потребител : guest@ArtGallery.bg и парола guest123
 
 # Диаграма на базата
-![DBArtGalleryDiagram](https://github.com/OlegAnokhin/MVC-ArtGallery/assets/102062768/33d51b51-cd92-444b-a6cc-8574e1e07fa2)
+![DBArtGalleryDiagram](https://github.com/OlegAnokhin/FinalProject-ArtGallery/assets/102062768/f5a147ba-0297-4438-863a-67dab7240644)
+
 
 # ArtGallery
 To make the project I used **ASP.NET MVC**, **Entity framework core**,**Bootstrap**, **Razor**, **HTML**, **CSS**, **Microsoft SQL Server**.
