@@ -1,4 +1,5 @@
-﻿namespace ArtGallery.Data
+﻿// ReSharper disable VirtualMemberCallInConstructor
+namespace ArtGallery.Data
 {
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,10 @@
     public ArtGalleryDbContext(DbContextOptions<ArtGalleryDbContext> options)
             : base(options)
         {
+            if (!this.Database.IsRelational())
+            {
+                this.Database.EnsureCreated();
+            }
         }
 
         public DbSet<Picture> Pictures { get; set; } = null!;
