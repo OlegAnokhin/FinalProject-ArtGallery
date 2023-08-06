@@ -36,6 +36,15 @@ namespace ArtGallery.Services.Tests
 
             Assert.IsTrue(result);
         }
+        
+        [Test]
+        public async Task ExistsByIdAsyncShouldReturnFalseWhenNotExists()
+        {
+            int existingArtEventId = 666;
+            bool result = await this.artEventService.ExistsByIdAsync(existingArtEventId);
+
+            Assert.IsFalse(result);
+        }
 
     }
 }

@@ -1,5 +1,4 @@
-﻿using ArtGallery.Web.ViewModels.Home;
-// ReSharper disable ReplaceWithSingleCallToCount
+﻿// ReSharper disable ReplaceWithSingleCallToCount
 
 namespace ArtGallery.Services.Data
 {
