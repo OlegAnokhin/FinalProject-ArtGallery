@@ -114,6 +114,89 @@ namespace ArtGallery.Services.Tests
             Assert.That(resultCount, Is.EqualTo(5));
         }
 
+        [Test]
+        public async Task GetArtEventByIdAsyncShouldReturnTrueWhenExists()
+        {
+            var newEvent = new AllArtEventViewModel
+            {
+                Id = 1,
+                Name = "Розовото дърво",
+                ImageAddress = "\\lib\\images\\ArtEventPinkTree.jpg",
+                Start = DateTime.Parse("26-07-2023 17:00"),
+            };
 
+            var result = await this.artEventService.GetArtEventByIdAsync(1);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(result.Id, Is.EqualTo(newEvent.Id));
+                Assert.That(result.Name, Is.EqualTo(newEvent.Name));
+                Assert.That(result.ImageAddress, Is.EqualTo(newEvent.ImageAddress));
+                Assert.That(result.Start, Is.EqualTo(newEvent.Start));
+
+            });
+        }
+
+        [Test]
+        public async Task JoinToArtEventsAsyncShouldReturnAllJoinedEvent()
+        {
+            var userId = "c1f40236-ee63-452f-8c56-18f952098074";
+
+            var newEvent = new AllArtEventViewModel
+            {
+                Id = 1,
+                Name = "Розовото дърво NEW",
+                ImageAddress = "\\lib\\images\\ArtEventPinkTree.jpg",
+                Start = DateTime.Parse("26-07-2023 17:00"),
+            };
+
+            await this.artEventService.JoinToArtEventAsync(userId, newEvent);
+
+            var result = await this.artEventService.GetJoinedArtEventsAsync(userId);
+            var resultCount = result.Count();
+
+            Assert.That(resultCount, Is.EqualTo(1));
+        }
+
+        [Test]
+        public async Task LeaveFromArtEventAsyncShouldDecreaseParticipantsCountForArtEvent()
+        {
+            var userId = "c1f40236-ee63-452f-8c56-18f952098074";
+
+            var newEvent = new AllArtEventViewModel
+            {
+                Id = 1,
+                Name = "Розовото дърво NEW",
+                ImageAddress = "\\lib\\images\\ArtEventPinkTree.jpg",
+                Start = DateTime.Parse("26-07-2023 17:00"),
+            };
+
+            await this.artEventService.LeaveFromArtEventAsync(userId, newEvent);
+
+            var result = await this.artEventService.GetJoinedArtEventsAsync(userId);
+            var resultCount = result.Count();
+
+            Assert.That(resultCount, Is.EqualTo(0));
+        }
+
+        [Test]
+        public async Task GetCountOfParticipantAsyncShouldReturnCountOfParticipant()
+        {
+            var userId = "c1f40236-ee63-452f-8c56-18f952098074";
+
+            var newEvent = new AllArtEventViewModel
+            {
+                Id = 1,
+                Name = "Розовото дърво NEW",
+                ImageAddress = "\\lib\\images\\ArtEventPinkTree.jpg",
+                Start = DateTime.Parse("26-07-2023 17:00"),
+            };
+
+            await this.artEventService.JoinToArtEventAsync(userId, newEvent);
+
+            var result = await this.artEventService.GetCountOfParticipantAsync(1);
+
+            Assert.That(result, Is.EqualTo(1));
+        }
     }
 }
