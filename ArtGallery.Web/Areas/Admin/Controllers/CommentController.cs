@@ -40,6 +40,7 @@
                 return RedirectToAction("Index", "Home");
             }
         }
+
         [HttpPost]
         public async Task<IActionResult> Delete([FromRoute] int commentId)
         {

@@ -109,9 +109,11 @@ namespace ArtGallery.Services.Tests
                 Description = "Обучение тип Арт-клас, в него заедно ще нарисуваме невероятна картина, а аз ще пи покажа нужни техники и ще ви напътствам през цялото време.",
             };
             await this.artEventService.AddArtEventAsync(newEvent);
-            await this.artEventService.DeleteArtEventAsync(3);
+            await this.artEventService.DeleteArtEventAsync(2);
 
-            Assert.That(resultCount - 1, Is.EqualTo(resultCount));
+            Assert.That(resultCount, Is.EqualTo(5));
         }
+
+
     }
 }
