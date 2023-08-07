@@ -42,7 +42,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete([FromRoute] int commentId)
+        public async Task<IActionResult> Delete(int commentId)
         {
             if (!User.IsAdmin())
             {
@@ -58,6 +58,7 @@
             try
             {
                 await this.commentService.DeleteCommentAsync(commentId);
+                this.memoryCache.Remove(CommentCasheKey);
                 return this. RedirectToAction("All", "Comment", new { area = "Admin" });
             }
             catch (Exception)
