@@ -1,5 +1,3 @@
-using ArtGallery.Data.Models;
-
 namespace ArtGallery.Services.Tests
 {
     using Microsoft.EntityFrameworkCore;
