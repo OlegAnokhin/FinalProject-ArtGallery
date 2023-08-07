@@ -1,17 +1,13 @@
-﻿using ArtGallery.Data;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ArtGallery.Services.Data.Interfaces;
-using ArtGallery.Services.Data;
-using ArtGallery.Web.ViewModels.ArtEvent;
-using ArtGallery.Web.ViewModels.OrderAPicture;
-
-namespace ArtGallery.Services.Tests
+﻿namespace ArtGallery.Services.Tests
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
+    using Data;
+    using ArtGallery.Data;
+    using Data.Interfaces;
+    using Web.ViewModels.OrderAPicture;
     using static DatabaseSeeder;
 
     public class OrderAPictureServiceTests
@@ -63,6 +59,49 @@ namespace ArtGallery.Services.Tests
             var newCount = newResult.Count();
 
             Assert.That(newCount, Is.EqualTo(1));
+        }
+
+        [Test]
+        public async Task GetMyOrdersAsyncShouldReturnCountForCurrentUserOrders()
+        {
+            var userId = "c1f40236-ee63-452f-8c56-18f952098074";
+            var newOrder = new OrderAPictureFormModel
+            {
+                FullName = "test",
+                PhoneNumber = "787878787878",
+                Size = "40 x 60",
+                Material = "test",
+                ImageBase = "test",
+                Description = "test"
+            };
+            await this.orderAPictureService.AddAsync(newOrder, userId);
+
+            var result = await this.orderAPictureService.GetMyOrdersAsync(userId);
+            var count = result.Count();
+
+            Assert.That(count, Is.EqualTo(2));
+        }
+
+        [Test]
+        public async Task DeleteOrderByIdAsyncShouldDecreaseMyOrdersCount()
+        {
+            var userId = "c1f40236-ee63-452f-8c56-18f952098074";
+            var result = await this.orderAPictureService.GetMyOrdersAsync(userId);
+            var count = result.Count();
+
+            var newOrder = new OrderAPictureFormModel
+            {
+                FullName = "test",
+                PhoneNumber = "787878787878",
+                Size = "40 x 60",
+                Material = "test",
+                ImageBase = "test",
+                Description = "test"
+            };
+            await this.orderAPictureService.AddAsync(newOrder, userId);
+            await this.orderAPictureService.DeleteOrderByIdAsync(2);
+
+            Assert.That(count, Is.EqualTo(1));
         }
     }
 }
