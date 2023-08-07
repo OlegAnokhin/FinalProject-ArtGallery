@@ -58,7 +58,7 @@ namespace ArtGallery.Data.Migrations
                     b.Property<DateTime>("Start")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 7, 30, 7, 10, 38, 430, DateTimeKind.Utc).AddTicks(6351))
+                        .HasDefaultValue(new DateTime(2023, 8, 7, 10, 35, 19, 906, DateTimeKind.Utc).AddTicks(8576))
                         .HasComment("Начало на обучението");
 
                     b.HasKey("Id");
@@ -206,7 +206,7 @@ namespace ArtGallery.Data.Migrations
                     b.Property<DateTime>("End")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 7, 30, 7, 10, 38, 431, DateTimeKind.Utc).AddTicks(2046))
+                        .HasDefaultValue(new DateTime(2023, 8, 7, 10, 35, 19, 907, DateTimeKind.Utc).AddTicks(2910))
                         .HasComment("Край на изложбата");
 
                     b.Property<string>("ImageUrl")
@@ -230,7 +230,7 @@ namespace ArtGallery.Data.Migrations
                     b.Property<DateTime>("Start")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 7, 30, 7, 10, 38, 431, DateTimeKind.Utc).AddTicks(1793))
+                        .HasDefaultValue(new DateTime(2023, 8, 7, 10, 35, 19, 907, DateTimeKind.Utc).AddTicks(2688))
                         .HasComment("Начало на изложбата");
 
                     b.HasKey("Id");
@@ -271,7 +271,7 @@ namespace ArtGallery.Data.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasComment("Име на заявка");
 
-                    b.Property<string>("Fullname")
+                    b.Property<string>("FullName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
@@ -284,7 +284,6 @@ namespace ArtGallery.Data.Migrations
                         .HasComment("Върху какво желаете да бъде нарисувана картината");
 
                     b.Property<byte[]>("ImageData")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)")
                         .HasComment("Добавете изображението");
 
@@ -306,14 +305,14 @@ namespace ArtGallery.Data.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasComment("Желаният размер на картината");
 
-                    b.Property<string>("userId")
+                    b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)")
                         .HasComment("Идентификатор на потребителя");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("userId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("OrdersAPictures");
                 });
@@ -649,15 +648,15 @@ namespace ArtGallery.Data.Migrations
                         {
                             Id = "d53a80c3-5fd9-4451-a381-f40d2f50ec08",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "33093f3e-7375-4ede-b645-3013eb36e355",
+                            ConcurrencyStamp = "161c3a08-8ab0-4aae-a083-bb9168723cdd",
                             Email = "admin@ArtGallery.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ARTGALLERY.BG",
                             NormalizedUserName = "ADMIN@ARTGALLERY.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHGX1C5xX4tCESUWfYk9G/7n9gaeYoSjuNbO2FuLBWCRp/A9anAvK1d310YH0hVHVw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEu304Gk+GOSJpb+6NDfBxAn2SpJgqIZ0KThDCOFGe83WOi3e54aE0O/DhDv7qpjvg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9008cabf-3b5a-4c91-b643-56143f665b1b",
+                            SecurityStamp = "a788feae-9610-41bb-a8ac-2beab65b53c1",
                             TwoFactorEnabled = false,
                             UserName = "admin@ArtGallery.bg"
                         },
@@ -665,15 +664,15 @@ namespace ArtGallery.Data.Migrations
                         {
                             Id = "c1f40236-ee63-452f-8c56-18f952098074",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "18e81716-9f22-4db9-8fef-1e6cee0f1325",
+                            ConcurrencyStamp = "d512f807-917a-42f8-af0c-825019d2993b",
                             Email = "guest@ArtGallery.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@ARTGALLERY.BG",
                             NormalizedUserName = "GUEST@ARTGALLERY.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDzn370UUEolWocyw6RE0grgG3uhRN4L1i0zx6wTvcYPM5BjRBlXprGH537Ph0Y7eQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKEhfn74r891if4Fhp7ww6AqM4YPOgGUpgH1giJtbyMNOe/QGuWz6UVC1heTsD8QMg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d62f880c-95bf-4be8-991b-c616f88d16ef",
+                            SecurityStamp = "6428d057-f083-4960-a6d9-f4dc382497f7",
                             TwoFactorEnabled = false,
                             UserName = "guest@ArtGallery.bg"
                         });
@@ -798,7 +797,7 @@ namespace ArtGallery.Data.Migrations
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
-                        .HasForeignKey("userId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -64,14 +64,22 @@
                 Description = model.Description
             };
 
-            using (var memoryStream = new MemoryStream())
+            if (model.Image != null)
             {
+                using (var memoryStream = new MemoryStream())
                 {
-                    await model.Image.CopyToAsync(memoryStream);
-                    order.ImageData = memoryStream.ToArray();
+                    {
+                        await model.Image.CopyToAsync(memoryStream);
+                        order.ImageData = memoryStream.ToArray();
+                    }
                 }
+                order.FileName = model.Image.FileName;
             }
-            order.FileName = model.Image.FileName;
+
+            if (model.Image == null)
+            {
+                order.FileName = "Няма изображение";
+            }
 
             await dbContext.AddAsync(order);
             await dbContext.SaveChangesAsync();
