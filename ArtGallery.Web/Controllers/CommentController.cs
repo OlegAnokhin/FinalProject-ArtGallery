@@ -28,7 +28,7 @@
         }
 
         [HttpGet]
-        public IActionResult Add([FromRoute]int id)
+        public IActionResult Add([FromRoute] int id)
         {
             var model = new CommentViewModel { PictureId = id };
             return this.View(model);
@@ -79,12 +79,17 @@
         }
 
         //[HttpPost]
-        //public async Task<IActionResult> Delete([FromRoute] int CommentId)
+        //public async Task<IActionResult> Delete(int CommentId)
         //{
-        //    if (!User.IsAdmin())
+        //    if (!User.Identity?.IsAuthenticated ?? false)
         //    {
         //        return this.RedirectToAction("Error", "Home", StatusCode(401));
         //    }
+
+        //    ClaimsPrincipal claimsPrincipal = User as ClaimsPrincipal;
+        //    Claim userIdClaim = claimsPrincipal.FindFirst("UserId")!;
+        //    var userId = userIdClaim.Value;
+
         //    bool commentExist = await commentService.ExistsByIdAsync(CommentId);
 
         //    if (!commentExist)
