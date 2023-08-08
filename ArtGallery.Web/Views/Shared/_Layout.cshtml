@@ -1,5 +1,4 @@
 ﻿@using static ArtGallery.Common.GeneralAppConstants;
-@using ArtGallery.Web.Infrastucture.Extensions
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,18 +40,6 @@
                         {
                             <li class="nav-item">
                                 <a id="button" class="nav-link" asp-area="" asp-controller="OrderAPicture" asp-action="Mine">Моите поръчки</a>
-                            </li>
-                        }
-                        @if (User.IsAdmin())
-                        {
-                            <li class="nav-item">
-                                <a id="button" class="nav-link " asp-area="" asp-controller="Picture" asp-action="Add">Добавяне на картина</a>
-                            </li>
-                            <li class="nav-item">
-                                <a id="button" class="nav-link " asp-area="" asp-controller="Exhibition" asp-action="Add">Добавяне на изложба</a>
-                            </li>
-                            <li class="nav-item">
-                                <a id="button" class="nav-link " asp-area="" asp-controller="ArtEvent" asp-action="Add">Добавяне на обучение</a>
                             </li>
                         }
                         <li class="nav-item">

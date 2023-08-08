@@ -1,13 +1,11 @@
-﻿@using ArtGallery.Web.Infrastucture.Extensions
-@model IEnumerable<IndexViewModel>
-
+﻿@model IEnumerable<IndexViewModel>
 
 @{
     ViewData["Title"] = "Арт галерия PM";
 
     var pictures = Model.ToList();
 }
-<h2 id="title" class="text-center">@ViewData["Title"]</h2>
+<h2 id="title" class="text-center">@ViewBag.Title</h2>
 <hr />
 
 <div>
@@ -22,13 +20,6 @@
             Все още няма добавени картини.
         </p>
         <hr class="my-4">
-        <p class="lead">
-            @if (User.IsAdmin())
-            {
-                <a asp-controller="Picture" asp-action="Add" class="btn btn-primary btn-lg"
-                   role="button">Добави картина</a>
-            }
-        </p>
     </div>
 }
 

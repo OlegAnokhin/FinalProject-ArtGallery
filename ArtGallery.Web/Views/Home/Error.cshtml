@@ -2,10 +2,10 @@
     ViewData["Title"] = "Възникна грешка";
 }
 
-<h2 id="title" class="text-center">@ViewData["Title"]</h2>
+<h2 id="title" class="text-center">@ViewBag.Title</h2>
 <hr />
 
 <br />
 <h2 class="text-danger">Възникна грешка във Вашaта заявка.</h2>
 <br />
-<div class="text-left h4"><a asp-controller="Home" asp-action="Index">Върни се на главната страница</a></div>
+<div class="text-left h4"><a asp-area="" asp-controller="Home" asp-action="Index">Върни се на главната страница</a></div>

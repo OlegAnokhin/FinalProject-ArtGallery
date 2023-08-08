@@ -2,7 +2,7 @@
     ViewData["Title"] = "Възникна грешка";
 }
 
-<h2 id="title" class="text-center">@ViewData["Title"]</h2>
+<h2 id="title" class="text-center">@ViewBag.Title</h2>
 <hr />
 
 <div class="row">
@@ -17,7 +17,7 @@
                     <p>Оп-па, възникна грешка с адреса.</p>
                     <p>Страницата не е намерена.</p>
                 </div>
-                <div class="text-left h4"><a asp-controller="Home" asp-action="Index">Върни се на главната страница</a></div>
+                <div class="text-left h4"><a asp-area="" asp-controller="Home" asp-action="Index">Върни се на главната страница</a></div>
             </div>
         </div>
     </div>
