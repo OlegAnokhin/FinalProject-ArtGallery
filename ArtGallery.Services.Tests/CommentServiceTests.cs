@@ -64,24 +64,23 @@
             Assert.That(newCount, Is.EqualTo(1));
         }
 
-        //[Test]
-        //public async Task DeleteCommentAsyncShouldDecreaseAllCommentsCount()
-        //{
-        //    var result = await this.commentService.AllCommentsWithAdminAsync();
-        //    var count = result.Count();
+        [Test]
+        public async Task DeleteCommentAsyncShouldReturnFalseIfRemoveIsSuccess()
+        {
+            var newComment = new CommentViewModel
+            {
+                CommentId = 3,
+                PictureId = 3,
+                Username = "user20",
+                Content = "Comment 20"
+            };
+            await this.commentService.AddCommentAsync(newComment.CommentId, newComment);
+            await this.commentService.DeleteCommentAsync(newComment.CommentId);
 
-        //    var newComment = new CommentViewModel
-        //    {
-        //        CommentId = 2,
-        //        PictureId = 2,
-        //        Username = "user2",
-        //        Content = "Comment 2"
-        //    };
-        //    await this.commentService.AddCommentAsync(2, newComment);
-        //    await this.commentService.DeleteCommentAsync(2);
+            var falseResult = await this.commentService.ExistsByIdAsync(newComment.CommentId);
 
-        //    Assert.That(count, Is.EqualTo(0));
-        //}
+            Assert.IsFalse(falseResult);
+        }
 
         [Test]
         public async Task ExistsByIdAsyncShouldReturnTrueWhenExists()

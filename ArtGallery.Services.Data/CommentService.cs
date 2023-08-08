@@ -75,6 +75,7 @@
 
             Comment comment = new Comment()
             {
+                CommentId = model.CommentId,
                 Username = model.Username,
                 Content = model.Content,
                 PictureId = pictureId
@@ -97,7 +98,12 @@
                 .Comments
                 .FirstAsync(c => c.CommentId == commentId);
 
-            dbContext.Comments.Remove(comment);
+            var picture = await this.dbContext.Pictures
+                .FirstAsync(p => p.Id == comment.PictureId);
+
+            picture.PictureComments.Remove(comment);
+
+            this.dbContext.Comments.Remove(comment);
             await dbContext.SaveChangesAsync();
         }
 
