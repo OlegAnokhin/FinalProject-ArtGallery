@@ -12,6 +12,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.20" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
+    <PackageReference Include="Moq" Version="4.20.1" />
     <PackageReference Include="NUnit" Version="3.13.3" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.4.2" />
     <PackageReference Include="NUnit.Analyzers" Version="3.6.1" />
@@ -24,6 +25,7 @@
     <ProjectReference Include="..\ArtGallery.Services.Data.Models\ArtGallery.Services.Data.Models.csproj" />
     <ProjectReference Include="..\ArtGallery.Services.Data\ArtGallery.Services.Data.csproj" />
     <ProjectReference Include="..\ArtGallery.Web.ViewModels\ArtGallery.Web.ViewModels.csproj" />
+    <ProjectReference Include="..\ArtGallery.Web\ArtGallery.Web.csproj" />
   </ItemGroup>
 
 </Project>

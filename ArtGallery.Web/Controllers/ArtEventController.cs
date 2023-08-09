@@ -22,6 +22,11 @@
             logger = _logger;
         }
 
+        public ArtEventController(IArtEventService artEventService)
+        {
+            this.artEventService = artEventService;
+        }
+
         [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> All()
