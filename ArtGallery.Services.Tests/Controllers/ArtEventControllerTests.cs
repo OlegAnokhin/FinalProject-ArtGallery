@@ -49,14 +49,14 @@
             Assert.That(result, Is.TypeOf<ViewResult>());
         }
 
-        //[Test]
-        //public void AddGetMethodShouldReturnsView()
-        //{
-        //    var result = this.controller.Add();
+        [Test]
+        public void AddGetMethodShouldReturnsView()
+        {
+            var result = this.controller.Add();
 
-        //    Assert.That(result, Is.Not.Null);
-        //    Assert.That(result, Is.TypeOf<RedirectToActionResult>());
-        //}
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.TypeOf<ViewResult>());
+        }
 
         [Test]
         public async Task AddPostMethodShouldReturnsRedirectToActionWhenModelStateIsValid()
