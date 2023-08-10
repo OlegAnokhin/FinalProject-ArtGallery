@@ -18,6 +18,12 @@
             this.exhibitionService = exhibitionService;
             logger = _logger;
         }
+
+        public ExhibitionController(IExhibitionService exhibitionService)
+        {
+            this.exhibitionService = exhibitionService;
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> All()
