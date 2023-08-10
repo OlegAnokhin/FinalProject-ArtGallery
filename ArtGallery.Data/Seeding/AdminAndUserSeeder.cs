@@ -12,7 +12,7 @@
 
             currentUser = new IdentityUser
             {
-                Id = "d53a80c3-5fd9-4451-a381-f40d2f50ec08",
+                Id = Guid.NewGuid().ToString(),
                 UserName = "admin@ArtGallery.bg",
                 NormalizedUserName = "ADMIN@ARTGALLERY.BG",
                 Email = "admin@ArtGallery.bg",
@@ -23,7 +23,7 @@
 
             currentUser = new IdentityUser
             {
-                Id = "c1f40236-ee63-452f-8c56-18f952098074",
+                Id = Guid.NewGuid().ToString(),
                 UserName = "guest@ArtGallery.bg",
                 NormalizedUserName = "GUEST@ARTGALLERY.BG",
                 Email = "guest@ArtGallery.bg",

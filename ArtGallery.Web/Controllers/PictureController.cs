@@ -72,8 +72,8 @@
                 return this.View(model);
             }
 
-            bool categoryExist = 
-                await this.categoryService.ExistsByIdAsync(model.CategoryId);
+            bool categoryExist = await this.categoryService.ExistsByIdAsync(model.CategoryId);
+
             if (!categoryExist)
             {
                 logger.LogError("Избрана категория не съществува.");
@@ -82,16 +82,16 @@
             try
             {
                 await pictureService.AddAsync(model);
+                return this.RedirectToAction("All", "Picture");
             }
             catch (Exception e)
             {
                 model.Categories = await this.categoryService.AllCategoriesAsync();
 
                 logger.LogError("GalleryController/Add", e);
-                ViewBag.ErrorMessage = "Възникна непредвидена грешка";
+                TempData["ErrorMessage"] = "Възникна непредвидена грешка";
+                return RedirectToAction("Error", "Home");
             }
-
-            return this.RedirectToAction("All", "Picture");
         }
 
         [HttpGet]
@@ -104,9 +104,10 @@
             if (!pictureExist)
             {
                 logger.LogError("Картина с този идентификатор не съществува");
-
-                return this.RedirectToAction("All", "Picture");
+                TempData["ErrorMessage"] = "Картина с този идентификатор не съществува";
+                return RedirectToAction("Error", "Home");
             }
+
             DetailsPictureViewModel model = await this.pictureService
                 .GetDetailsByIdAsync(id);
 
@@ -128,9 +129,9 @@
 
             if (!pictureExist)
             {
-                logger.LogError("Картина с този идентификатор не съществува");
-
-                return this.RedirectToAction("All", "Picture");
+                logger.LogError("Картина с този идентификатор не съществува.");
+                TempData["ErrorMessage"] = "Картина с този идентификатор не съществува.";
+                return RedirectToAction("Error", "Home");
             }
 
             AddAndEditPictureViewModel model = await this.pictureService
@@ -159,23 +160,22 @@
 
             if (!pictureExist)
             {
-                logger.LogError("Картина с този идентификатор не съществува");
-
-                return this.RedirectToAction("All", "Picture");
+                logger.LogError("Картина с този идентификатор не съществува.");
+                TempData["ErrorMessage"] = "Картина с този идентификатор не съществува.";
+                return RedirectToAction("Error", "Home");
             }
 
             try
             {
                 await this.pictureService.EditPictureByIdAsync(id, model);
+                return this.RedirectToAction("Details", "Picture", new { id });
             }
             catch (Exception)
             {
                 logger.LogError("Възникна непредвидена грешка");
-                model.Categories = await this.categoryService.AllCategoriesAsync();
-                return this.View(model);
+                TempData["ErrorMessage"] = "Възникна непредвидена грешка";
+                return RedirectToAction("Error", "Home");
             }
-
-            return this.RedirectToAction("Details", "Picture", new { id });
         }
 
         [HttpPost]
@@ -191,27 +191,22 @@
 
             if (!pictureExist)
             {
-                logger.LogError("Картина с този идентификатор не съществува");
-
-                return this.RedirectToAction("All", "Picture");
+                logger.LogError("Картина с този идентификатор не съществува.");
+                TempData["ErrorMessage"] = "Картина с този идентификатор не съществува.";
+                return RedirectToAction("Error", "Home");
             }
 
             try
             {
                 await this.pictureService.DeletePictureByIdAsync(id);
+                return this.RedirectToAction("All", "Picture");
             }
             catch (Exception)
             {
                 logger.LogError("Възникна непредвидена грешка");
-                return this.RedirectToAction("All", "Picture");
+                TempData["ErrorMessage"] = "Възникна непредвидена грешка";
+                return RedirectToAction("Error", "Home");
             }
-            return this.RedirectToAction("All", "Picture");
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error(int statusCode)
-        {
-            return RedirectToAction("Error", "Home", statusCode);
         }
     }
 }

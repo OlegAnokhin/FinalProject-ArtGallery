@@ -16,13 +16,13 @@
 
         public async Task<IEnumerable<UserViewModel>> AllAsync()
         {
-            var allUsers = await this.dbContext
-                .Users
+            var allUsers = await this.dbContext.Users
                 .Select(u => new UserViewModel()
                 {
                     Id = u.Id,
                     Email = u.Email,
-                }).ToListAsync();
+                })
+                .ToListAsync();
 
             return allUsers;
         }

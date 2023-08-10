@@ -1,5 +1,7 @@
 ﻿// ReSharper disable ReplaceWithSingleCallToCount
 
+using ArtGallery.Web.ViewModels.Home;
+
 namespace ArtGallery.Services.Data
 {
     using Microsoft.EntityFrameworkCore;
@@ -40,7 +42,8 @@ namespace ArtGallery.Services.Data
                     Name = e.Name,
                     ImageAddress = e.ImageAddress,
                     Start = e.Start
-                }).ToListAsync();
+                })
+                .ToListAsync();
         }
 
         /// <summary>
@@ -56,8 +59,9 @@ namespace ArtGallery.Services.Data
                 Start = model.Start,
                 ImageAddress = model.ImageAddress,
                 Place = model.Place,
-                Description = model.Description,
+                Description = model.Description
             };
+
             await dbContext.ArtEvents.AddAsync(artEvent);
             await dbContext.SaveChangesAsync();
         }
@@ -69,9 +73,8 @@ namespace ArtGallery.Services.Data
         /// <returns></returns>
         public async Task<bool> ExistsByIdAsync(int artEventId)
         {
-            bool result = await this.dbContext.ArtEvents
+            return await this.dbContext.ArtEvents
                 .AnyAsync(a => a.Id == artEventId);
-            return result;
         }
 
         /// <summary>
@@ -81,8 +84,7 @@ namespace ArtGallery.Services.Data
         /// <returns></returns>
         public async Task<DetaisArtEventViewModel> GetArtEventDetailsAsync(int artEventId)
         {
-            ArtEvent artEvent = await this.dbContext
-                .ArtEvents
+            ArtEvent artEvent = await this.dbContext.ArtEvents
                 .FirstAsync(a => a.Id == artEventId);
 
             return new DetaisArtEventViewModel
@@ -103,8 +105,7 @@ namespace ArtGallery.Services.Data
         /// <returns></returns>
         public async Task DeleteArtEventAsync(int artEventId)
         {
-            ArtEvent artEvent = await this.dbContext
-                .ArtEvents
+            ArtEvent artEvent = await this.dbContext.ArtEvents
                 .FirstAsync(a => a.Id == artEventId);
 
             this.dbContext.ArtEvents.Remove(artEvent);
@@ -126,7 +127,8 @@ namespace ArtGallery.Services.Data
                     Name = e.Name,
                     ImageAddress = e.ImageAddress,
                     Start = e.Start
-                }).FirstAsync();
+                })
+                .FirstAsync();
         }
 
         /// <summary>
@@ -146,7 +148,8 @@ namespace ArtGallery.Services.Data
                     Start = e.ArtEvent.Start,
                     Place = e.ArtEvent.Place,
                     Description = e.ArtEvent.Description
-                }).ToListAsync();
+                })
+                .ToListAsync();
         }
 
         /// <summary>
@@ -188,26 +191,23 @@ namespace ArtGallery.Services.Data
 
         public async Task<int> GetCountOfParticipantAsync(int eventId)
         {
-            var count = dbContext.ArtEventParticipants
+            return await dbContext.ArtEventParticipants
                 .Where(e => e.ArtEventId == eventId)
-                .Count();
-
-            return count;
+                .CountAsync();
         }
 
-        //public async Task<IndexViewModel> LastArtEventAsync()
-        //{
-        //    var lastArtEvent = await this.dbContext
-        //        .ArtEvents
-        //        .OrderByDescending(e => e.Start)
-        //        .Select(e => new IndexViewModel()
-        //        {
-        //            ArtEventTitle = e.Name,
-        //            ArtEventImageUrl = e.ImageAddress
-        //        })
-        //        .FirstAsync();
+        public async Task<IndexViewModel> LastArtEventAsync()
+        {
+            var lastArtEvent = await this.dbContext.ArtEvents
+                .OrderByDescending(e => e.Start)
+                .Select(e => new IndexViewModel()
+                {
+                    ArtEventTitle = e.Name,
+                    ArtEventImageUrl = e.ImageAddress
+                })
+                .FirstAsync();
 
-        //    return lastArtEvent;
-        //}
+            return lastArtEvent;
+        }
     }
 }

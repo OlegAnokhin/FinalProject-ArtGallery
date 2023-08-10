@@ -36,8 +36,8 @@
             }
             catch (Exception)
             {
-                ViewBag.ErrorMessage = "Възникна непредвидена грешка";
-                return RedirectToAction("Index", "Home");
+                TempData["ErrorMessage"] = "Възникна непредвидена грешка";
+                return RedirectToAction("Error", "Home");
             }
         }
 

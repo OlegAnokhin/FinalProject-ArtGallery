@@ -14,8 +14,8 @@
                 Id = 1,
                 Name = "Изложба Африка",
                 ImageUrl = "\\lib\\images\\ExhibitionAfrica.jpg",
-                Start = DateTime.Parse("20-07-2023 10:00"),
-                End = DateTime.Parse("30-07-2023 17:00"),
+                Start = new DateTime(2023,7,20,10,0,0),
+                End = new DateTime(2023,7,30,17,0,0),
                 Place = "Варна, Галерията на Петя",
                 Description = "В тази изложба на тема Африка ще бъдат представени тематични картина на хора и животни."
             };

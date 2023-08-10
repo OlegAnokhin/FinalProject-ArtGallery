@@ -23,7 +23,7 @@
             try
             {
                 var model = this.memoryCache.Get<IEnumerable<MyOrdersViewModel>>(OrderCasheKey);
-
+                //throw new Exception();
                 if (model == null)
                 {
                     model = await this.orderService.AllAsync();
@@ -35,8 +35,8 @@
             }
             catch (Exception)
             {
-                ViewBag.ErrorMessage = "Възникна непредвидена грешка";
-                return RedirectToAction("Index", "Home");
+                TempData["ErrorMessage"] = "Възникна непредвидена грешка";
+                return RedirectToAction("Error", "Home");
             }
         }
     }

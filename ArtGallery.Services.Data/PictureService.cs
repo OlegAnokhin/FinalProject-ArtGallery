@@ -34,41 +34,44 @@
         /// Добавяне на последно качените картини
         /// </summary>
         /// <returns></returns>
-        public async Task<IEnumerable<IndexViewModel>> LastPicturesAsync(int pictureCount)
+        public async Task<IEnumerable<PictureInfo>> LastPicturesAsync(int pictureCount)
         {
-            IEnumerable<IndexViewModel> lastThreePictures = await this.dbContext
-                .Pictures
+            List<PictureInfo> pictures = await this.dbContext.Pictures
                 .OrderByDescending(p => p.CreatedOn)
                 .Take(pictureCount)
-                .Select(p => new IndexViewModel()
+                .Select(p => new PictureInfo()
                 {
                     Id = p.Id,
                     PictureTitle = p.Name,
                     PictureImageUrl = p.ImageAddress
                 })
-                .ToArrayAsync();
+                .ToListAsync();
 
-            return lastThreePictures;
+            return pictures;
         }
 
         /// <summary>
-            /// Добавяне на категории към картината
-            /// </summary>
-            /// <returns></returns>
-            public async Task<AddAndEditPictureViewModel> GetCategoriesForAddNewPictureAsync()
+        /// Добавяне на категории към картината
+        /// </summary>
+        /// <returns></returns>
+        public async Task<AddAndEditPictureViewModel> GetCategoriesForAddNewPictureAsync()
         {
             var categories = await dbContext.Categories
                 .Select(c => new PictureSelectCategoryModel
                 {
                     Id = c.Id,
                     Name = c.Name
-                }).ToListAsync();
+                })
+                .ToListAsync();
+
             var model = new AddAndEditPictureViewModel()
             {
                 Categories = categories
             };
+
             return model;
         }
+
         /// <summary>
         /// Добавяне на картина
         /// </summary>
@@ -86,6 +89,7 @@
                 Description = model.Description,
                 CategoryId = model.CategoryId
             };
+
             await dbContext.AddAsync(entity);
             await dbContext.SaveChangesAsync();
         }
@@ -97,17 +101,15 @@
         /// <returns></returns>
         public async Task<AllPicturesFilteredAndPagedServiceModel> AllAsync(AllPictureQueryModel model)
         {
-            IQueryable<Picture> pictureQuery = this.dbContext
-                .Pictures
-                .AsQueryable();
+            IQueryable<Picture> pictureQuery = this.dbContext.Pictures;
 
-            if(!string.IsNullOrWhiteSpace(model.Category))
+            if (!string.IsNullOrWhiteSpace(model.Category))
             {
                 pictureQuery = pictureQuery
                     .Where(p => p.Category.Name == model.Category);
             }
 
-            if(!string.IsNullOrWhiteSpace(model.SearchString))
+            if (!string.IsNullOrWhiteSpace(model.SearchString))
             {
                 string wildCard = $"%{model.SearchString.ToLower()}%";
                 pictureQuery = pictureQuery
@@ -134,11 +136,10 @@
                     Name = p.Name
                 })
                 .ToArrayAsync();
-            int totalPictures = pictureQuery.Count();
 
             return new AllPicturesFilteredAndPagedServiceModel()
             {
-                TotalPicturesCount = totalPictures,
+                TotalPicturesCount = pictureQuery.Count(),
                 Pictures = allPictures
             };
         }
@@ -151,8 +152,7 @@
         /// <returns></returns>
         public async Task EditPictureByIdAsync(int pictureId, AddAndEditPictureViewModel model)
         {
-            Picture picture = await this.dbContext
-                .Pictures
+            Picture picture = await this.dbContext.Pictures
                 .FirstAsync(p => p.Id == pictureId);
 
             picture.Name = model.Name;
@@ -174,14 +174,12 @@
         /// <exception cref="ArgumentException"></exception>
         public async Task<DetailsPictureViewModel> GetDetailsByIdAsync(int pictureId)
         {
-            Picture? picture = await this.dbContext
-                .Pictures
+            Picture? picture = await this.dbContext.Pictures
                 .Include(p => p.Category)
                 .Include(pc => pc.PictureComments)
                 .FirstAsync(p => p.Id == pictureId);
 
-            var comments = await this.dbContext
-                .Comments
+            var comments = await this.dbContext.Comments
                 .Where(p => p.PictureId == pictureId)
                 .Select(c => new CommentViewModel()
                 {
@@ -189,7 +187,8 @@
                     PictureId = pictureId,
                     Username = c.Username,
                     Content = c.Content
-                }).ToArrayAsync();
+                })
+                .ToArrayAsync();
 
             return new DetailsPictureViewModel()
             {
@@ -213,11 +212,9 @@
         /// <returns></returns>
         public async Task<bool> ExistByIdAsync(int pictureId)
         {
-            bool result = await this.dbContext
+            return await this.dbContext
                 .Pictures
                 .AnyAsync(p => p.Id == pictureId);
-
-            return result;
         }
 
         /// <summary>
@@ -225,14 +222,12 @@
         /// </summary>
         /// <param name="model">Данни за картина</param>
         /// <returns></returns>
-
         public async Task<AddAndEditPictureViewModel> GetPictureForEditAsync(int pictureId)
         {
-            Picture picture = await this.dbContext
-                .Pictures
+            Picture picture = await this.dbContext.Pictures
                 .Include(p => p.Category)
                 .FirstAsync(p => p.Id == pictureId);
-            
+
             return new AddAndEditPictureViewModel
             {
                 Name = picture.Name,
@@ -253,8 +248,7 @@
         /// <returns></returns>
         public async Task DeletePictureByIdAsync(int pictureId)
         {
-            Picture picture = await this.dbContext
-                .Pictures
+            Picture picture = await this.dbContext.Pictures
                 .FirstAsync(p => p.Id == pictureId);
 
             this.dbContext.Pictures.Remove(picture);

@@ -1,4 +1,7 @@
-﻿namespace ArtGallery.Services.Tests.Controllers
+﻿using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.Extensions.Logging;
+
+namespace ArtGallery.Services.Tests.Controllers
 {
     using System.Security.Claims;
     using Microsoft.AspNetCore.Http;
@@ -7,10 +10,14 @@
     using Mocks;
     using Mocks.Models;
     using Mocks.Services;
+    using ArtGallery.Services.Data.Interfaces;
+    using Moq;
 
     [TestFixture]
     public class ArtEventControllerTests
     {
+        private Mock<IArtEventService> artEventServiceMock;
+        private Mock<ILogger<ArtEventController>> loggerMock;
         private ArtEventController controller;
 
         private const string name = "admin@ArtGallery.bg";
@@ -20,7 +27,9 @@
         [SetUp]
         public async Task SetUp()
         {
-            this.controller = new ArtEventController(await ArtEventServiceMock.Instance());
+            artEventServiceMock = new Mock<IArtEventService>();
+            loggerMock = new Mock<ILogger<ArtEventController>>();
+            this.controller = new ArtEventController(artEventServiceMock.Object, loggerMock.Object);
 
             ClaimsPrincipal user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
             {
@@ -90,6 +99,12 @@
         [Test]
         public async Task DetailsMethodShouldReturnsRedirectToActionWhenArtEventNotExist()
         {
+            artEventServiceMock.Setup(x => x.ExistsByIdAsync(It.IsAny<int>()))
+                .Returns(Task.FromResult(false));
+            var tempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>());
+            tempData["ErrorMessage"] = "test";
+            controller.TempData = tempData;
+
             var result = await this.controller.Details(1);
 
             Assert.That(result, Is.Not.Null);

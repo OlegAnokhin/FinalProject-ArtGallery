@@ -29,10 +29,13 @@
             }
 
             int.TryParse(configuration["Settings:PictureCount"], out int pictureCount);
-            IEnumerable<IndexViewModel> viewModel = 
-                await this.pictureService.LastPicturesAsync(pictureCount);
+            IndexViewModel viewModel = new IndexViewModel();
+            var pictureInfo = await this.pictureService.LastPicturesAsync(pictureCount);
+            var artEventInfo = await this.artEventService.LastArtEventAsync();
 
-          // viewModel = this.artEventService.LastArtEventAsync();
+            viewModel.PicturesInfo = pictureInfo.ToList();
+            viewModel.ArtEventTitle = artEventInfo.ArtEventTitle;
+            viewModel.ArtEventImageUrl = artEventInfo.ArtEventImageUrl;
 
             return View(viewModel);
         }

@@ -29,7 +29,7 @@
 
         public string GetErrorMessage()
         {
-            return "Недопустимо расширение на файла.";
+            return "Недопустимо разширение на файла.";
         }
     }
 }

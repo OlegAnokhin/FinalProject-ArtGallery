@@ -31,7 +31,7 @@
         public IActionResult Add([FromRoute] int id)
         {
             var model = new CommentViewModel { PictureId = id };
-            return this.View(model);
+            return View(model);
         }
 
         [HttpPost]
@@ -73,7 +73,6 @@
                 return this.RedirectToAction("All", "Picture");
             }
             this.memoryCache.Remove(CommentCasheKey);
-
 
             return this.RedirectToAction("Details", "Picture", new { id = pictureId });
         }

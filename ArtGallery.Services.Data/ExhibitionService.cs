@@ -60,6 +60,7 @@
                 Place = model.Place,
                 Description = model.Description
             };
+
             await this.dbContext.Exhibitions.AddAsync(exhibition);
             await this.dbContext.SaveChangesAsync();
         }
@@ -71,9 +72,8 @@
         /// <returns></returns>
         public async Task<bool> ExistsByIdAsync(int exhibitionId)
         {
-            bool result = await this.dbContext.Exhibitions
+            return await this.dbContext.Exhibitions
                 .AnyAsync(e => e.Id == exhibitionId);
-            return result;
         }
 
         /// <summary>
@@ -106,8 +106,7 @@
         /// <returns></returns>
         public async Task DeleteExhibitionAsync(int id)
         {
-            Exhibition exhibition = await this.dbContext
-                .Exhibitions
+            Exhibition exhibition = await this.dbContext.Exhibitions
                 .FirstAsync(e => e.Id == id);
 
             this.dbContext.Exhibitions.Remove(exhibition);

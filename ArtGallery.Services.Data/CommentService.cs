@@ -116,10 +116,8 @@
         {
             bool result = await this.dbContext
                 .Comments
-                .AnyAsync(c => c.CommentId==commentId);
+                .AnyAsync(c => c.CommentId == commentId);
             return result;
         }
-
-
     }
 }

@@ -27,24 +27,22 @@
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Add()
-        {
-            return View();
-        }
+        public IActionResult Add() => View();
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public async Task<IActionResult> Add(OrderAPictureFormModel model)
         {
             if (!User.Identity?.IsAuthenticated ?? false)
             {
                 return RedirectToAction("Error", "Home", StatusCode(401));
             }
+
             if (!ModelState.IsValid)
             {
                 return View();
             }
+
             var userId = User.GetId();
 
             try
@@ -54,7 +52,8 @@
             catch (Exception e)
             {
                 logger.LogError("OrderAPictureController/Add", e);
-                ViewBag.ErrorMessage = "Възникна непредвидена грешка";
+                TempData["ErrorMessage"] = "Възникна непредвидена грешка";
+                return RedirectToAction("Error", "Home");
             }
             this.memoryCache.Remove(OrderCasheKey);
 
@@ -69,6 +68,7 @@
             {
                 return RedirectToAction("Error", "Home", StatusCode(401));
             }
+
             try
             {
                 var model = await orderAPictureService.GetMyOrdersAsync(userId);
@@ -77,8 +77,7 @@
             catch (Exception e)
             {
                 logger.LogError("OrderAPictureController/Mine", e);
-                ViewBag.ErrorMessage = "Възникна непредвидена грешка";
-                return RedirectToAction("All", "Picture");
+                return RedirectToAction("Error", "Home", StatusCode(404));
             }
         }
 
@@ -87,9 +86,10 @@
         {
             if (Id <= 0)
             {
-                ViewBag.ErrorMessage = "Поръчка с такъв идентификатор не съществува.";
-                return RedirectToAction("Mine", "OrderAPicture");
+                TempData["ErrorMessage"] = "Поръчка с такъв идентификатор не съществува.";
+                return RedirectToAction("Error", "Home");
             }
+
             try
             {
                 await this.orderAPictureService.DeleteOrderByIdAsync(Id);
@@ -97,7 +97,8 @@
             catch (Exception e)
             {
                 logger.LogError("OrderAPictureController/Add", e);
-                ViewBag.ErrorMessage = "Възникна непредвидена грешка";
+                TempData["ErrorMessage"] = "Възникна непредвидена грешка";
+                return RedirectToAction("Error", "Home");
             }
             this.memoryCache.Remove(OrderCasheKey);
 
@@ -105,6 +106,7 @@
             {
                 return RedirectToAction("All", "Order", new { area = "Admin" });
             }
+
             return RedirectToAction("Mine", "OrderAPicture");
         }
     }

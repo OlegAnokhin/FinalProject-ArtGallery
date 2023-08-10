@@ -13,15 +13,10 @@
         private readonly ILogger logger;
 
         public ExhibitionController(IExhibitionService exhibitionService, 
-                               ILogger<ExhibitionController> _logger)
+                               ILogger<ExhibitionController> logger)
         {
             this.exhibitionService = exhibitionService;
-            logger = _logger;
-        }
-
-        public ExhibitionController(IExhibitionService exhibitionService)
-        {
-            this.exhibitionService = exhibitionService;
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -36,8 +31,8 @@
             catch (Exception e)
             {
                 logger.LogError("ExhibitionController/All", e);
-                ViewBag.ErrorMessage = "Възникна непредвидена грешка";
-                return RedirectToAction(nameof(All));
+                TempData["ErrorMessage"] = "Възникна непредвидена грешка";
+                return RedirectToAction("Error", "Home");
             }
         }
 
@@ -65,6 +60,7 @@
             {
                 return RedirectToAction("Error", "Home", StatusCode(401));
             }
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -78,8 +74,8 @@
             catch (Exception e)
             {
                 logger.LogError("ExhibitionController/Add", e);
-                ViewBag.ErrorMessage = "Възникна непредвидена грешка";
-                return RedirectToAction(nameof(All));
+                TempData["ErrorMessage"] = "Възникна непредвидена грешка";
+                return RedirectToAction("Error", "Home");
             }
         }
 
@@ -91,7 +87,7 @@
             
             if (!exhibitionExist)
             {
-                ViewBag.ErrorMessage = "Изложба с такъв идентификатор не съществува.";
+                TempData["ErrorMessage"] = "Изложба с такъв идентификатор не съществува.";
                 return RedirectToAction(nameof(All));
             }
 
@@ -103,8 +99,8 @@
             catch (Exception e)
             {
                 logger.LogError("ExhibitionController/Details", e);
-                ViewBag.ErrorMessage = "Възникна непредвидена грешка";
-                return RedirectToAction(nameof(All));
+                TempData["ErrorMessage"] = "Възникна непредвидена грешка";
+                return RedirectToAction("Error", "Home");
             }
         }
 
@@ -115,11 +111,12 @@
             {
                 return RedirectToAction("Error", "Home", StatusCode(401));
             }
+
             bool exhibitionExist = await exhibitionService.ExistsByIdAsync(id);
 
             if (!exhibitionExist)
             {
-                ViewBag.ErrorMessage = "Изложба с такъв идентификатор не съществува.";
+                TempData["ErrorMessage"] = "Изложба с такъв идентификатор не съществува.";
                 return RedirectToAction(nameof(All));
             }
 
@@ -131,7 +128,8 @@
             catch (Exception)
             {
                 logger.LogError("Възникна непредвидена грешка");
-                return RedirectToAction(nameof(All));
+                TempData["ErrorMessage"] = "Възникна непредвидена грешка";
+                return RedirectToAction("Error", "Home");
             }
         }
     }

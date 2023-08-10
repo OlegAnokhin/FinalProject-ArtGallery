@@ -74,10 +74,10 @@
 
         Task<int> GetCountOfParticipantAsync(int eventId);
 
-        ///// <summary>
-        ///// Зарежда последно обучение
-        ///// </summary>
-        ///// <returns></returns>
-        //Task<IndexViewModel> LastArtEventAsync();
+        /// <summary>
+        /// Зарежда последно обучение
+        /// </summary>
+        /// <returns></returns>
+        Task<IndexViewModel> LastArtEventAsync();
     }
 }

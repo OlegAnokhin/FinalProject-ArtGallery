@@ -1,6 +1,5 @@
 ﻿namespace ArtGallery.Web.Controllers
 {
-
     using Infrastucture.Extensions;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -16,15 +15,10 @@
         private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier);
 
         public ArtEventController(IArtEventService artEventService,
-                                  ILogger<ArtEventController> _logger)
+                                  ILogger<ArtEventController> logger)
         {
             this.artEventService = artEventService;
-            logger = _logger;
-        }
-
-        public ArtEventController(IArtEventService artEventService)
-        {
-            this.artEventService = artEventService;
+            this.logger = logger;
         }
 
         [AllowAnonymous]
@@ -39,8 +33,8 @@
             catch (Exception e)
             {
                 logger.LogError("ArtEventController/All", e);
-                ViewBag.ErrorMessage = "Възникна непредвидена грешка";
-                return RedirectToAction("Index", "Home");
+                TempData["ErrorMessage"] = "Възникна непредвидена грешка";
+                return RedirectToAction("Error", "Home");
             }
         }
 
@@ -79,8 +73,8 @@
             catch (Exception e)
             {
                 logger.LogError("ArtEventController/Add", e);
-                ViewBag.ErrorMessage = "Възникна непредвидена грешка";
-                return RedirectToAction(nameof(All));
+                TempData["ErrorMessage"] = "Възникна непредвидена грешка";
+                return RedirectToAction("Error", "Home");
             }
         }
 
@@ -92,8 +86,8 @@
 
             if (!artEventExist)
             {
-                ViewBag.ErrorMessage = "Oбучение с такъв идентификатор не съществува.";
-                return RedirectToAction(nameof(All));
+                TempData["ErrorMessage"] = "Oбучение с такъв идентификатор не съществува.";
+                return RedirectToAction("Error", "Home");
             }
 
             try
@@ -104,8 +98,8 @@
             catch (Exception e)
             {
                 logger.LogError("ArtEventController/Details", e);
-                ViewBag.ErrorMessage = "Възникна непредвидена грешка";
-                return RedirectToAction(nameof(All));
+                TempData["ErrorMessage"] = "Възникна непредвидена грешка";
+                return RedirectToAction("Error", "Home");
             }
         }
 
@@ -120,8 +114,8 @@
 
             if (!artEventExist)
             {
-                ViewBag.ErrorMessage = "Oбучение с такъв идентификатор не съществува.";
-                return RedirectToAction(nameof(All));
+                TempData["ErrorMessage"] = "Oбучение с такъв идентификатор не съществува.";
+                return RedirectToAction("Error", "Home");
             }
 
             try
@@ -132,7 +126,8 @@
             catch (Exception e)
             {
                 logger.LogError("Възникна непредвидена грешка", e);
-                return RedirectToAction(nameof(Details));
+                TempData["ErrorMessage"] = "Възникна непредвидена грешка";
+                return RedirectToAction("Error", "Home");
             }
         }
 
@@ -160,17 +155,26 @@
             catch (Exception e)
             {
                 logger.LogError("Възникна непредвидена грешка", e);
-                return RedirectToAction(nameof(Details));
+                TempData["ErrorMessage"] = "Възникна непредвидена грешка";
+                return RedirectToAction("Error", "Home");
             }
         }
 
         [HttpPost]
         public async Task<IActionResult> Leave(int id)
         {
-            var eventToLeave = await artEventService.GetArtEventByIdAsync(id);
-            await artEventService.LeaveFromArtEventAsync(GetUserId(), eventToLeave);
-
-            return RedirectToAction(nameof(All));
+            try
+            {
+                var eventToLeave = await artEventService.GetArtEventByIdAsync(id);
+                await artEventService.LeaveFromArtEventAsync(GetUserId(), eventToLeave);
+                return RedirectToAction(nameof(All));
+            }
+            catch (Exception e)
+            {
+                logger.LogError("Възникна непредвидена грешка", e);
+                TempData["ErrorMessage"] = "Възникна непредвидена грешка";
+                return RedirectToAction("Error", "Home");
+            }
         }
     }
 }

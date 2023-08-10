@@ -62,6 +62,9 @@ namespace ArtGallery.Web
                 app.UseHsts();
             }
 
+            var scope = app.Services.CreateScope();
+            scope.ServiceProvider.GetService<ArtGalleryDbContext>()?.Database.EnsureCreated();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

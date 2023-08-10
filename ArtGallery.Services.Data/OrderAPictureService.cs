@@ -42,7 +42,8 @@
                     ImageBase = o.ImageBase,
                     Image = o.ImageData,
                     Description = o.Description
-                }).ToListAsync();
+                })
+                .ToListAsync();
         }
 
         /// <summary>
@@ -73,6 +74,7 @@
                         order.ImageData = memoryStream.ToArray();
                     }
                 }
+
                 order.FileName = model.Image.FileName;
             }
 
@@ -104,7 +106,8 @@
                     ImageBase = o.ImageBase,
                     Image = o.ImageData,
                     Description = o.Description
-                }).ToListAsync();
+                })
+                .ToListAsync();
         }
 
         /// <summary>
@@ -114,8 +117,7 @@
         /// <returns></returns>
         public async Task DeleteOrderByIdAsync(int orderId)
         {
-            OrderAPicture order = await this.dbContext
-                .OrdersAPictures
+            OrderAPicture order = await this.dbContext.OrdersAPictures
                 .FirstAsync(o => o.Id == orderId);
 
             dbContext.OrdersAPictures.Remove(order);

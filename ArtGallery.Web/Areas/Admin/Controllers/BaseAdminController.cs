@@ -8,6 +8,5 @@
     [Authorize(Roles = AdminRoleName)]
     public class BaseAdminController : Controller
     {
-        
     }
 }

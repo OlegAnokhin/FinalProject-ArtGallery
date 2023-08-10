@@ -1,4 +1,6 @@
-﻿namespace ArtGallery.Services.Tests.Controllers
+﻿using Microsoft.Extensions.Logging;
+
+namespace ArtGallery.Services.Tests.Controllers
 {
     using System.Security.Claims;
     using Microsoft.AspNetCore.Mvc;
@@ -6,10 +8,14 @@
     using Web.Controllers;
     using Tests.Mocks.Services;
     using Mocks.Models;
+    using ArtGallery.Services.Data.Interfaces;
+    using Moq;
 
     [TestFixture]
     public class ExhibitionControllerTests
     {
+        private Mock<IExhibitionService> exhibitionServiceMock = new Mock<IExhibitionService>();
+        private Mock<ILogger<ExhibitionController>> loggerMock = new Mock<ILogger<ExhibitionController>>();
         private ExhibitionController controller;
 
         private const string name = "admin@ArtGallery.bg";
@@ -19,7 +25,7 @@
         [SetUp]
         public async Task SetUp()
         {
-            this.controller = new ExhibitionController(await ExhibitionServiceMock.Instance());
+            this.controller = new ExhibitionController(exhibitionServiceMock.Object, loggerMock.Object);
 
             ClaimsPrincipal user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
             {

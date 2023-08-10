@@ -4,7 +4,6 @@
     using Microsoft.AspNetCore.Mvc;
     using Services.Data.Interfaces;
     using ViewModels.User;
-
     using static Common.GeneralAppConstants;
 
     public class UserController : BaseAdminController
@@ -38,8 +37,8 @@
             }
             catch (Exception)
             {
-                ViewBag.ErrorMessage = "Възникна непредвидена грешка";
-                return RedirectToAction("Index", "Home");
+                TempData["ErrorMessage"] = "Възникна непредвидена грешка";
+                return RedirectToAction("Error", "Home");
             }
         }
     }

@@ -3,30 +3,18 @@
     public class IndexViewModel
     {
         /// <summary>
-        /// Идентификатор
+        /// Заглавие на АртЕвент
         /// </summary>
-        public int  Id { get; set; }
+        public string ArtEventTitle { get; set; } = null!;
 
         /// <summary>
-        /// Заглавие на картината
+        /// Адреса на изображение на АртЕвента
         /// </summary>
-        public string PictureTitle { get; set; } = null!;
+        public string ArtEventImageUrl { get; set; } = null!;
 
         /// <summary>
-        /// Адреса на изображение на картината
+        /// Колекция от картини
         /// </summary>
-        public string PictureImageUrl { get; set; } = null!;
-        
-        ///// <summary>
-        ///// Заглавие на АртЕвент
-        ///// </summary>
-        //public string ArtEventTitle { get; set; } = null!;
-
-        ///// <summary>
-        ///// Адреса на изображение на АртЕвента
-        ///// </summary>
-        //public string ArtEventImageUrl { get; set; } = null!;
-
-
+        public List<PictureInfo> PicturesInfo { get; set; } = new List<PictureInfo>();
     }
 }
