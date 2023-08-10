@@ -5,6 +5,7 @@
     using Microsoft.AspNetCore.Http;
     using Web.Controllers;
     using Tests.Mocks.Services;
+    using ArtGallery.Services.Tests.Mocks.Models;
 
     [TestFixture]
     public class ExhibitionControllerTests
@@ -36,6 +37,43 @@
             };
         }
 
+        [Test]
+        public async Task AllMethodShouldReturnsViewWhenModelStateIsValid()
+        {
+            var controller = this.controller;
 
+            IActionResult result = await controller.All();
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.TypeOf<ViewResult>());
+        }
+
+        [Test]
+        public void AddGetMethodShouldReturnsView()
+        {
+            var result = this.controller.Add();
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.TypeOf<ViewResult>());
+        }
+
+        [Test]
+        public async Task AddPostMethodShouldReturnsRedirectToActionWhenModelStateIsValid()
+        {
+            var result = await this.controller.Add(ExhibitionFormModelMock.Instance());
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.TypeOf<RedirectToActionResult>());
+        }
+
+        [Test]
+        public async Task AddPostMethodShouldReturnsRedirectToActionWhenModelStateIsInvalid()
+        {
+            controller.ModelState.AddModelError("test", "test");
+            var result = await this.controller.Add(ExhibitionFormModelMock.Instance());
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.TypeOf<ViewResult>());
+        }
     }
 }
