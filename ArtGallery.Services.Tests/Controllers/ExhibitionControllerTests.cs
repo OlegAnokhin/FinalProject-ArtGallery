@@ -5,7 +5,7 @@
     using Microsoft.AspNetCore.Http;
     using Web.Controllers;
     using Tests.Mocks.Services;
-    using ArtGallery.Services.Tests.Mocks.Models;
+    using Mocks.Models;
 
     [TestFixture]
     public class ExhibitionControllerTests
@@ -74,6 +74,36 @@
 
             Assert.That(result, Is.Not.Null);
             Assert.That(result, Is.TypeOf<ViewResult>());
+        }
+
+        //[Test]
+        //public async Task DetailsMethodShouldReturnsRedirectToActionWhenExhibitionExist()
+        //{
+        //    var model = await this.controller.Add(ExhibitionFormModelMock.Instance());
+        //    var result = await this.controller.Details(1);
+
+        //    Assert.That(result, Is.Not.Null);
+        //    Assert.That(result, Is.TypeOf<ViewResult>());
+        //}
+
+        [Test]
+        public async Task DetailsMethodShouldReturnsRedirectToActionWhenExhibitionNotExist()
+        {
+            var result = await this.controller.Details(1);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.TypeOf<RedirectToActionResult>());
+            Assert.That("Изложба с такъв идентификатор не съществува.", Is.EqualTo(controller.ViewBag.ErrorMessage));
+        }
+
+        [Test]
+        public async Task DeleteMethodShouldReturnsRedirectToActionWhenExhibitionNotExist()
+        {
+            var result = await this.controller.Delete(1);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.TypeOf<RedirectToActionResult>());
+            Assert.That("Изложба с такъв идентификатор не съществува.", Is.EqualTo(controller.ViewBag.ErrorMessage));
         }
     }
 }
