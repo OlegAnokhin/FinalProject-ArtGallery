@@ -21,6 +21,5 @@
             dbContext.ArtEvents.Add(artEvent);
             dbContext.SaveChanges();
         }
-
     }
 }

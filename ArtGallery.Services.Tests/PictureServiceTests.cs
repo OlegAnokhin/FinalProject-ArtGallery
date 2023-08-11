@@ -1,8 +1,8 @@
 ﻿namespace ArtGallery.Services.Tests
 {
-    using Microsoft.EntityFrameworkCore;
     using System;
     using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
     using Data;
     using ArtGallery.Data;
     using Data.Interfaces;
