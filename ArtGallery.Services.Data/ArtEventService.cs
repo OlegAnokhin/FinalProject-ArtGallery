@@ -109,6 +109,16 @@ namespace ArtGallery.Services.Data
             ArtEvent artEvent = await this.dbContext.ArtEvents
                 .FirstAsync(a => a.Id == artEventId);
 
+            var events = await this.dbContext.ArtEventParticipants
+                .Where(e => e.ArtEventId == artEventId)
+                .ToListAsync();
+
+            if (events != null && events.Any())
+            {
+                this.dbContext.ArtEventParticipants.RemoveRange(events);
+                await this.dbContext.SaveChangesAsync();
+            }
+
             this.dbContext.ArtEvents.Remove(artEvent);
             await this.dbContext.SaveChangesAsync();
         }
