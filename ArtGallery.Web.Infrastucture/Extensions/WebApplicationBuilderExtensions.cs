@@ -12,6 +12,7 @@
         /// <summary>
         /// This method registers all services with their interfaces and implementations of given assembly.
         /// The assembly is taken from the type of random service interface or implementation provided.
+        /// Written by Kris
         /// </summary>
         /// <param name="serviceType"></param>
         /// <exception cref="InvalidOperationException"></exception>
