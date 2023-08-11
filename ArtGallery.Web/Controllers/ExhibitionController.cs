@@ -117,7 +117,7 @@
             if (!exhibitionExist)
             {
                 TempData["ErrorMessage"] = "Изложба с такъв идентификатор не съществува.";
-                return RedirectToAction(nameof(All));
+                return RedirectToAction("Error", "Home");
             }
 
             try

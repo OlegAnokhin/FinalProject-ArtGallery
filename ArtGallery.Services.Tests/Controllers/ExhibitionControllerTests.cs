@@ -4,6 +4,7 @@
     using Microsoft.Extensions.Logging;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc.ViewFeatures;
     using Web.Controllers;
     using Mocks.Models;
     using Data.Interfaces;
@@ -82,34 +83,52 @@
             Assert.That(result, Is.TypeOf<ViewResult>());
         }
 
-        //[Test]
-        //public async Task DetailsMethodShouldReturnsRedirectToActionWhenExhibitionExist()
-        //{
-        //    var model = await this.controller.Add(ExhibitionFormModelMock.Instance());
-        //    var result = await this.controller.Details(1);
+        [Test]
+        public async Task DetailsMethodShouldReturnsRedirectToActionWhenExhibitionExist()
+        {
+            exhibitionServiceMock.Setup(x => x.ExistsByIdAsync(It.IsAny<int>()))
+                .Returns(Task.FromResult(true));
+            var result = await this.controller.Details(1);
 
-        //    Assert.That(result, Is.Not.Null);
-        //    Assert.That(result, Is.TypeOf<ViewResult>());
-        //}
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.TypeOf<ViewResult>());
+        }
 
-        //[Test]
-        //public async Task DetailsMethodShouldReturnsRedirectToActionWhenExhibitionNotExist()
-        //{
-        //    var result = await this.controller.Details(1);
+        [Test]
+        public async Task DetailsMethodShouldReturnsRedirectToActionWhenExhibitionNotExist()
+        {
+            var tempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>());
+            tempData["ErrorMessage"] = "test";
+            controller.TempData = tempData;
 
-        //    Assert.That(result, Is.Not.Null);
-        //    Assert.That(result, Is.TypeOf<RedirectToActionResult>());
-        //    Assert.That("Изложба с такъв идентификатор не съществува.", Is.EqualTo(controller.ViewBag.ErrorMessage));
-        //}
+            var result = await this.controller.Details(1);
 
-        //[Test]
-        //public async Task DeleteMethodShouldReturnsRedirectToActionWhenExhibitionNotExist()
-        //{
-        //    var result = await this.controller.Delete(1);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.TypeOf<RedirectToActionResult>());
+        }
 
-        //    Assert.That(result, Is.Not.Null);
-        //    Assert.That(result, Is.TypeOf<RedirectToActionResult>());
-        //    Assert.That("Изложба с такъв идентификатор не съществува.", Is.EqualTo(controller.ViewBag.ErrorMessage));
-        //}
+        [Test]
+        public async Task DeleteMethodShouldReturnsRedirectToActionWhenExhibitionExist()
+        {
+            exhibitionServiceMock.Setup(x => x.ExistsByIdAsync(It.IsAny<int>()))
+                .Returns(Task.FromResult(true));
+            var result = await this.controller.Delete(1);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.TypeOf<RedirectToActionResult>());
+        }
+
+        [Test]
+        public async Task DeleteMethodShouldReturnsRedirectToActionWhenExhibitionNotExist()
+        {
+            var tempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>());
+            tempData["ErrorMessage"] = "test";
+            controller.TempData = tempData;
+
+            var result = await this.controller.Delete(1);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.TypeOf<RedirectToActionResult>());
+        }
     }
 }
