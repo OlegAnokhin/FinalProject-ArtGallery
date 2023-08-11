@@ -1,17 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.Extensions.Logging;
-
-namespace ArtGallery.Services.Tests.Controllers
+﻿namespace ArtGallery.Services.Tests.Controllers
 {
     using System.Security.Claims;
+    using Microsoft.AspNetCore.Mvc.ViewFeatures;
+    using Microsoft.Extensions.Logging;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Web.Controllers;
-    using Mocks;
     using Mocks.Models;
-    using Mocks.Services;
-    using ArtGallery.Services.Data.Interfaces;
+    using Data.Interfaces;
     using Moq;
+    using ArtGallery.Web.ViewModels.ArtEvent;
 
     [TestFixture]
     public class ArtEventControllerTests
@@ -86,15 +84,18 @@ namespace ArtGallery.Services.Tests.Controllers
             Assert.That(result, Is.TypeOf<ViewResult>());
         }
 
-        //[Test]
-        //public async Task DetailsMethodShouldReturnsRedirectToActionWhenArtEventExist()
-        //{
-        //    var model = await this.controller.Add(ArtEventFormModelMock.Instance());
-        //    var result = await this.controller.Details(1);
+        [Test]
+        public async Task DetailsMethodShouldReturnsRedirectToActionWhenArtEventExist()
+        {
+            artEventServiceMock.Setup(x => x.ExistsByIdAsync(It.IsAny<int>()))
+                .Returns(Task.FromResult(true));
 
-        //    Assert.That(result, Is.Not.Null);
-        //    Assert.That(result, Is.TypeOf<ViewResult>());
-        //}
+            var model = await this.controller.Add(ArtEventFormModelMock.Instance());
+            var result = await this.controller.Details(1);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.TypeOf<ViewResult>());
+        }
 
         [Test]
         public async Task DetailsMethodShouldReturnsRedirectToActionWhenArtEventNotExist()
@@ -112,26 +113,102 @@ namespace ArtGallery.Services.Tests.Controllers
         }
 
         [Test]
-        public async Task DeleteMethodShouldReturnsRedirectToActionWhenArtEventNotExist()
+        public async Task DeleteMethodShouldReturnsRedirectToActionWhenArtEventExist()
         {
+            artEventServiceMock.Setup(x => x.ExistsByIdAsync(It.IsAny<int>()))
+                .Returns(Task.FromResult(true));
+
+            var tempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>());
+            tempData["ErrorMessage"] = "test";
+            controller.TempData = tempData;
+
             var result = await this.controller.Delete(1);
 
             Assert.That(result, Is.Not.Null);
             Assert.That(result, Is.TypeOf<RedirectToActionResult>());
         }
 
-        //[Test]
-        //public async Task JoinMethodShouldReturnsRedirectToActionWhenArtEventNotExist()
-        //{
-        //    var result = await this.controller.Join(1);
+        [Test]
+        public async Task DeleteMethodShouldReturnsRedirectToActionWhenArtEventNotExist()
+        {
+            var tempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>());
+            tempData["ErrorMessage"] = "test";
+            controller.TempData = tempData;
 
-        //    Assert.That(result, Is.Not.Null);
-        //    Assert.That(result, Is.TypeOf<RedirectToActionResult>());
-        //}
+            var result = await this.controller.Delete(1);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.TypeOf<RedirectToActionResult>());
+        }
+
+        [Test]
+        public async Task JoinMethodShouldReturnsRedirectToActionWhenArtEventExist()
+        {
+            artEventServiceMock.Setup(x => x.GetArtEventByIdAsync(It.IsAny<int>()))
+                .Returns(Task.FromResult(new AllArtEventViewModel()
+                {
+                    Id = 1,
+                    Name = "Name",
+                    ImageAddress = "ImageAddress",
+                    Start = DateTime.Today
+                }));
+
+            var joinedArtEvents = new List<JoinedArtEventsViewModel>
+            {
+                new JoinedArtEventsViewModel
+                {
+                    Id = 1,
+                    Name = "Name 1",
+                    ImageAddress = "ImageAddress 1",
+                    Start = DateTime.Today,
+                    Place = "Place 1",
+                    Description = "Description 1"
+                },
+                new JoinedArtEventsViewModel
+                {
+                    Id = 2,
+                    Name = "Name 2",
+                    ImageAddress = "ImageAddress 2",
+                    Start = DateTime.Today.AddDays(1),
+                    Place = "Place 2",
+                    Description = "Description 2"
+                }
+            };
+
+            artEventServiceMock.Setup(x => x.GetJoinedArtEventsAsync(It.IsAny<string>()))
+                .Returns(Task.FromResult(joinedArtEvents));
+
+            var result = await this.controller.Join(3);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.TypeOf<RedirectToActionResult>());
+        }
+
+        [Test]
+        public async Task LeaveMethodShouldReturnsRedirectToActionWhenArtEventExist()
+        {
+            artEventServiceMock.Setup(x => x.GetArtEventByIdAsync(It.IsAny<int>()))
+                .Returns(Task.FromResult(new AllArtEventViewModel()
+                {
+                    Id = 1,
+                    Name = "Name",
+                    ImageAddress = "ImageAddress",
+                    Start = DateTime.Today
+                }));
+
+            var result = await this.controller.Leave(1);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.TypeOf<RedirectToActionResult>());
+        }
 
         [Test]
         public async Task LeaveMethodShouldReturnsRedirectToActionWhenArtEventNotExist()
         {
+            var tempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>());
+            tempData["ErrorMessage"] = "test";
+            controller.TempData = tempData;
+
             var result = await this.controller.Leave(1);
 
             Assert.That(result, Is.Not.Null);

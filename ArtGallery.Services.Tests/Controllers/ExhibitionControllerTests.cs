@@ -1,14 +1,12 @@
-﻿using Microsoft.Extensions.Logging;
-
-namespace ArtGallery.Services.Tests.Controllers
+﻿namespace ArtGallery.Services.Tests.Controllers
 {
     using System.Security.Claims;
+    using Microsoft.Extensions.Logging;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Http;
     using Web.Controllers;
-    using Tests.Mocks.Services;
     using Mocks.Models;
-    using ArtGallery.Services.Data.Interfaces;
+    using Data.Interfaces;
     using Moq;
 
     [TestFixture]

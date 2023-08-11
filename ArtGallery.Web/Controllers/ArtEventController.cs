@@ -166,6 +166,13 @@
             try
             {
                 var eventToLeave = await artEventService.GetArtEventByIdAsync(id);
+
+                if (eventToLeave == null)
+                {
+                    TempData["ErrorMessage"] = "Oбучение с такъв идентификатор не съществува.";
+                    return RedirectToAction("Error", "Home");
+                }
+
                 await artEventService.LeaveFromArtEventAsync(GetUserId(), eventToLeave);
                 return RedirectToAction(nameof(All));
             }
