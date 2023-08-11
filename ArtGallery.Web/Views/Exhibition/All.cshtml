@@ -3,7 +3,7 @@
     ViewData["Title"] = "Изложби";
 }
 
-<h2 id="title" class="text-center">@ViewBag.Title</h2>
+<h2 id="title" class="text-center">@ViewData["Title"]</h2>
 <hr />
 
 @if (!Model.Any())
