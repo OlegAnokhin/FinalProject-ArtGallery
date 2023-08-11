@@ -5,7 +5,5 @@
     public interface IUserService
     {
         Task<IEnumerable<UserViewModel>> AllAsync();
-
-
     }
 }

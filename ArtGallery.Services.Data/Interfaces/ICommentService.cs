@@ -39,7 +39,5 @@
         /// <param name="commentId">Идентификатор на коментара</param>
         /// <returns></returns>
         Task<bool> ExistsByIdAsync(int commentId);
-
-
     }
 }
