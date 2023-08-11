@@ -40,7 +40,7 @@
                     ImageUrl = e.ImageUrl,
                     Place = e.Place
                 })
-                .OrderBy(e => e.Start)
+                .OrderByDescending(e => e.Start)
                 .ToListAsync();
         }
 
