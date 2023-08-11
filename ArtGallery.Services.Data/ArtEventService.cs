@@ -43,6 +43,7 @@ namespace ArtGallery.Services.Data
                     ImageAddress = e.ImageAddress,
                     Start = e.Start
                 })
+                .OrderByDescending(d => d.Start)
                 .ToListAsync();
         }
 
