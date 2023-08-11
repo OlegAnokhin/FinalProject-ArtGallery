@@ -5,11 +5,11 @@
     using Microsoft.Extensions.Logging;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using Web.ViewModels.ArtEvent;
     using Web.Controllers;
     using Mocks.Models;
     using Data.Interfaces;
     using Moq;
-    using ArtGallery.Web.ViewModels.ArtEvent;
 
     [TestFixture]
     public class ArtEventControllerTests

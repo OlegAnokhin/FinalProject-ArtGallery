@@ -86,7 +86,7 @@ namespace ArtGallery.Services.Tests
               Assert.That(artEvent.Id, Is.EqualTo(1));
               Assert.That(artEvent.Name, Is.EqualTo("Розовото дърво"));
               Assert.That(artEvent.ImageAddress, Is.EqualTo("\\lib\\images\\ArtEventPinkTree.jpg"));
-              Assert.That(artEvent.Start, Is.EqualTo(DateTime.Parse("26-07-2023 17:00")));
+              Assert.That(artEvent.Start, Is.EqualTo(DateTime.Parse("26-09-2023 17:00")));
               Assert.That(artEvent.Place, Is.EqualTo("Варна, Галерията на Петя"));
               Assert.That(artEvent.Description, Is.EqualTo("Обучение тип Арт-клас, в него заедно ще нарисуваме невероятна картина, а аз ще пи покажа нужни техники и ще ви напътствам през цялото време."));
           });
@@ -102,7 +102,7 @@ namespace ArtGallery.Services.Tests
             {
                 Name = "Розовото дърво NEW",
                 ImageAddress = "\\lib\\images\\ArtEventPinkTree.jpg",
-                Start = DateTime.Parse("26-07-2023 17:00"),
+                Start = DateTime.Parse("26-09-2023 17:00"),
                 Place = "Варна, Галерията на Петя",
                 Description = "Обучение тип Арт-клас, в него заедно ще нарисуваме невероятна картина, а аз ще пи покажа нужни техники и ще ви напътствам през цялото време.",
             };
@@ -120,7 +120,7 @@ namespace ArtGallery.Services.Tests
                 Id = 1,
                 Name = "Розовото дърво",
                 ImageAddress = "\\lib\\images\\ArtEventPinkTree.jpg",
-                Start = DateTime.Parse("26-07-2023 17:00"),
+                Start = DateTime.Parse("26-09-2023 17:00"),
             };
 
             var result = await this.artEventService.GetArtEventByIdAsync(1);
@@ -145,7 +145,7 @@ namespace ArtGallery.Services.Tests
                 Id = 1,
                 Name = "Розовото дърво NEW",
                 ImageAddress = "\\lib\\images\\ArtEventPinkTree.jpg",
-                Start = DateTime.Parse("26-07-2023 17:00"),
+                Start = DateTime.Parse("26-09-2023 17:00"),
             };
 
             await this.artEventService.JoinToArtEventAsync(userId, newEvent);
@@ -166,7 +166,7 @@ namespace ArtGallery.Services.Tests
                 Id = 1,
                 Name = "Розовото дърво NEW",
                 ImageAddress = "\\lib\\images\\ArtEventPinkTree.jpg",
-                Start = DateTime.Parse("26-07-2023 17:00"),
+                Start = DateTime.Parse("26-09-2023 17:00"),
             };
 
             await this.artEventService.LeaveFromArtEventAsync(userId, newEvent);
@@ -187,7 +187,7 @@ namespace ArtGallery.Services.Tests
                 Id = 1,
                 Name = "Розовото дърво NEW",
                 ImageAddress = "\\lib\\images\\ArtEventPinkTree.jpg",
-                Start = DateTime.Parse("26-07-2023 17:00"),
+                Start = DateTime.Parse("26-09-2023 17:00"),
             };
 
             await this.artEventService.JoinToArtEventAsync(userId, newEvent);

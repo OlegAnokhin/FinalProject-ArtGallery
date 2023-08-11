@@ -86,8 +86,8 @@
                 Assert.That(exhibition.Id, Is.EqualTo(1));
                 Assert.That(exhibition.Name, Is.EqualTo("Изложба Африка"));
                 Assert.That(exhibition.ImageUrl, Is.EqualTo("\\lib\\images\\ExhibitionAfrica.jpg"));
-                Assert.That(exhibition.Start, Is.EqualTo(DateTime.Parse("20-07-2023 10:00")));
-                Assert.That(exhibition.End, Is.EqualTo(DateTime.Parse("30-07-2023 17:00")));
+                Assert.That(exhibition.Start, Is.EqualTo(DateTime.Parse("20-09-2023 10:00")));
+                Assert.That(exhibition.End, Is.EqualTo(DateTime.Parse("30-09-2023 17:00")));
                 Assert.That(exhibition.Place, Is.EqualTo("Варна, Галерията на Петя"));
                 Assert.That(exhibition.Description, Is.EqualTo("В тази изложба на тема Африка ще бъдат представени тематични картина на хора и животни."));
             });

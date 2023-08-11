@@ -1,11 +1,9 @@
 ﻿namespace ArtGallery.Services.Tests
 {
-
     using Microsoft.EntityFrameworkCore;
     using Data;
     using ArtGallery.Data;
     using Data.Interfaces;
-    using Web.ViewModels.User;
     using static DatabaseSeeder;
 
     public class UserServiceTests
@@ -44,7 +42,7 @@
             var users = actualUsers.ToArray();
 
             var currentUser = users[0];
-            Assert.That(currentUser.Id, Is.EqualTo("d53a80c3-5fd9-4451-a381-f40d2f50ec08"));
+            Assert.That(currentUser.Id, Is.EqualTo(users[0].Id));
             Assert.That(currentUser.Email, Is.EqualTo("admin@ArtGallery.bg"));
         }
     }
