@@ -19,7 +19,7 @@
         /// Вашият телефонен номер
         /// </summary>
         [Display(Name = "Вашият телефонен номер")]
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Полето '{0}' е задължително")]
         [StringLength(PhoneNumberMaxLength, MinimumLength = PhoneNumberMinLength, ErrorMessage = "Полето '{0}' трябва да е между {2} и {1} символа")]
         public string PhoneNumber { get; set; } = null!;
 
@@ -27,7 +27,7 @@
         /// Размер на картината
         /// </summary>
         [Display(Name = "Желаният размер на картината")]
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Полето '{0}' е задължително")]
         [StringLength(SizeMaxLength, MinimumLength = SizeMinLength, ErrorMessage = "Полето '{0}' трябва да е между {2} и {1} символа")]
         public string Size { get; set; } = null!;
 
@@ -35,7 +35,7 @@
         /// С какво е нарисувана картината
         /// </summary>
         [Display(Name = "С каква боя желаете да бъде нарисувана картината")]
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Полето '{0}' е задължително")]
         [StringLength(MaterialMaxLength, MinimumLength = MaterialMinLength, ErrorMessage = "Полето '{0}' трябва да е между {2} и {1} символа")]
         public string Material { get; set; } = null!;
 
@@ -43,7 +43,7 @@
         /// Върху какво е нарисувана картината
         /// </summary>
         [Display(Name = "Върху какво желаете да бъде нарисувана картината")]
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Полето '{0}' е задължително")]
         [StringLength(ImageBaseMaxLength, MinimumLength = ImageBaseMinLength, ErrorMessage = "Полето '{0}' трябва да е между {2} и {1} символа")]
         public string ImageBase { get; set; } = null!;
 
